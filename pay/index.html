@@ -29,10 +29,10 @@ button{width:100%;border:0;border-radius:12px;padding:15px 18px;margin-top:24px;
  * Paste the Paddle.js client-side token (test_...) and active Sandbox price IDs (pri_...).
  * Never put a Paddle API secret in browser code.
  */
-const PADDLE_CLIENT_TOKEN = 'PASTE_SANDBOX_CLIENT_SIDE_TOKEN_HERE';
+const PADDLE_CLIENT_TOKEN = 'test_e4f0e065eaceea68fb3e15c8894';
 const PRICE_IDS = {
-  monthly: 'PASTE_PRO_MONTHLY_PRICE_ID_HERE',
-  yearly: 'PASTE_PRO_YEARLY_PRICE_ID_HERE'
+  monthly: 'pri_01m7dyjmdk7775d23n8vpe4r25',
+  yearly: 'pri_01m7dyrbnqpjkxdbvyzxv99k59'
 };
 const params=new URLSearchParams(location.search);
 const selectedPlan=params.get('plan')==='yearly'?'yearly':'monthly';
