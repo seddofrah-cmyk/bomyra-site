@@ -1,0 +1,7 @@
+title: "BOMYRA — AI Chat Saver & Exporter"
+description: "Save, organize, select and export useful conversations from ChatGPT, Claude and Google Gemini."
+theme: minima
+markdown: kramdown
+header_pages:
+  - privacy.md
+show_excerpts: false
