@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071b2a">
+<title>BOMYRA — Secure Checkout</title>
+<style>
+:root{--bg:#061522;--line:#244253;--ink:#f3f8fa;--muted:#a8bdc8;--teal:#20d5d2}*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#17445a 0,transparent 50%),var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}.wrap{width:min(760px,calc(100% - 32px));margin:auto}.top{height:72px;border-bottom:1px solid #ffffff16;display:flex;align-items:center}.brand{font-weight:900;letter-spacing:.18em;display:flex;align-items:center;gap:10px}.mark{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#20d5d2,#4c83d8);display:grid;place-items:center;color:#061522;font-weight:950}
+main{padding:54px 0 70px;flex:1}.back{color:var(--muted);font-size:14px}.back:hover{color:var(--teal)}h1{font-size:clamp(32px,6vw,48px);letter-spacing:-.045em;line-height:1.1;margin:22px 0 10px}.sub{color:var(--muted);margin:0 0 28px}
+.checkout{border:1px solid var(--line);background:linear-gradient(145deg,#102b3d,#0a1d2b);border-radius:22px;padding:28px;box-shadow:0 24px 70px #0004}.row{display:flex;justify-content:space-between;gap:20px;align-items:center}.label{color:var(--muted);font-size:13px}.plan{font-size:20px;font-weight:800}.price{font-size:34px;font-weight:900;letter-spacing:-.04em}.divider{height:1px;background:var(--line);margin:22px 0}.secure{display:flex;align-items:center;gap:9px;color:#b8d0da;font-size:13px}.shield{color:var(--teal);font-size:18px}
+button{width:100%;border:0;border-radius:12px;padding:15px 18px;margin-top:24px;background:linear-gradient(100deg,#20d5d2,#83e9d9);color:#06202a;font:inherit;font-weight:900;cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}
+.notice{display:none;margin-top:18px;padding:14px 16px;border:1px solid #a67b36;background:#6e4c171f;border-radius:12px;color:#f1d59c;font-size:13px}.fine{color:#7893a1;text-align:center;font-size:12px;margin:20px 0}.fine a{text-decoration:underline}.foot{text-align:center;color:#7893a1;font-size:12px;padding:24px}
+@media(max-width:560px){.checkout{padding:22px}.row{align-items:flex-start}.price{font-size:29px}}
+</style>
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+</head><body>
+<header class="top"><div class="wrap"><a class="brand" href="../"><span class="mark">B</span><span>BOMYRA</span></a></div></header>
+<main class="wrap"><a class="back" href="../pricing/">← Back to plans</a><h1>Complete your <span style="color:#20d5d2">BOMYRA Pro</span> order</h1><p class="sub">Review your selected plan, then continue to Paddle's secure Sandbox checkout.</p>
+<section class="checkout" aria-label="Order summary"><div class="row"><div><div class="label">Selected plan</div><div class="plan" id="planName">Pro Monthly</div><div class="label" id="billingText">Billed monthly · USD</div></div><div class="price" id="planPrice">$5.99</div></div><div class="divider"></div>
+<div class="row"><span class="label">Payment provider</span><strong>Paddle</strong></div><div class="row" style="margin-top:12px"><span class="label">Environment</span><strong style="color:#20d5d2">Sandbox · Test mode</strong></div><div class="divider"></div>
+<div class="secure"><span class="shield">◈</span><span>Secure checkout · Available payment methods are displayed by Paddle</span></div>
+<button id="checkoutBtn" type="button">Continue to secure checkout</button><div class="notice" id="configNotice" role="status">Sandbox checkout needs the client-side token and the two price IDs from your Paddle Sandbox dashboard. No payment has been taken.</div></section>
+<p class="fine">This is a Sandbox demonstration. Test transactions do not collect real money. <a href="../privacy.html">Privacy notice</a>.</p></main>
+<footer class="foot">© <span id="year"></span> BOMYRA · <a href="mailto:seddev213@gmail.com">Support</a></footer>
+<script>
+/*
+ * SANDBOX ONLY.
+ * Paste the Paddle.js client-side token (test_...) and active Sandbox price IDs (pri_...).
+ * Never put a Paddle API secret in browser code.
+ */
+const PADDLE_CLIENT_TOKEN = 'PASTE_SANDBOX_CLIENT_SIDE_TOKEN_HERE';
+const PRICE_IDS = {
+  monthly: 'PASTE_PRO_MONTHLY_PRICE_ID_HERE',
+  yearly: 'PASTE_PRO_YEARLY_PRICE_ID_HERE'
+};
+const params=new URLSearchParams(location.search);
+const selectedPlan=params.get('plan')==='yearly'?'yearly':'monthly';
+const info={
+ monthly:{name:'Pro Monthly',price:'$5.99',billing:'Billed monthly · USD'},
+ yearly:{name:'Pro Yearly',price:'$39.99',billing:'Billed annually · USD'}
+}[selectedPlan];
+document.getElementById('year').textContent=new Date().getFullYear();
+document.getElementById('planName').textContent=info.name;
+document.getElementById('planPrice').textContent=info.price;
+document.getElementById('billingText').textContent=info.billing;
+const btn=document.getElementById('checkoutBtn');
+const notice=document.getElementById('configNotice');
+const configured=PADDLE_CLIENT_TOKEN.startsWith('test_') &&
+ PRICE_IDS.monthly.startsWith('pri_') && PRICE_IDS.yearly.startsWith('pri_');
+if(configured && window.Paddle){
+ Paddle.Environment.set('sandbox');
+ Paddle.Initialize({
+   token:PADDLE_CLIENT_TOKEN,
+   eventCallback:function(event){
+     if(event && event.name==='checkout.completed'){
+       // A completed checkout is not a substitute for server-side webhook verification.
+       const tx=event.data && event.data.transaction_id ? '?transaction_id='+encodeURIComponent(event.data.transaction_id) : '';
+       location.href='success/'+tx;
+     }
+   }
+ });
+}
+btn.addEventListener('click',()=>{
+ if(!configured || !window.Paddle){notice.style.display='block';return;}
+ Paddle.Checkout.open({
+   items:[{priceId:PRICE_IDS[selectedPlan],quantity:1}],
+   settings:{displayMode:'overlay',theme:'dark',locale:'en'}
+ });
+});
+</script></body></html>
