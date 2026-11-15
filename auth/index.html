@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071b2a">
+<meta name="description" content="Create your BOMYRA account or sign in securely.">
+<title>BOMYRA — Account</title>
+<style>
+:root{--bg:#061522;--panel:#0c2232;--line:#244253;--ink:#f3f8fa;--muted:#a8bdc8;--teal:#20d5d2;--danger:#ffb2a8}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#17445a 0,transparent 50%),var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}.wrap{width:min(1000px,calc(100% - 32px));margin:auto}header{height:74px;border-bottom:1px solid #ffffff16;display:flex;align-items:center}.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.18em}.mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--teal),#4c83d8);display:grid;place-items:center;color:#061522;font-weight:950}
+.top{display:flex;align-items:center;justify-content:space-between}.nav{display:flex;align-items:center;gap:20px;color:var(--muted);font-size:14px}.nav a:hover{color:var(--teal)}.lang{border:1px solid var(--line);background:#0c2232;color:#d9e8ee;border-radius:9px;padding:7px 11px;cursor:pointer}
+main{flex:1;display:grid;place-items:center;padding:48px 0}.layout{width:min(900px,100%);display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}.intro h1{font-size:clamp(36px,5vw,54px);line-height:1.08;letter-spacing:-.05em;margin:16px 0}.gradient{background:linear-gradient(90deg,#fff 10%,#a7f4ee 55%,#86b4ff);-webkit-background-clip:text;background-clip:text;color:transparent}.intro p{color:var(--muted);max-width:390px}.eyebrow{color:var(--teal);font-size:12px;font-weight:850;letter-spacing:.14em}.card{border:1px solid var(--line);border-radius:22px;background:linear-gradient(155deg,#102b3d,#0a1d2b);padding:30px;box-shadow:0 24px 70px #0004}.tabs{display:grid;grid-template-columns:1fr 1fr;background:#071a28;padding:4px;border-radius:11px;gap:4px;margin-bottom:24px}.tabs button{border:0;border-radius:8px;background:transparent;color:var(--muted);padding:10px;font:inherit;font-weight:750;cursor:pointer}.tabs button.active{background:#1b4352;color:#fff}.card h2{margin:0 0 5px;font-size:24px}.hint{margin:0 0 22px;color:var(--muted);font-size:13px}label{display:block;font-size:13px;color:#d6e4e9;margin:15px 0 6px}input{width:100%;border:1px solid #315064;background:#071a28;color:var(--ink);border-radius:10px;padding:13px 14px;font:inherit;outline:none}input:focus{border-color:var(--teal);box-shadow:0 0 0 3px #20d5d21c}button.primary{width:100%;border:0;border-radius:11px;padding:14px;margin-top:22px;background:linear-gradient(100deg,#20d5d2,#83e9d9);color:#06202a;font:inherit;font-weight:900;cursor:pointer}button:disabled{opacity:.55;cursor:wait}.status{display:none;margin-top:16px;border:1px solid #315064;border-radius:10px;padding:12px 14px;font-size:13px;color:#cde0e8;overflow-wrap:anywhere}.status.error{border-color:#a85e56;color:var(--danger)}.status.success{border-color:#287f75;color:#9af0df}.fine{font-size:12px;color:#819aa7;margin:16px 0 0;text-align:center}.fine a{text-decoration:underline}.foot{text-align:center;color:#7893a1;font-size:12px;padding:24px}
+[dir=rtl] .layout{direction:rtl}[dir=rtl] .top{direction:rtl}
+@media(max-width:720px){.layout{grid-template-columns:1fr;max-width:480px}.intro{text-align:center}.intro p{margin:auto}.intro h1{font-size:38px}.card{padding:24px}.nav a{display:none}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./config.js"></script>
+</head>
+<body>
+<header><div class="wrap top"><a class="brand" href="../"><span class="mark">B</span><span>BOMYRA</span></a><nav class="nav"><a href="../">Home</a><a href="../pricing/">Plans</a><button class="lang" id="langBtn" type="button">العربية</button></nav></div></header>
+<main class="wrap"><div class="layout">
+<section class="intro"><span class="eyebrow" data-en="YOUR WORKSPACE, KEPT IN SYNC" data-ar="مساحتك، محفوظة ومتزامنة">YOUR WORKSPACE, KEPT IN SYNC</span><h1><span class="gradient" data-en="Welcome back." data-ar="مرحباً بعودتك.">Welcome back.</span><br><span data-en="Keep what matters." data-ar="احتفظ بما يهمك.">Keep what matters.</span></h1><p data-en="Create your BOMYRA account to manage your Pro subscription and keep your workflow connected." data-ar="أنشئ حساب BOMYRA لإدارة اشتراك Pro والحفاظ على اتصال مساحة عملك.">Create your BOMYRA account to manage your Pro subscription and keep your workflow connected.</p></section>
+<section class="card" aria-label="BOMYRA account">
+<div class="tabs"><button id="signinTab" class="active" type="button" data-en="Sign in" data-ar="تسجيل الدخول">Sign in</button><button id="signupTab" type="button" data-en="Create account" data-ar="إنشاء حساب">Create account</button></div>
+<h2 id="formTitle">Sign in</h2><p class="hint" id="formHint">Use your email and password to continue.</p>
+<form id="authForm">
+<label for="email" data-en="Email address" data-ar="البريد الإلكتروني">Email address</label><input id="email" type="email" autocomplete="email" required placeholder="you@example.com">
+<label for="password" data-en="Password" data-ar="كلمة المرور">Password</label><input id="password" type="password" autocomplete="current-password" minlength="8" required placeholder="At least 8 characters">
+<button class="primary" id="submitBtn" type="submit">Sign in securely</button>
+</form>
+<div class="status" id="status" role="status" aria-live="polite"></div>
+<p class="fine" data-en="By continuing, you agree to use BOMYRA in accordance with its" data-ar="بالمتابعة، توافق على استخدام BOMYRA وفقاً لـ"><span>By continuing, you agree to use BOMYRA in accordance with its</span> <a href="../privacy.md" data-en="Privacy Notice" data-ar="إشعار الخصوصية">Privacy Notice</a>.</p>
+</section></div></main>
+<footer class="foot">© <span id="year"></span> BOMYRA · <a href="mailto:seddev213@gmail.com">Support</a></footer>
+<script>
+const {createClient}=window.supabase||{};
+const url=window.BOMYRA_SUPABASE_URL, key=window.BOMYRA_SUPABASE_ANON_KEY;
+const validConfig=createClient && url && !url.includes("YOUR_PROJECT_REF") && key && !key.includes("YOUR_SUPABASE");
+const supabaseClient=validConfig?createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}):null;
+const basePath="/bomyra-site/";
+const callbackUrl=location.origin+basePath+"auth/callback/";
+let mode="signin",arabic=false;
+const $=id=>document.getElementById(id);
+$("year").textContent=new Date().getFullYear();
+function showStatus(message,type=""){const el=$("status");el.textContent=message;el.className="status "+type;el.style.display="block";}
+function setMode(next){mode=next;$("signinTab").classList.toggle("active",mode==="signin");$("signupTab").classList.toggle("active",mode==="signup");$("formTitle").textContent=mode==="signin"?(arabic?"تسجيل الدخول":"Sign in"):(arabic?"إنشاء حساب":"Create account");$("formHint").textContent=mode==="signin"?(arabic?"أدخل بريدك الإلكتروني وكلمة المرور للمتابعة.":"Use your email and password to continue."):(arabic?"أنشئ حسابك. سنرسل رابط تأكيد إلى بريدك الإلكتروني.":"Create your account. We'll email you a confirmation link.");$("submitBtn").textContent=mode==="signin"?(arabic?"تسجيل الدخول بأمان":"Sign in securely"):(arabic?"إنشاء الحساب":"Create account");$("status").style.display="none";}
+$("signinTab").addEventListener("click",()=>setMode("signin"));$("signupTab").addEventListener("click",()=>setMode("signup"));
+$("langBtn").addEventListener("click",()=>{arabic=!arabic;document.documentElement.lang=arabic?"ar":"en";document.documentElement.dir=arabic?"rtl":"ltr";document.querySelectorAll("[data-en][data-ar]").forEach(el=>{if(el.id==="signinTab"||el.id==="signupTab")return;el.textContent=arabic?el.dataset.ar:el.dataset.en;});$("langBtn").textContent=arabic?"English":"العربية";setMode(mode);});
+$("authForm").addEventListener("submit",async e=>{e.preventDefault();if(!supabaseClient){showStatus(arabic?"لم يتم إعداد اتصال Supabase بعد. يلزم إدخال Project URL وPublishable/anon key في auth/config.js.":"Supabase is not configured yet. Add the Project URL and publishable/anon key in auth/config.js.","error");return;}
+const email=$("email").value.trim(),password=$("password").value;const btn=$("submitBtn");btn.disabled=true;btn.textContent=arabic?"جارٍ المعالجة…":"Please wait…";
+try{if(mode==="signup"){const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:callbackUrl}});if(error)throw error;showStatus(data.session?(arabic?"تم إنشاء حسابك بنجاح.":"Your account has been created."):(arabic?"أرسلنا رابط تأكيد إلى بريدك الإلكتروني. افتح الرسالة لتأكيد الحساب.":"We sent a confirmation link to your email. Open it to verify your account."),"success");}
+else{const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;if(data.session){showStatus(arabic?"تم تسجيل الدخول. جارٍ تحويلك…":"Signed in. Redirecting…","success");setTimeout(()=>location.href="../",900);}}
+}catch(err){showStatus(err.message||"Authentication failed.","error");}finally{btn.disabled=false;btn.textContent=mode==="signin"?(arabic?"تسجيل الدخول بأمان":"Sign in securely"):(arabic?"إنشاء الحساب":"Create account");}});
+</script></body></html>
