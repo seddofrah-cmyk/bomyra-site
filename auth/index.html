@@ -40,6 +40,13 @@ const validConfig=createClient && url && !url.includes("YOUR_PROJECT_REF") && ke
 const supabaseClient=validConfig?createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}):null;
 const basePath="/bomyra-site/";
 const callbackUrl=location.origin+basePath+"auth/callback/";
+function safeNextPath(value){
+ if(!value)return "../";
+ try{const target=new URL(value,location.origin);if(target.origin!==location.origin||!target.pathname.startsWith(basePath))return "../";return target.pathname+target.search+target.hash;}
+ catch{return "../";}
+}
+const nextPath=safeNextPath(new URLSearchParams(location.search).get("next"));
+function rememberNextPath(){try{localStorage.setItem("bomyra.auth.next",nextPath);}catch{}}
 let mode="signin",arabic=false;
 const $=id=>document.getElementById(id);
 $("year").textContent=new Date().getFullYear();
@@ -49,7 +56,7 @@ $("signinTab").addEventListener("click",()=>setMode("signin"));$("signupTab").ad
 $("langBtn").addEventListener("click",()=>{arabic=!arabic;document.documentElement.lang=arabic?"ar":"en";document.documentElement.dir=arabic?"rtl":"ltr";document.querySelectorAll("[data-en][data-ar]").forEach(el=>{if(el.id==="signinTab"||el.id==="signupTab")return;el.textContent=arabic?el.dataset.ar:el.dataset.en;});$("langBtn").textContent=arabic?"English":"العربية";setMode(mode);});
 $("authForm").addEventListener("submit",async e=>{e.preventDefault();if(!supabaseClient){showStatus(arabic?"لم يتم إعداد اتصال Supabase بعد. يلزم إدخال Project URL وPublishable/anon key في auth/config.js.":"Supabase is not configured yet. Add the Project URL and publishable/anon key in auth/config.js.","error");return;}
 const email=$("email").value.trim(),password=$("password").value;const btn=$("submitBtn");btn.disabled=true;btn.textContent=arabic?"جارٍ المعالجة…":"Please wait…";
-try{if(mode==="signup"){const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:callbackUrl}});if(error)throw error;showStatus(data.session?(arabic?"تم إنشاء حسابك بنجاح.":"Your account has been created."):(arabic?"أرسلنا رابط تأكيد إلى بريدك الإلكتروني. افتح الرسالة لتأكيد الحساب.":"We sent a confirmation link to your email. Open it to verify your account."),"success");}
-else{const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;if(data.session){showStatus(arabic?"تم تسجيل الدخول. جارٍ تحويلك…":"Signed in. Redirecting…","success");setTimeout(()=>location.href="../",900);}}
+try{if(mode==="signup"){rememberNextPath();const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:callbackUrl}});if(error)throw error;showStatus(data.session?(arabic?"تم إنشاء حسابك بنجاح.":"Your account has been created."):(arabic?"أرسلنا رابط تأكيد إلى بريدك الإلكتروني. افتح الرسالة لتأكيد الحساب.":"We sent a confirmation link to your email. Open it to verify your account."),"success");}
+else{const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;if(data.session){showStatus(arabic?"تم تسجيل الدخول. جارٍ تحويلك…":"Signed in. Redirecting…","success");setTimeout(()=>location.href=nextPath,900);}}
 }catch(err){showStatus(err.message||"Authentication failed.","error");}finally{btn.disabled=false;btn.textContent=mode==="signin"?(arabic?"تسجيل الدخول بأمان":"Sign in securely"):(arabic?"إنشاء الحساب":"Create account");}});
 </script></body></html>
