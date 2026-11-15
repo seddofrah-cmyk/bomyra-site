@@ -35,17 +35,19 @@ $("year").textContent=new Date().getFullYear();
 $("planName").textContent=info.name;$("planPrice").textContent=info.price;$("billingText").textContent=info.billing;
 const btn=$("checkoutBtn"),notice=$("configNotice");
 function showNotice(message){notice.textContent=message;notice.style.display="block";}
-const configured=!!(window.supabase&&window.BOMYRA_SUPABASE_URL&&window.BOMYRA_SUPABASE_ANON_KEY&&window.BOMYRA_CHECKOUT_API_URL&&!window.BOMYRA_CHECKOUT_API_URL.includes("YOUR_BOMYRA_BACKEND_DOMAIN"));
+const supabaseConfigured=!!(window.supabase&&window.BOMYRA_SUPABASE_URL&&window.BOMYRA_SUPABASE_ANON_KEY);
+const checkoutConfigured=!!(window.BOMYRA_CHECKOUT_API_URL&&!window.BOMYRA_CHECKOUT_API_URL.includes("YOUR_BOMYRA_BACKEND_DOMAIN"));
 let supabaseClient=null;
-if(configured){supabaseClient=window.supabase.createClient(window.BOMYRA_SUPABASE_URL,window.BOMYRA_SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});}
+if(supabaseConfigured){supabaseClient=window.supabase.createClient(window.BOMYRA_SUPABASE_URL,window.BOMYRA_SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});}
 if(window.Paddle){Paddle.Environment.set("sandbox");Paddle.Initialize({token:PADDLE_CLIENT_TOKEN,eventCallback:function(event){if(event&&event.name==="checkout.completed"){const tx=event.data&&event.data.transaction_id?"?transaction_id="+encodeURIComponent(event.data.transaction_id):"";location.href="success/"+tx;}}});}
 btn.addEventListener("click",async()=>{
- if(!configured||!supabaseClient){showNotice("Checkout is not fully configured yet. Please try again later.");return;}
+ if(!supabaseClient){showNotice("Account sign-in is not available right now. Please try again later.");return;}
  btn.disabled=true;btn.textContent="Preparing secure checkout…";notice.style.display="none";
  try{
   const {data,error}=await supabaseClient.auth.getSession();if(error)throw error;
   const session=data.session;
   if(!session){const next=location.pathname+location.search;location.href="../auth/?next="+encodeURIComponent(next);return;}
+  if(!checkoutConfigured)throw new Error("The secure checkout service is not connected yet. Please try again shortly.");
   const response=await fetch(window.BOMYRA_CHECKOUT_API_URL,{method:"POST",headers:{"Authorization":"Bearer "+session.access_token,"Content-Type":"application/json"},body:JSON.stringify({plan:selectedPlan})});
   const result=await response.json().catch(()=>({}));
   if(!response.ok)throw new Error(result.error||"Unable to prepare checkout. Please try again.");
