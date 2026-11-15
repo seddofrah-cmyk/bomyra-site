@@ -8,8 +8,7 @@ The account UI is a static GitHub Pages addition and uses Supabase Auth from the
 
 ## Browser configuration
 Edit `auth/config.js` and replace:
-- `https://YOUR_PROJECT_REF.supabase.co` with the Supabase Project URL
-- `YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY` with the project's publishable key (or legacy anon key)
+Project URL and the Supabase publishable key have been configured in `auth/config.js`.
 
 Only the publishable/anon key may be used in browser code. Never use the `service_role` key, Paddle API key, webhook secret, or any other server secret here.
 
