@@ -20,7 +20,7 @@ In Authentication → URL Configuration:
 Keep email confirmation enabled. The account page requests that confirmation links return to the callback route.
 
 ## Important boundary
-The account UI is not yet connected to the Paddle checkout endpoint. Do not enable paid subscriptions or grant Pro access based on browser state. The next integration step is to require an authenticated Supabase session when starting checkout, call the server-side checkout endpoint, and pass the verified Supabase user ID into Paddle transaction custom data. Subscription access must still be granted only by the signed server-side Paddle webhook.
+The account and checkout pages use Supabase Auth, but checkout remains disabled until the production backend URL and required Vercel Sandbox environment variables are configured. Do not grant Pro access based on browser state. Subscription access must be granted only by the signed server-side Paddle webhook.
 
 ## Paddle Sandbox checkout integration
 
