@@ -47,15 +47,38 @@ function safeNextPath(value){
 }
 const nextPath=safeNextPath(new URLSearchParams(location.search).get("next"));
 function rememberNextPath(){try{localStorage.setItem("bomyra.auth.next",nextPath);}catch{}}
-let mode="signin"; const arabic=false;
+let mode="signin";
 const $=id=>document.getElementById(id);
 $("year").textContent=new Date().getFullYear();
 function showStatus(message,type=""){const el=$("status");el.textContent=message;el.className="status "+type;el.style.display="block";}
-function setMode(next){mode=next;$("signinTab").classList.toggle("active",mode==="signin");$("signupTab").classList.toggle("active",mode==="signup");$("formTitle").textContent=mode==="signin"?(arabic?"تسجيل الدخول":"Sign in"):(arabic?"إنشاء حساب":"Create account");$("formHint").textContent=mode==="signin"?(arabic?"أدخل بريدك الإلكتروني وكلمة المرور للمتابعة.":"Use your email and password to continue."):(arabic?"أنشئ حسابك. سنرسل رابط تأكيد إلى بريدك الإلكتروني.":"Create your account. We'll email you a confirmation link.");$("submitBtn").textContent=mode==="signin"?(arabic?"تسجيل الدخول بأمان":"Sign in securely"):(arabic?"إنشاء الحساب":"Create account");$("status").style.display="none";}
-$("signinTab").addEventListener("click",()=>setMode("signin"));$("signupTab").addEventListener("click",()=>setMode("signup"));
-$("authForm").addEventListener("submit",async e=>{e.preventDefault();if(!supabaseClient){showStatus(arabic?"لم يتم إعداد اتصال Supabase بعد. يلزم إدخال Project URL وPublishable/anon key في auth/config.js.":"Supabase is not configured yet. Add the Project URL and publishable/anon key in auth/config.js.","error");return;}
-const email=$("email").value.trim(),password=$("password").value;const btn=$("submitBtn");btn.disabled=true;btn.textContent=arabic?"جارٍ المعالجة…":"Please wait…";
-try{if(mode==="signup"){rememberNextPath();const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:callbackUrl}});if(error)throw error;showStatus(data.session?(arabic?"تم إنشاء حسابك بنجاح.":"Your account has been created."):(arabic?"أرسلنا رابط تأكيد إلى بريدك الإلكتروني. افتح الرسالة لتأكيد الحساب.":"We sent a confirmation link to your email. Open it to verify your account."),"success");}
-else{const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;if(data.session){showStatus(arabic?"تم تسجيل الدخول. جارٍ تحويلك…":"Signed in. Redirecting…","success");setTimeout(()=>location.href=nextPath,900);}}
-}catch(err){showStatus(err.message||"Authentication failed.","error");}finally{btn.disabled=false;btn.textContent=mode==="signin"?(arabic?"تسجيل الدخول بأمان":"Sign in securely"):(arabic?"إنشاء الحساب":"Create account");}});
+function setMode(next){
+ mode=next;
+ $("signinTab").classList.toggle("active",mode==="signin");
+ $("signupTab").classList.toggle("active",mode==="signup");
+ $("formTitle").textContent=mode==="signin"?"Sign in":"Create account";
+ $("formHint").textContent=mode==="signin"?"Use your email and password to continue.":"Create your account. We'll email you a confirmation link.";
+ $("submitBtn").textContent=mode==="signin"?"Sign in securely":"Create account";
+ $("status").style.display="none";
+}
+$("signinTab").addEventListener("click",()=>setMode("signin"));
+$("signupTab").addEventListener("click",()=>setMode("signup"));
+$("authForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(!supabaseClient){showStatus("Supabase is not configured yet. Add the Project URL and publishable/anon key in auth/config.js.","error");return;}
+ const email=$("email").value.trim(),password=$("password").value;
+ const btn=$("submitBtn");btn.disabled=true;btn.textContent="Please wait…";
+ try{
+  if(mode==="signup"){
+   rememberNextPath();
+   const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:callbackUrl}});
+   if(error)throw error;
+   showStatus(data.session?"Your account has been created.":"We sent a confirmation link to your email. Open it to verify your account.","success");
+  }else{
+   const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
+   if(error)throw error;
+   if(data.session){showStatus("Signed in. Redirecting…","success");setTimeout(()=>location.href=nextPath,900);}
+  }
+ }catch(err){showStatus(err.message||"Authentication failed.","error");}
+ finally{btn.disabled=false;btn.textContent=mode==="signin"?"Sign in securely":"Create account";}
+});
 </script></body></html>
