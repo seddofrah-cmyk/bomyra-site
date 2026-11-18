@@ -5,8 +5,7 @@ permalink: /privacy.html
 ---
 
 
-# BOMYRA — AI Chat Saver & Exporter | Privacy & Data Notice
-=========================================================
+# Privacy & Data Notice
 
 Last updated: 14 November 2026
 
