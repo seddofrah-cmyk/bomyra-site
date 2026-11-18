@@ -160,3 +160,54 @@ body{min-height:100vh;background:#061522;color:#f3f8fa}
  .bomyra-home .home-brand-copy strong{font-size:17px}
  .bomyra-home .home-brand-copy small{font-size:7px}
 }
+
+/* Privacy notice: dedicated readable document layout */
+.legal-shell{
+  width:min(920px,calc(100% - 40px));
+  margin:0 auto;
+  padding:58px 0 76px;
+}
+.legal-document{
+  padding:clamp(26px,5vw,58px);
+  color:#c4d3dc;
+  font-size:16px;
+  line-height:1.85;
+  overflow-wrap:anywhere;
+  border:1px solid #254b60;
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(16,43,61,.96),rgba(7,25,40,.98));
+  box-shadow:0 28px 80px #0004,inset 0 1px #ffffff0c;
+}
+.legal-document>*:first-child{margin-top:0}
+.legal-document h1{
+  max-width:760px;margin:0 0 18px;color:#f4fafc;
+  font-size:clamp(34px,5vw,48px);font-weight:900;
+  line-height:1.12;letter-spacing:-.045em;
+}
+.legal-document h2{
+  margin:46px 0 16px;padding:0 0 12px;
+  border-bottom:1px solid #31576b;color:#e9f7fa;
+  font-size:clamp(23px,3vw,29px);font-weight:800;
+  line-height:1.25;letter-spacing:-.025em;
+}
+.legal-document h3{
+  margin:30px 0 10px;color:#8ee9df;
+  font-size:18px;font-weight:800;line-height:1.45;
+}
+.legal-document p{margin:0 0 18px;color:#b9cbd5;font-size:16px;line-height:1.85}
+.legal-document ul,.legal-document ol{margin:12px 0 24px;padding-left:26px}
+.legal-document li{margin:7px 0;padding-left:3px;color:#b9cbd5;font-size:16px;line-height:1.8}
+.legal-document li::marker{color:#20d5d2}
+.legal-document strong{color:#f2f8fa;font-weight:800}
+.legal-document a{color:#48e0d7;text-decoration:underline;text-decoration-color:#48e0d766;text-underline-offset:3px}
+.legal-document code{padding:2px 6px;border:1px solid #315164;border-radius:6px;background:#061a29;color:#9dece5;font-size:.88em;white-space:normal}
+.legal-document blockquote{margin:22px 0;padding:17px 20px;border:1px solid #28576a;border-left:3px solid #20d5d2;border-radius:0 14px 14px 0;background:#0b3040;color:#d2e5eb}
+.legal-document hr{margin:35px 0;border:0;border-top:1px solid #294b5f}
+@media(max-width:700px){
+ .legal-shell{width:calc(100% - 24px);padding:28px 0 44px}
+ .legal-document{padding:23px 19px;border-radius:18px;font-size:15px}
+ .legal-document h1{font-size:33px}
+ .legal-document h2{margin-top:36px;font-size:23px}
+ .legal-document h3{font-size:17px}
+ .legal-document p,.legal-document li{font-size:15px;line-height:1.8}
+}
