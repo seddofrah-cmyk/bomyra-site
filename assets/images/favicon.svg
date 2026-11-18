@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="bomyra-title">
+<title id="bomyra-title">BOMYRA</title>
+<defs>
+  <linearGradient id="bubble-cyan" x1="24" y1="20" x2="185" y2="150" gradientUnits="userSpaceOnUse"><stop stop-color="#1CE0E0"/><stop offset="1" stop-color="#079BBE"/></linearGradient>
+  <linearGradient id="bubble-green" x1="82" y1="100" x2="235" y2="245" gradientUnits="userSpaceOnUse"><stop stop-color="#48E6AD"/><stop offset="1" stop-color="#13B879"/></linearGradient>
+  <linearGradient id="arrow-navy" x1="94" y1="41" x2="166" y2="172" gradientUnits="userSpaceOnUse"><stop stop-color="#164783"/><stop offset="1" stop-color="#09285D"/></linearGradient>
+  <filter id="shadow" x="4" y="4" width="248" height="248" color-interpolation-filters="sRGB"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#001522" flood-opacity=".28"/></filter>
+</defs>
+<g filter="url(#shadow)">
+  <path d="M57 22h88c17.1 0 31 13.9 31 31v69c0 17.1-13.9 31-31 31H94l-35 29 9-29h-11c-17.1 0-31-13.9-31-31V53c0-17.1 13.9-31 31-31Z" fill="url(#bubble-cyan)"/>
+  <path d="M77 66h70M77 91h70" stroke="#062A3D" stroke-width="11" stroke-linecap="round"/>
+  <path d="M111 100h94c17.1 0 31 13.9 31 31v57c0 17.1-13.9 31-31 31h-9l11 23-39-23h-57c-17.1 0-31-13.9-31-31v-57c0-17.1 13.9-31 31-31Z" fill="url(#bubble-green)"/>
+  <path d="M126 145h75M126 169h75" stroke="#073348" stroke-width="11" stroke-linecap="round"/>
+  <path d="M112 39h31v83h30l-45 47-45-47h29V39Z" fill="url(#arrow-navy)" stroke="#A7FFF0" stroke-width="4" stroke-linejoin="round"/>
+</g>
+</svg>
