@@ -5,6 +5,7 @@ The account UI is a static GitHub Pages addition and uses Supabase Auth from the
 ## Routes
 - `/auth/` — sign in and create account
 - `/auth/callback/` — email confirmation return page
+- `/extension/connect/` — authenticated approval page for connecting the browser extension
 
 ## Browser configuration
 Edit `auth/config.js` and replace:
@@ -18,6 +19,16 @@ In Authentication → URL Configuration:
 - Add this exact Redirect URL: `https://seddofrah-cmyk.github.io/bomyra-site/auth/callback/`
 
 Keep email confirmation enabled. The account page requests that confirmation links return to the callback route.
+
+## Browser extension account pairing
+
+1. The extension requests a short-lived pairing code from `POST /api/extension/pair/start`.
+2. The backend stores only the SHA-256 hash of that code and returns the public approval URL at `/extension/connect/?code=…`.
+3. The approval page checks the existing Supabase browser session. If the user is signed out, it sends them through `/auth/` and returns to the approval page afterward.
+4. The page sends only the one-time pairing code and the signed-in user's Supabase access token to `POST /api/extension/pair/approve`.
+5. The extension polls `POST /api/extension/pair/poll` and receives an opaque 30-day extension session token once. The backend stores only the token's SHA-256 hash.
+
+The pairing code expires after 10 minutes. The page removes it from the address bar after reading it and uses a no-referrer policy. Account linking does not send conversation content. Keep the Supabase publishable key in the browser; all service-role credentials and signing secrets remain server-side.
 
 ## Important boundary
 The account and checkout pages use Supabase Auth, but checkout remains disabled until the production backend URL and required Vercel Sandbox environment variables are configured. Do not grant Pro access based on browser state. Subscription access must be granted only by the signed server-side Paddle webhook.
