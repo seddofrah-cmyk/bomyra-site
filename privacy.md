@@ -74,6 +74,8 @@ The extension uses Chrome storage for settings and local archive; supported chat
 
 Questions about this notice, privacy requests, or product support can be sent to [seddev213@gmail.com](mailto:seddev213@gmail.com).
 
+<div lang="ar" dir="rtl" markdown="1">
+
 العربية
 -------
 
@@ -136,3 +138,5 @@ Questions about this notice, privacy requests, or product support can be sent to
 ### 8. التواصل
 
 يمكن إرسال الأسئلة حول هذا الإشعار، أو طلبات الخصوصية، أو دعم المنتجات إلى [seddev213@gmail.com](mailto:seddev213@gmail.com).
+
+</div>
