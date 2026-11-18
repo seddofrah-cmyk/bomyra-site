@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#061522">
+  <meta name="description" content="{{ page.description | default: site.description | escape }}">
+  <title>{% if page.title %}{{ page.title | escape }} · {% endif %}BOMYRA</title>
+  <link rel="icon" href="/bomyra-site/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/bomyra-site/assets/css/style.css?v=4">
+</head>
+<body class="{% if page.url == '/' %}home-document{% else %}content-document{% endif %}">
+  {% unless page.url == '/' %}
+  <header class="content-header">
+    <div class="content-header-inner">
+      <a class="content-brand" href="/bomyra-site/" aria-label="BOMYRA home">
+        <img src="/bomyra-site/assets/images/bomyra-mark.svg" alt="">
+        <span class="content-brand-copy"><strong>BOMYRA</strong><small>AI CHAT SAVER &amp; EXPORTER</small></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="/bomyra-site/">Home</a>
+        <a href="/bomyra-site/pricing/">Pricing</a>
+        <a class="content-nav-cta" href="/bomyra-site/auth/">Sign in</a>
+      </nav>
+    </div>
+  </header>
+  {% endunless %}
+  {{ content }}
+  {% unless page.url == '/' %}
+  <footer class="content-footer">
+    <a href="/bomyra-site/" class="content-footer-brand">BOMYRA</a>
+    <div><a href="/bomyra-site/pricing/">Plans</a><a href="/bomyra-site/privacy.html">Privacy</a><a href="mailto:seddev213@gmail.com">Support</a></div>
+    <p>© 2026 BOMYRA · Independent product. Not affiliated with OpenAI, Anthropic or Google.</p>
+  </footer>
+  {% endunless %}
+</body>
+</html>
