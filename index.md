@@ -81,5 +81,5 @@ permalink: /
 
     <section class="final-cta"><div><span class="eyebrow">MAKE YOUR AI CHATS WORK FOR YOU</span><h2>Keep the ideas.<br><span>Take them anywhere.</span></h2><p>Explore BOMYRA plans and choose the workflow that fits you.</p><a class="button-primary" href="/bomyra-site/pricing/">Explore plans <span>→</span></a></div></section>
   </main>
-  <footer class="home-footer"><a class="home-brand" href="/bomyra-site/"><img src="/bomyra-site/assets/images/bomyra-mark.svg" alt="" /><span>BOMYRA</span></a><div class="footer-links"><a href="/bomyra-site/pricing/">Plans / الأسعار</a><a href="/bomyra-site/privacy.html">Privacy / الخصوصية</a><a href="mailto:seddev213@gmail.com">Support / الدعم</a></div><p>© 2026 BOMYRA · Independent product. Not affiliated with OpenAI, Anthropic or Google.</p></footer>
+  <footer class="home-footer"><a class="home-brand" href="/bomyra-site/"><img src="/bomyra-site/assets/images/bomyra-mark.svg" alt="" /><span>BOMYRA</span></a><div class="footer-links"><a href="/bomyra-site/pricing/">Plans</a><a href="/bomyra-site/privacy.html">Privacy</a><a href="mailto:seddev213@gmail.com">Support</a></div><p>© 2026 BOMYRA · Independent product. Not affiliated with OpenAI, Anthropic or Google.</p></footer>
 </div>
