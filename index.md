@@ -11,7 +11,7 @@ permalink: /
       <a href="#features" class="lang-en">Features</a><a href="#how" class="lang-en">How it works</a><a href="/bomyra-site/pricing/" class="lang-en">Pricing</a>
       <a href="#features" class="lang-ar">المميزات</a><a href="#how" class="lang-ar">طريقة العمل</a><a href="/bomyra-site/pricing/" class="lang-ar">الأسعار</a>
       <a href="/bomyra-site/auth/" class="nav-login lang-en">Sign in</a><a href="/bomyra-site/auth/" class="nav-login lang-ar">تسجيل الدخول</a>
-      <button class="lang-toggle" type="button" id="languageToggle" aria-label="Switch language">العربية</button>
+
     </nav>
   </header>
 
@@ -89,11 +89,3 @@ permalink: /
   </main>
   <footer class="home-footer"><a class="home-brand" href="/bomyra-site/"><img src="/bomyra-site/assets/images/bomyra-mark.svg" alt="" /><span>BOMYRA</span></a><div class="footer-links"><a href="/bomyra-site/pricing/">Plans / الأسعار</a><a href="/bomyra-site/privacy.html">Privacy / الخصوصية</a><a href="mailto:seddev213@gmail.com">Support / الدعم</a></div><p>© 2026 BOMYRA · Independent product. Not affiliated with OpenAI, Anthropic or Google.</p></footer>
 </div>
-<script>
-(function(){
- const root=document.querySelector('.bomyra-home');
- const button=document.getElementById('languageToggle');
- function setLanguage(ar){root.classList.toggle('is-ar',ar);root.classList.toggle('is-en',!ar);document.documentElement.lang=ar?'ar':'en';document.documentElement.dir=ar?'rtl':'ltr';button.textContent=ar?'English':'العربية';}
- setLanguage(false);button.addEventListener('click',()=>setLanguage(!root.classList.contains('is-ar')));
-})();
-</script>
