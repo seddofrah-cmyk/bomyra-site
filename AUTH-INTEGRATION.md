@@ -36,3 +36,10 @@ Before enabling the flow:
 The checkout page sends the current Supabase access token and the selected plan key (`monthly` or `yearly`). The backend validates the token, resolves the UUID from Supabase Auth, creates the Paddle Sandbox transaction with `custom_data.user_id`, and returns its transaction ID. Paddle.js opens that server-created transaction.
 
 Only the signed Paddle webhook can activate or change Pro access. A browser success page or Paddle.js event is not proof of an active subscription. Keep all Paddle API secrets and the Supabase service-role key server-side.
+
+
+## Browser extension account linking
+
+The `/extension/connect/` page is used only after a user starts account linking from the BOMYRA browser extension. It reads the existing Supabase browser session, then sends the one-time pairing code to `POST /api/extension/pair/approve` with the authenticated access token. It does not request or transmit conversation content. The extension polls the backend for the one-time opaque extension session token and stores it in its own browser profile for up to 30 days.
+
+Keep the extension pairing and export-quota endpoints in the private backend. The extension pairing page must remain on the same GitHub Pages origin configured in `EXTENSION_ALLOWED_ORIGINS`.
