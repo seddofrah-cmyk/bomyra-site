@@ -14,7 +14,7 @@ BOMYRA helps you keep the parts that matter. Select messages from **ChatGPT, Cla
 
 **ChatGPT** · **Claude** · **Google Gemini**
 
-[Explore the workflow](#how-it-works) · [Read the privacy and data notice](/seddofrah-cmyk/bomyra-site/blob/main/privacy.html)
+[Explore the workflow](#how-it-works) · [View plans](/bomyra-site/pricing/) · [Sign in](/bomyra-site/auth/) · [Privacy & data notice](/bomyra-site/privacy.html)
 
 ---
 
@@ -59,7 +59,7 @@ Privacy by design, with clear choices
 
 Ordinary selection and export processing run in your browser. BOMYRA does not include a developer-operated content relay. If you explicitly request a cloud summary, selected message text and your custom prompt are sent directly to the provider you enabled and separately consented to. You can also configure a supported local model runtime.
 
-[Read the full privacy and data notice](/seddofrah-cmyk/bomyra-site/blob/main/privacy.html)
+[Read the full privacy and data notice](/bomyra-site/privacy.html)
 
 ---
 
@@ -82,9 +82,9 @@ Supported outputs include Markdown, HTML, PDF, TXT, JSON, CSV, rich text for the
 
 Yes. You can configure a local model runtime such as Ollama, LM Studio, or LocalAI. BOMYRA does not automatically fall back to a cloud provider if the local service fails.
 
-**Is pricing available now?**
+**Where can I see plans and pricing?**
 
-Free and Pro plan details are being finalized. Exact limits and prices will be published before paid subscriptions become available.
+Visit the [BOMYRA plans page](/bomyra-site/pricing/) for the current Free and Pro plan information. Checkout is still in test mode; paid subscriptions are not yet open to the public.
 
 ---
 
@@ -126,7 +126,9 @@ For product questions, technical support, or privacy requests, contact BOMYRA su
 
 تتم عمليات التحديد والتصدير العادية داخل المتصفح. لا يتضمن BOMYRA خادمًا تابعًا للمطوّر لتمرير المحتوى. وعند طلب تلخيص سحابي صراحةً، يُرسل نص الرسائل المحددة وأي مطالبة تلخيص مخصصة مباشرة إلى المزود الذي فعّلته ووافقت عليه. ويمكنك أيضًا إعداد محرك نماذج محلي مدعوم.
 
-[اقرأ إشعار الخصوصية والبيانات كاملًا](/seddofrah-cmyk/bomyra-site/blob/main/privacy.html)
+[اقرأ إشعار الخصوصية والبيانات كاملًا](/bomyra-site/privacy.html)
+
+[عرض الخطط والأسعار](/bomyra-site/pricing/) · [تسجيل الدخول](/bomyra-site/auth/)
 
 ---
 
