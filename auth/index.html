@@ -20,17 +20,17 @@ main{flex:1;display:grid;place-items:center;padding:48px 0}.layout{width:min(900
 <body>
 <header><div class="wrap top"><a class="brand" href="../"><img class="brand-logo" src="../assets/images/bomyra-mark.svg" alt="" /><span>BOMYRA</span></a><nav class="nav"><a href="../">Home</a><a href="../pricing/">Plans</a></nav></div></header>
 <main class="wrap"><div class="layout">
-<section class="intro"><span class="eyebrow" data-en="YOUR WORKSPACE, KEPT IN SYNC" data-ar="مساحتك، محفوظة ومتزامنة">YOUR WORKSPACE, KEPT IN SYNC</span><h1><span class="gradient" data-en="Welcome back." data-ar="مرحباً بعودتك.">Welcome back.</span><br><span data-en="Keep what matters." data-ar="احتفظ بما يهمك.">Keep what matters.</span></h1><p data-en="Create your BOMYRA account to manage your Pro subscription and keep your workflow connected." data-ar="أنشئ حساب BOMYRA لإدارة اشتراك Pro والحفاظ على اتصال مساحة عملك.">Create your BOMYRA account to manage your Pro subscription and keep your workflow connected.</p></section>
+<section class="intro"><span class="eyebrow" data-en="YOUR WORKSPACE, KEPT IN SYNC">YOUR WORKSPACE, KEPT IN SYNC</span><h1><span class="gradient" data-en="Welcome back.">Welcome back.</span><br><span data-en="Keep what matters.">Keep what matters.</span></h1><p data-en="Create your BOMYRA account to manage your Pro subscription and keep your workflow connected.">Create your BOMYRA account to manage your Pro subscription and keep your workflow connected.</p></section>
 <section class="card" aria-label="BOMYRA account">
-<div class="tabs"><button id="signinTab" class="active" type="button" data-en="Sign in" data-ar="تسجيل الدخول">Sign in</button><button id="signupTab" type="button" data-en="Create account" data-ar="إنشاء حساب">Create account</button></div>
+<div class="tabs"><button id="signinTab" class="active" type="button" data-en="Sign in">Sign in</button><button id="signupTab" type="button" data-en="Create account">Create account</button></div>
 <h2 id="formTitle">Sign in</h2><p class="hint" id="formHint">Use your email and password to continue.</p>
 <form id="authForm">
-<label for="email" data-en="Email address" data-ar="البريد الإلكتروني">Email address</label><input id="email" type="email" autocomplete="email" required placeholder="you@example.com">
-<label for="password" data-en="Password" data-ar="كلمة المرور">Password</label><input id="password" type="password" autocomplete="current-password" minlength="8" required placeholder="At least 8 characters">
+<label for="email" data-en="Email address">Email address</label><input id="email" type="email" autocomplete="email" required placeholder="you@example.com">
+<label for="password" data-en="Password">Password</label><input id="password" type="password" autocomplete="current-password" minlength="8" required placeholder="At least 8 characters">
 <button class="primary" id="submitBtn" type="submit">Sign in securely</button>
 </form>
 <div class="status" id="status" role="status" aria-live="polite"></div>
-<p class="fine" data-en="By continuing, you agree to use BOMYRA in accordance with its" data-ar="بالمتابعة، توافق على استخدام BOMYRA وفقاً لـ"><span>By continuing, you agree to use BOMYRA in accordance with its</span> <a href="../privacy.html" data-en="Privacy Notice" data-ar="إشعار الخصوصية">Privacy Notice</a>.</p>
+<p class="fine" data-en="By continuing, you agree to use BOMYRA in accordance with its"><span>By continuing, you agree to use BOMYRA in accordance with its</span> <a href="../privacy.html" data-en="Privacy Notice">Privacy Notice</a>.</p>
 </section></div></main>
 <footer class="foot">© <span id="year"></span> BOMYRA · <a href="mailto:seddev213@gmail.com">Support</a></footer>
 <script>
@@ -47,7 +47,7 @@ function safeNextPath(value){
 }
 const nextPath=safeNextPath(new URLSearchParams(location.search).get("next"));
 function rememberNextPath(){try{localStorage.setItem("bomyra.auth.next",nextPath);}catch{}}
-let mode="signin",arabic=false;
+let mode="signin"; const arabic=false;
 const $=id=>document.getElementById(id);
 $("year").textContent=new Date().getFullYear();
 function showStatus(message,type=""){const el=$("status");el.textContent=message;el.className="status "+type;el.style.display="block";}
