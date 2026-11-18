@@ -32,9 +32,6 @@ a{color:var(--bomyra-teal)}a:hover{color:#83e9d9}
 
 /* Bilingual homepage */
 .bomyra-home{width:100%;overflow:hidden;background:radial-gradient(ellipse at 80% 5%,#0d3548 0,transparent 38%),var(--bomyra-bg);color:var(--bomyra-ink)}
-.bomyra-home .lang-ar{display:none!important}
-.bomyra-home.is-ar .lang-en{display:none!important}
-.bomyra-home.is-ar .lang-ar{display:revert!important}
 .bomyra-home .home-nav{width:min(1160px,calc(100% - 40px));min-height:82px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid #ffffff18}
 .bomyra-home .home-brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-size:21px;font-weight:900;letter-spacing:.13em}
 .bomyra-home .home-brand img{width:44px;height:44px;object-fit:contain}
@@ -42,7 +39,6 @@ a{color:var(--bomyra-teal)}a:hover{color:#83e9d9}
 .bomyra-home .home-nav nav>a{color:#c2d5df;text-decoration:none;font-size:14px;font-weight:650;transition:color .2s}
 .bomyra-home .home-nav nav>a:hover{color:var(--bomyra-teal)}
 .bomyra-home .nav-login{padding:9px 15px;border:1px solid #2b5368;border-radius:10px}
-.bomyra-home .lang-toggle{padding:9px 13px;border:1px solid #2b5368;border-radius:10px;background:#0c2637;color:#d8e8ee;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
 .bomyra-home .home-hero{width:min(1160px,calc(100% - 40px));min-height:610px;margin:auto;padding:76px 0 70px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:60px}
 .bomyra-home .hero-copy .eyebrow,.bomyra-home .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--bomyra-teal);font-size:11px;font-weight:850;letter-spacing:.15em;text-transform:uppercase}
 .bomyra-home .eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--bomyra-teal);box-shadow:0 0 14px var(--bomyra-teal)}
@@ -106,10 +102,5 @@ a{color:var(--bomyra-teal)}a:hover{color:#83e9d9}
 .bomyra-home .footer-links{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin:22px 0}
 .bomyra-home .footer-links a{color:#a8bdc8;text-decoration:none;font-size:13px}
 .bomyra-home .home-footer p{margin:0;color:#69899a;font-size:11px}
-.bomyra-home.is-ar .home-nav,.bomyra-home.is-ar .home-nav nav{direction:rtl}
-.bomyra-home.is-ar .home-hero{direction:rtl}
-.bomyra-home.is-ar .hero-actions{direction:rtl}
-.bomyra-home.is-ar .feature-number{right:auto;left:25px}
-.bomyra-home.is-ar .privacy-band{direction:rtl}
 @media(max-width:900px){.bomyra-home .home-hero{grid-template-columns:1fr;gap:42px;padding:60px 0}.bomyra-home .hero-copy{max-width:720px;margin:auto;text-align:center}.bomyra-home .hero-actions{justify-content:center}.bomyra-home .hero-visual{width:min(600px,100%);margin:auto}.bomyra-home .feature-grid{grid-template-columns:repeat(2,1fr)}.bomyra-home .privacy-band{align-items:flex-start;flex-direction:column}}
 @media(max-width:620px){.bomyra-home .home-nav{width:calc(100% - 28px);min-height:70px}.bomyra-home .home-brand{font-size:17px}.bomyra-home .home-brand img{width:36px;height:36px}.bomyra-home .home-nav nav{gap:10px}.bomyra-home .home-nav nav>a:not(.nav-login){display:none}.bomyra-home .home-hero,.bomyra-home .home-section,.bomyra-home .workflow-section,.bomyra-home .faq-section{width:calc(100% - 30px)}.bomyra-home .home-hero{min-height:0;padding:55px 0}.bomyra-home h1{font-size:42px}.bomyra-home .hero-copy>p{font-size:16px}.bomyra-home .hero-visual{padding:18px}.bomyra-home .platform-strip{gap:16px}.bomyra-home .platform-strip>span{width:100%;text-align:center}.bomyra-home .home-section,.bomyra-home .workflow-section,.bomyra-home .faq-section{padding:70px 0}.bomyra-home .feature-grid,.bomyra-home .steps-grid,.bomyra-home .faq-grid{grid-template-columns:1fr}.bomyra-home .feature-card{min-height:0}.bomyra-home .privacy-band{width:calc(100% - 30px);padding:28px}.bomyra-home .final-cta{width:calc(100% - 30px);margin-bottom:55px;padding:45px 20px}.bomyra-home .footer-links{gap:12px}.bomyra-home .visual-message{padding:13px}}
