@@ -62,6 +62,13 @@ btn.addEventListener("click",async()=>{
     }
     throw new Error("You already have a Pro "+existingPlan+" subscription, but its end date could not be verified. Please contact support before starting another purchase.");
    }
+   if(result.code==="CHECKOUT_ALREADY_PENDING"){
+    const pendingPlan=result.checkout&&result.checkout.plan==="yearly"?"annual":"monthly";
+    throw new Error("A "+pendingPlan+" checkout is already in progress for this account. Complete or cancel that checkout before starting a different plan.");
+   }
+   if(["CHECKOUT_PROCESSING","CHECKOUT_STATUS_UNKNOWN","CHECKOUT_RESERVATION_FAILED"].includes(result.code)){
+    throw new Error("A previous checkout is still being prepared or its payment status is being confirmed. To protect you from a duplicate charge, another checkout is temporarily blocked. Please retry shortly; contact support if this message persists.");
+   }
    throw new Error(result.error||"Unable to prepare checkout. Please try again.");
   }
   if(!result.transactionId||!result.transactionId.startsWith("txn_"))throw new Error("The checkout service returned an invalid transaction.");
