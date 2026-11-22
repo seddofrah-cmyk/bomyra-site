@@ -5,13 +5,26 @@ permalink: /
 ---
 
 <div class="bomyra-home">
-  <style>.pairing-status{margin:12px 0 0;max-width:520px;color:#9af0df;font-size:13px;line-height:1.5}.pairing-status.error{color:#ffb2a8}.pairing-status[hidden]{display:none}.bomyra-pairing-pending{opacity:.65;pointer-events:none}</style>
+  <style>
+  .bomyra-install-dialog[hidden]{display:none}
+  .bomyra-install-dialog{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:20px;background:#020b12d9;backdrop-filter:blur(8px)}
+  .bomyra-install-card{width:min(480px,100%);padding:clamp(25px,5vw,36px);border:1px solid #285064;border-radius:22px;background:linear-gradient(150deg,#102b3d,#0a1d2b);color:#f3f8fa;text-align:center;box-shadow:0 26px 70px #0008}
+  .bomyra-install-card h2{margin:12px 0;color:#f3f8fa;font-size:clamp(24px,5vw,30px);line-height:1.2}
+  .bomyra-install-card p{margin:0 auto;color:#a8bdc8;line-height:1.65}
+  .bomyra-install-actions{display:grid;gap:10px;margin-top:24px}
+  .bomyra-install-actions button{min-height:46px;padding:11px 16px;border:1px solid transparent;border-radius:10px;font:inherit;font-weight:800;cursor:pointer}
+  .bomyra-install-primary{background:linear-gradient(100deg,#20d5d2,#83e9d9);color:#06202a}
+  .bomyra-install-secondary{border-color:#315064!important;background:#102b3d;color:#d9e8ee}
+  .bomyra-install-primary:disabled{opacity:.55;cursor:not-allowed}
+  .bomyra-install-note{display:block;margin-top:12px;color:#819aa7;font-size:12px}
+  body.bomyra-dialog-open{overflow:hidden}
+</style>
   <header class="home-nav">
     <a class="home-brand" href="/bomyra-site/" aria-label="BOMYRA home"><img src="/bomyra-site/assets/images/bomyra-mark.svg" alt="" /><span class="home-brand-copy"><strong>BOMYRA</strong><small>AI CHAT SAVER &amp; EXPORTER</small></span></a>
     <nav aria-label="Main navigation">
       <a href="#features">Features</a><a href="#how">How it works</a><a href="/bomyra-site/pricing/">Pricing</a>
       
-      <a href="/bomyra-site/auth/" class="nav-login" data-bomyra-pair>Sign in</a><a href="/bomyra-site/auth/" class="nav-cta" data-bomyra-pair>Get Started</a>
+      <a href="/bomyra-site/auth/" class="nav-login" data-bomyra-onboarding>Sign in</a><a href="/bomyra-site/auth/" class="nav-cta" data-bomyra-onboarding>Get Started</a>
 
     </nav>
   </header>
@@ -22,8 +35,7 @@ permalink: /
         <span class="eyebrow"><i></i> AI CHAT SAVER &amp; EXPORTER</span>
         <h1>Keep your best AI conversations.<span> Make them useful again.</span></h1>
         <p>BOMYRA helps you select the messages that matter from ChatGPT, Claude and Google Gemini, then turn them into portable, organized archives.</p>
-        <div class="hero-actions"><a class="button-primary" href="/bomyra-site/auth/" data-bomyra-pair>Get Started <span>→</span></a><a class="button-quiet" href="/bomyra-site/pricing/">View Plans</a></div>
-        <p id="bomyra-pairing-status" class="pairing-status" role="status" aria-live="polite" hidden></p>
+        <div class="hero-actions"><a class="button-primary" href="/bomyra-site/auth/" data-bomyra-onboarding>Get Started <span>→</span></a><a class="button-quiet" href="/bomyra-site/pricing/">View Plans</a></div>
         <div class="platform-line">CHATGPT <b>·</b> CLAUDE <b>·</b> GOOGLE GEMINI</div>
       </div>
       
@@ -84,5 +96,17 @@ permalink: /
     <section class="final-cta"><div><span class="eyebrow">MAKE YOUR AI CHATS WORK FOR YOU</span><h2>Keep the ideas.<br><span>Take them anywhere.</span></h2><p>Explore BOMYRA plans and choose the workflow that fits you.</p><a class="button-primary" href="/bomyra-site/pricing/">Explore plans <span>→</span></a></div></section>
   </main>
   <footer class="home-footer"><a class="home-brand" href="/bomyra-site/" aria-label="BOMYRA home"><img src="/bomyra-site/assets/images/bomyra-mark.svg" alt="" /><span class="home-brand-copy"><strong>BOMYRA</strong><small>AI CHAT SAVER &amp; EXPORTER</small></span></a><div class="footer-links"><a href="/bomyra-site/pricing/">Plans</a><a href="/bomyra-site/privacy.html">Privacy</a><a href="mailto:seddev213@gmail.com">Support</a></div><p>© 2026 BOMYRA · Independent product. Not affiliated with OpenAI, Anthropic or Google.</p></footer>
-  <script src="/bomyra-site/assets/js/bomyra-pairing.js" defer></script>
+  <div class="bomyra-install-dialog" id="bomyra-install-dialog" role="dialog" aria-modal="true" aria-labelledby="bomyra-install-title" aria-describedby="bomyra-install-description" hidden>
+    <section class="bomyra-install-card">
+      <span class="eyebrow">ONE MORE STEP</span>
+      <h2 id="bomyra-install-title">Connect your BOMYRA extension</h2>
+      <p id="bomyra-install-description">To continue, install and enable the BOMYRA browser extension.</p>
+      <div class="bomyra-install-actions">
+        <button class="bomyra-install-primary" id="bomyra-install-button" type="button" disabled>Install BOMYRA</button>
+        <button class="bomyra-install-secondary" id="bomyra-retry-button" type="button">I've installed it — Retry</button>
+      </div>
+      <small class="bomyra-install-note">The official installation link will be added here soon.</small>
+    </section>
+  </div>
+  <script src="/bomyra-site/assets/js/bomyra-onboarding.js" defer></script>
 </div>
