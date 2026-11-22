@@ -1,6 +1,6 @@
 # BOMYRA — Ordered Open Work Queue
 
-Updated: 2026-11-22 (Africa/Algiers)
+Updated: 2026-11-23 (Africa/Algiers)
 Purpose: current task order based on the latest available project checkpoint, QA reports, repository evidence, and the user's browser confirmation of the site guide.
 
 ## Operating rules
