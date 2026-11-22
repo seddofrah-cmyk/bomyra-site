@@ -22,14 +22,14 @@ Purpose: current task order based on the latest available project checkpoint, QA
 - Independent binary/hash verification of the image is not recorded. No source change is required based on current evidence.
 - Keep the feature branch isolated; do not promote or merge it as part of this task.
 
-## Priority 2 — review homepage Get Started behavior (separate site task)
+## Priority 2 — homepage Get Started / Sign in navigation
 
-**Status: OPEN / intentionally deferred**
+**Status: IMPLEMENTED IN ISOLATED QA BRANCH; preview validation pending**
 
-- Review the existing homepage button behavior and destination.
-- Preserve the user's requirement that the sign-in/create-account screen must be shown when starting the account flow, including when a user is already signed in, so another account can be added.
-- Important boundary: the website must not pair, link, or manage BOMYRA accounts. The actual sign-in, account addition, and switching flow remains inside the extension. Design the button destination accordingly; do not add a website-side pairing flow.
-- Do not change this button during the completed visual-guide pass.
+- Root cause confirmed: the three homepage Sign in/Get Started anchors already pointed to `/bomyra-site/auth/`, but `assets/js/bomyra-onboarding.js` intercepted clicks on elements carrying `data-bomyra-onboarding`, called `preventDefault()`, and opened the visual guide instead.
+- The authentication page exists at `auth/index.html` and provides Sign in / Create account tabs. Its existing logic preserves the extension pairing continuation path; that flow was not modified.
+- Commit `8bed0ba574b3e1345814dc307f49bcdd5a5f13cd` on `feature/site-signin-visual-guide` removes the interception attribute from the three primary CTAs and adds a separate footer **Account guide** link, retaining the visual guide as an independent informational action.
+- Next: wait for the Cloudflare Pages preview build for this exact commit to finish, then verify the homepage links navigate to `/bomyra-site/auth/` and that the separate Account guide still opens. No pairing or account linking is added to the main website.
 
 ## Priority 3 — official extension distribution destination
 
@@ -41,14 +41,13 @@ Purpose: current task order based on the latest available project checkpoint, QA
 
 ## Priority 4 — Cloudflare Billing QA release evidence
 
-**Status: QA implementation/CI largely complete; release evidence still gated**
+**Status: QA evidence PASS; PR #6 superseded and closed; production cutover still blocked**
 
-- Backend isolated QA branch: `fix/webhook-atomic-claim-qa`; draft PR #6 remains open/unmerged in the latest recorded checkpoint.
-- Recorded commit with `subscription.past_due` source synchronization and regression test: `e222b9311c56340c1d25d5f4cc9d16eb90e13a8a`; GitHub Actions run `44938568679` passed (37 Billing Worker tests, plus typecheck/backend/Worker checks).
-- Atomic Paddle webhook claim/lease migration and Worker hardening were implemented on QA; DB concurrency claim/reclaim/fencing checks passed with a synthetic event.
-- A signed `subscription.past_due` Sandbox event was processed successfully; duplicate replay was acknowledged without a second processing attempt. Unauthenticated checkout rejection also passed.
-- Next: verify the currently deployed QA Worker version/source corresponds to the intended final branch commit and that the atomic-claim implementation is the active version; then run one controlled signed Sandbox webhook against that active version and verify the event/lease lifecycle in Supabase QA. Do not repeat already successful unrelated checkout, duplicate replay, or regression checks.
-- Production cutover remains blocked until the QA evidence is reconciled and reviewed.
+- PR #6 was closed without merge after exact source, migration, test-coverage, and QA-state comparison. Its branch `fix/webhook-atomic-claim-qa` remains preserved. See the PR #6 disposition addendum at the end of this queue and the backend QA report.
+- Target branch `migration/cloudflare-billing-qa` already contains the same Worker entrypoint, the applied QA atomic-claim migration `20261121122153`, and the essential lease/in-flight duplicate and `subscription.past_due` regression coverage.
+- The redundant PR-only migration `20261121130000` was not copied or applied because it duplicates the target migration and broadly drops CHECK constraints.
+- Active Worker provenance, signed Sandbox `subscription.past_due`, duplicate replay protection, and unauthenticated checkout rejection are already verified. Do not repeat these successful checks absent a relevant code change.
+- Production cutover remains blocked and requires a separate explicit approval.
 
 ## Priority 5 — subscription expiry lifecycle follow-through
 
