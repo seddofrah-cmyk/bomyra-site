@@ -52,3 +52,14 @@ Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
 - Cloudflare Pages deployment `c56f2566-84bc-4641-ba55-b876446a304c` for code commit `8bed0ba574b3e1345814dc307f49bcdd5a5f13cd` completed successfully. Queued, initialize, clone_repo, build, and deploy stages all report success.
 - Preview URL: `https://c56f2566.bomyra-site-preview.pages.dev/bomyra-site/`.
 - This confirms build/deployment only. Automated browser inspection was unavailable; user/browser confirmation is still required for the CTA navigation and independent Account guide interaction. Do not mark behavioral acceptance PASS yet.
+
+
+## Correction — account-pairing root cause and CTA-only change rollback (2026-11-22, Africa/Algiers)
+
+- The previous CTA-only change was not a valid account-linking fix. It was reverted in commit `b89f86c465b01cb81a43aead5c80c62bc1bea80e`; the homepage CTAs returned to their prior markup/behavior. No production deployment was made.
+- Source review established that `/auth/` authenticates only the website's Supabase session. It does not create an extension session or write an extension token into Chrome extension storage.
+- The site file `assets/js/bomyra-pairing.js` is currently orphaned: it expects `data-bomyra-pair` controls and a same-window extension bridge response, but the homepage has neither pairing controls nor a script reference to this file.
+- The extension manifest for v1.5.139 runs content scripts only on ChatGPT, Claude, and Gemini hosts. It does not match the BOMYRA website origin and declares no `externally_connectable` bridge. Its existing account-pairing function is initiated from inside the extension UI and performs Worker start/poll itself.
+- Consequently, the current website CTA → extension pairing path is not wired end-to-end. The correct implementation requires an explicit website/extension bridge and must preserve the existing in-extension Add account and multi-account storage behavior.
+- The CTA-only preview deployment `c56f2566-84bc-4641-ba55-b876446a304c` reflects the now-reverted commit and is not an accepted QA result. Browser behavior was never accepted.
+- No extension source, Worker, database, auth session, production environment, or Paddle configuration was changed during this diagnosis.
