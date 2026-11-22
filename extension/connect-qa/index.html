@@ -129,10 +129,20 @@ h1{margin:12px 0;color:#f3f8fa;font-size:clamp(25px,5vw,32px);font-weight:850;le
   accountCard.hidden=false;
   accountActions.hidden=false;
   status.className="status";
-  status.textContent="Review the BOMYRA account that will be linked to this browser extension.";
+  status.textContent=sitePreviewFlow
+   ?"Review the BOMYRA account you want to use. Account linking will be enabled in a later update."
+   :"Review the BOMYRA account that will be linked to this browser extension.";
   return data.session;
  }
  async function approveCurrentAccount(){
+  if(sitePreviewFlow){
+   status.className="status success";
+   status.textContent="Account selected. The account-linking step will be available in a later update.";
+   accountActions.hidden=true;
+   returnLink.hidden=false;
+   returnLink.textContent="Return to BOMYRA";
+   return;
+  }
   approveButton.disabled=true;
   switchButton.disabled=true;
   try{
