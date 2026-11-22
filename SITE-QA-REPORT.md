@@ -14,6 +14,10 @@ Base commit: `7ed11b1d1e5afe77c3d5299abb4cbee0de3da9fe`
 - Replaced the former retry action with a Close guide button. Account connection and account switching are performed only inside the BOMYRA extension.
 - Did not change the extension repository, pairing flow, Workers, backend, or production settings.
 
+## Deferred work — do not change in this pass
+- The homepage `Get Started` button is intentionally left as-is for now. Its behavior and destination will be reviewed and modified in a separate future task, after the current visual-guide work is complete.
+- Keep this item open in the project report; do not treat `Get Started` as finalized.
+
 ## Not completed — waiting for official store URL
 - The website does not initiate extension installation or account linking. Any future installation CTA requires a confirmed official store listing and a separate approved change.
 
