@@ -19,7 +19,7 @@ permalink: /
   .bomyra-guide-number{display:grid;place-items:center;flex:0 0 27px;width:27px;height:27px;border-radius:50%;background:#20d5d2;color:#06202a;font-size:12px;font-weight:900}
   .bomyra-guide-step p{min-height:48px;margin:0 0 13px;color:#a8bdc8;font-size:13px;line-height:1.55}
   .bomyra-guide-image{display:flex;align-items:center;justify-content:center;min-height:112px;overflow:hidden;border:1px solid #315064;border-radius:11px;background:#050d14}
-  .bomyra-guide-image img{display:block;max-width:100%;height:auto;object-fit:contain}
+  .bomyra-guide-image img{display:block;max-width:100%;height:auto;object-fit:contain;pointer-events:none;user-select:none}
   .bomyra-guide-image.step-one img{width:100%;max-height:110px}
   .bomyra-guide-image.step-two img{width:100%;max-height:145px}
   .bomyra-guide-footnote{margin:15px 0 0;color:#819aa7;font-size:12px;text-align:center}
@@ -122,13 +122,13 @@ permalink: /
       <div class="bomyra-guide-grid">
         <article class="bomyra-guide-step">
           <h3><span class="bomyra-guide-number">1</span> Open the account control</h3>
-          <p>At the bottom of the BOMYRA side panel, select <strong>Connect BOMYRA account</strong>.</p>
-          <div class="bomyra-guide-image step-one"><img src="/bomyra-site/assets/images/signin-connect-account.jpg" alt="BOMYRA panel showing the Connect BOMYRA account control at the bottom"></div>
+          <p>In the extension panel, use <strong>Connect BOMYRA account</strong> to open the account options. This picture is guidance only; it does not connect an account.</p>
+          <div class="bomyra-guide-image step-one"><img src="/bomyra-site/assets/images/signin-connect-account.jpg" alt="Visual reference: Connect BOMYRA account control in the extension panel" draggable="false"></div>
         </article>
         <article class="bomyra-guide-step">
           <h3><span class="bomyra-guide-number">2</span> Choose or add an account</h3>
           <p>Use an existing BOMYRA account, or select <strong>Add account</strong> to sign in with another one.</p>
-          <div class="bomyra-guide-image step-two"><img src="/bomyra-site/assets/images/signin-add-account.jpg" alt="BOMYRA accounts menu with the Add account option"></div>
+          <div class="bomyra-guide-image step-two"><img src="/bomyra-site/assets/images/signin-add-account.jpg" alt="Visual reference: BOMYRA accounts menu with the Add account option" draggable="false"></div>
         </article>
       </div>
       <p class="bomyra-guide-footnote">Each account keeps its own plan and quota. Switching accounts never transfers a subscription.</p>
