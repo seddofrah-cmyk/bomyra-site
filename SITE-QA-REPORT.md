@@ -1,6 +1,6 @@
 # BOMYRA Site — QA / Work Report
 
-Updated: 2026-11-22 (Africa/Algiers)
+Updated: 2026-11-23 (Africa/Algiers)
 Repository: `seddofrah-cmyk/bomyra-site`
 Working branch: `feature/site-signin-visual-guide`
 Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
