@@ -45,3 +45,10 @@ Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
 - Commit `8bed0ba574b3e1345814dc307f49bcdd5a5f13cd` on isolated branch `feature/site-signin-visual-guide` removes the interception attribute from the three primary Sign in/Get Started CTAs and adds a distinct footer **Account guide** link so the guide remains available independently.
 - No extension pairing, auth implementation, Supabase configuration, checkout, Worker, or production configuration was changed.
 - Cloudflare Pages preview deployment for this commit was created as `c56f2566-84bc-4641-ba55-b876446a304c` at `https://c56f2566.bomyra-site-preview.pages.dev`. At the latest check it was still in the `build` stage (active); therefore deployment success and browser behavior are **not yet verified**. Do not describe the fix as accepted until the deployment completes and the homepage CTA plus separate guide are checked.
+
+
+### Preview deployment result — code commit (2026-11-22, Africa/Algiers)
+
+- Cloudflare Pages deployment `c56f2566-84bc-4641-ba55-b876446a304c` for code commit `8bed0ba574b3e1345814dc307f49bcdd5a5f13cd` completed successfully. Queued, initialize, clone_repo, build, and deploy stages all report success.
+- Preview URL: `https://c56f2566.bomyra-site-preview.pages.dev/bomyra-site/`.
+- This confirms build/deployment only. Automated browser inspection was unavailable; user/browser confirmation is still required for the CTA navigation and independent Account guide interaction. Do not mark behavioral acceptance PASS yet.
