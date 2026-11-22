@@ -11,38 +11,51 @@
   const stepLabel = document.getElementById("bomyra-tour-step");
   const count = document.getElementById("bomyra-tour-count");
   const progress = document.getElementById("bomyra-tour-progress");
+  const screenshot = document.getElementById("bomyra-tour-screenshot");
   const scenes = Array.from(document.querySelectorAll(".bomyra-tour-scene"));
-  if (!triggers.length || !tour || !closeButton || !previousButton || !nextButton || scenes.length !== 6) return;
+  if (!triggers.length || !tour || !closeButton || !previousButton || !nextButton || !screenshot || scenes.length !== 6) return;
 
   const steps = [
     {
       title: "Floating controls",
-      description: "Meet the floating BOMYRA controls. They keep the main selection and export actions close at hand.",
+      description: "Explore the floating BOMYRA controls that give you quick access to selection and export actions.",
+      image: "/bomyra-site/assets/images/tour/01-floating-controls.png",
+      imageAlt: "BOMYRA floating controls",
       focus: ".bomyra-tour-float"
     },
     {
       title: "Quick actions",
       description: "Open the quick-action menu to export, work with conversation images, scan media, copy selected content, or clear the selection.",
+      image: "/bomyra-site/assets/images/tour/02-quick-actions.png",
+      imageAlt: "BOMYRA quick actions menu",
       focus: ".bomyra-tour-menu"
     },
     {
       title: "Export formats",
       description: "Choose the output that fits your workflow: JSON, CSV, Markdown, ZIP, text, HTML, PDF, or rich text for Word.",
+      image: "/bomyra-site/assets/images/tour/03-export-formats.png",
+      imageAlt: "BOMYRA available export formats",
       focus: ".bomyra-tour-menu"
     },
     {
       title: "Export selection and preview",
       description: "Review the selected-message count, estimated word count, reading time, and export template before choosing an export.",
+      image: "/bomyra-site/assets/images/tour/04-export-selection-preview.png",
+      imageAlt: "BOMYRA export selection and preview",
       focus: ".bomyra-tour-metrics"
     },
     {
       title: "Summary",
       description: "Choose an enabled cloud provider, use a configured local model, or create a context-transfer summary. These are separate workflows.",
+      image: "/bomyra-site/assets/images/tour/05-summary.png",
+      imageAlt: "BOMYRA summary tools",
       focus: ".bomyra-tour-card:nth-of-type(2)"
     },
     {
       title: "Archive",
       description: "Browse saved exports, filter by format, and search your archive. Your archive stays within the extension.",
+      image: "/bomyra-site/assets/images/tour/06-archive.png",
+      imageAlt: "BOMYRA archive",
       focus: ".bomyra-tour-tabs"
     }
   ];
@@ -52,6 +65,8 @@
 
   function renderStep() {
     const step = steps[currentStep];
+    screenshot.src = step.image;
+    screenshot.alt = step.imageAlt;
     scenes.forEach((scene, index) => {
       scene.hidden = index !== currentStep;
       scene.querySelectorAll(".tour-focus").forEach(element => element.classList.remove("tour-focus"));
