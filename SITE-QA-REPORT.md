@@ -36,3 +36,12 @@ Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
 - User screenshot confirms the guide is visible in the browser. Cloudflare deployment `0ab62c71-ccb1-4553-b596-b261647e7df5` is API-confirmed successful. Independent binary/hash verification of the image is still not recorded.
 - No merge to the production branch and no production deployment were performed.
 - Do not modify the extension pairing/login flow, Workers, backend, Supabase, billing, or production settings as part of this site-only task.
+
+
+## Addendum — homepage account CTA navigation correction (2026-11-22, Africa/Algiers)
+
+- Root cause: homepage Sign in/Get Started anchors already targeted `/bomyra-site/auth/`, but `assets/js/bomyra-onboarding.js` intercepted every element with `data-bomyra-onboarding`, called `preventDefault()`, and opened the informational visual guide instead of following the link.
+- Confirmed the account page exists at `auth/index.html`; it provides Sign in and Create account tabs. Existing `next` and pending extension-pairing continuation logic was inspected and left unchanged.
+- Commit `8bed0ba574b3e1345814dc307f49bcdd5a5f13cd` on isolated branch `feature/site-signin-visual-guide` removes the interception attribute from the three primary Sign in/Get Started CTAs and adds a distinct footer **Account guide** link so the guide remains available independently.
+- No extension pairing, auth implementation, Supabase configuration, checkout, Worker, or production configuration was changed.
+- Cloudflare Pages preview deployment for this commit was created as `c56f2566-84bc-4641-ba55-b876446a304c` at `https://c56f2566.bomyra-site-preview.pages.dev`. At the latest check it was still in the `build` stage (active); therefore deployment success and browser behavior are **not yet verified**. Do not describe the fix as accepted until the deployment completes and the homepage CTA plus separate guide are checked.
