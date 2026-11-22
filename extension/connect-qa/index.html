@@ -63,9 +63,29 @@ h1{margin:12px 0;color:#f3f8fa;font-size:clamp(25px,5vw,32px);font-weight:850;le
  const params=new URLSearchParams(location.search);
  const code=params.get("code")||"";
  const returnPath=location.pathname+location.search;
+ const siteStartedFlow=params.get("flow")==="site";
  // Keep the one-time pairing code in memory only, not in browser history.
  try{history.replaceState(null,"",location.pathname);}catch(_){}
  const fail=message=>{status.className="status error";status.textContent=message;};
+ window.addEventListener("message",event=>{
+  if(event.source!==window||event.origin!==location.origin)return;
+  const message=event.data;
+  if(!message||message.source!=="bomyra-extension-bridge")return;
+  if(message.type==="PAIRING_WAITING"&&siteStartedFlow){
+   status.className="status";
+   status.textContent=message.message||"Account approved. Waiting for BOMYRA to finish connecting the extension…";
+  }else if(message.type==="PAIRING_COMPLETE"&&siteStartedFlow){
+   status.className="status success";
+   status.textContent="BOMYRA is now connected to this browser for "+(message.email||"your account")+". Return to your AI chat to use the extension.";
+   accountActions.hidden=true;
+   returnLink.hidden=false;
+   returnLink.textContent="Return to BOMYRA";
+  }else if(message.type==="PAIRING_FAILED"&&siteStartedFlow){
+   fail(message.message||"The account was approved, but the extension could not finish connecting. Start a new connection from BOMYRA.");
+   accountActions.hidden=true;
+   returnLink.hidden=false;
+  }
+ });
  const initials=value=>{
   const parts=String(value||"B").split("@")[0].split(/[._ -]+/).filter(Boolean);
   return ((parts[0]||"B")[0]+(parts[1]||"")[0]).toUpperCase();
@@ -142,11 +162,13 @@ h1{margin:12px 0;color:#f3f8fa;font-size:clamp(25px,5vw,32px);font-weight:850;le
     };
     throw new Error(messages[result.error]||"The Cloudflare QA Worker could not approve this connection.");
    }
-   status.className="status success";
-   status.textContent="The extension is now authorized for "+email+". Return to the extension to finish setup.";
+   status.className=siteStartedFlow?"status":"status success";
+   status.textContent=siteStartedFlow
+    ?"Account approved. Waiting for BOMYRA to finish connecting the extension…"
+    :"The extension is now authorized for "+email+". Return to the extension to finish setup.";
    clearPendingConnectPath();
    accountActions.hidden=true;
-   returnLink.hidden=false;
+   returnLink.hidden=!siteStartedFlow;
   }catch(error){
    fail(error&&error.message?error.message:"QA account authorization failed. Please try again.");
    approveButton.disabled=false;
