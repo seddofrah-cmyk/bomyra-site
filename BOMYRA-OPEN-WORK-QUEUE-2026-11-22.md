@@ -12,14 +12,15 @@ Purpose: current task order based on the latest available project checkpoint, QA
 - Preserve successful QA results. Do not rerun completed tests unless a later code change affects the tested path.
 - Record each action with timestamp/timezone, environment, resource, action, output/evidence, result, and evidence quality.
 
-## Priority 1 — close the current website QA evidence discrepancy
+## Priority 1 — website visual-guide QA
 
-**Status: PARTIAL / browser-visible PASS**
+**Status: PASS — user screenshot + Cloudflare deployment API**
 
 - User screenshot on 2026-11-22 shows the Cloudflare Pages preview page and the new single screenshot rendering inside the guide.
-- Cloudflare deployment `0ab62c71-ccb1-4553-b596-b261647e7df5` was still reported as build-active by the API; automated fetch returned 404 for page and asset.
-- Reconcile deployment status and verify the asset is served by the deployed Preview URL. Do not change site source unless this verification reveals a real defect.
-- Do not promote or merge this branch as part of this task.
+- Deployment `0ab62c71-ccb1-4553-b596-b261647e7df5` subsequently completed successfully; all five stages (queued, initialize, clone_repo, build, deploy) are success.
+- The earlier automated 404 occurred while deployment was still building; it is superseded by the completed deployment record and browser screenshot.
+- Independent binary/hash verification of the image is not recorded. No source change is required based on current evidence.
+- Keep the feature branch isolated; do not promote or merge it as part of this task.
 
 ## Priority 2 — review homepage Get Started behavior (separate site task)
 
@@ -81,7 +82,7 @@ Purpose: current task order based on the latest available project checkpoint, QA
 
 ## Next execution order
 
-1. Resolve the Cloudflare Pages deployment-status / automated-fetch discrepancy without changing source prematurely.
+1. The site visual guide is complete for this pass. Keep Get Started review separate; no further image-guide change is currently queued.
 2. Verify active Cloudflare Billing QA Worker provenance and perform one signed Sandbox event check on the active atomic-claim version.
 3. Keep the Get Started behavior review separate from the image-guide work; maintain the extension-only account flow.
 4. Wait for/verify the official store listing before any install CTA.

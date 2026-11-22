@@ -3,7 +3,7 @@
 Updated: 2026-11-22 (Africa/Algiers)
 Repository: `seddofrah-cmyk/bomyra-site`
 Working branch: `feature/site-signin-visual-guide`
-Latest recorded commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
+Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
 
 ## Completed — visual sign-in guide
 
@@ -21,7 +21,7 @@ Latest recorded commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
 - The screenshot visibly confirms that the guide opens and the new single image renders inside the guide; **Close guide** is visible.
 - Result: **PASS — user-confirmed visual rendering in the actual browser**.
 - Evidence boundary: this is a user-provided browser screenshot, not an independently captured browser test or a binary hash comparison from the deployment.
-- Cloudflare API inspection for deployment `0ab62c71-ccb1-4553-b596-b261647e7df5` showed queued, initialize, and clone_repo successful, while build remained reported as active. A separate automated fetch returned 404 for the page and image despite the user's browser screenshot showing the page. These conflicting signals are recorded, not silently reconciled. The browser screenshot establishes that the user could view the page at that time; the Cloudflare API/fetch verification remains unresolved.
+- Cloudflare API recheck on 2026-11-22 confirmed deployment `0ab62c71-ccb1-4553-b596-b261647e7df5` completed successfully: queued, initialize, clone_repo, build, and deploy all reported success. The earlier automated fetch had returned 404 while the deployment was still building; this is superseded by the completed deployment record and the user's browser screenshot. The separate report-only commit `b99e864a2971ac606e74c8c41c3aa7ee817b08b1` has triggered a subsequent Pages preview build; it contains documentation changes only.
 
 ## Deferred work — keep open
 
@@ -33,6 +33,6 @@ Latest recorded commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
 - Working branch remains isolated: `feature/site-signin-visual-guide`.
 - Latest source change commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e` — `Use the single replacement sign-in guide image`.
 - Cloudflare Pages project: `bomyra-site-preview`; deployment ID: `0ab62c71-ccb1-4553-b596-b261647e7df5`.
-- User screenshot confirms the guide is visible in the browser. Cloudflare API deployment completion and independent asset-fetch verification are not yet confirmed.
+- User screenshot confirms the guide is visible in the browser. Cloudflare deployment `0ab62c71-ccb1-4553-b596-b261647e7df5` is API-confirmed successful. Independent binary/hash verification of the image is still not recorded.
 - No merge to the production branch and no production deployment were performed.
 - Do not modify the extension pairing/login flow, Workers, backend, Supabase, billing, or production settings as part of this site-only task.
