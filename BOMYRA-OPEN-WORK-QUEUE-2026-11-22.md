@@ -12,14 +12,16 @@ Purpose: current task order based on the latest available project checkpoint, QA
 - Preserve successful QA results. Do not rerun completed tests unless a later code change affects the tested path.
 - Record each action with timestamp/timezone, environment, resource, action, output/evidence, result, and evidence quality.
 
-## Priority 1 — website visual-guide QA
+## Priority 1 — website visual guide and six-step Product Tour
 
-**Status: PASS — user screenshot + Cloudflare deployment API**
+**Status: PASS — source, Cloudflare preview deployment, and user browser confirmation (2026-11-23)**
 
-- User screenshot on 2026-11-22 shows the Cloudflare Pages preview page and the new single screenshot rendering inside the guide.
-- Deployment `0ab62c71-ccb1-4553-b596-b261647e7df5` subsequently completed successfully; all five stages (queued, initialize, clone_repo, build, deploy) are success.
-- The earlier automated 404 occurred while deployment was still building; it is superseded by the completed deployment record and browser screenshot.
-- Independent binary/hash verification of the image is not recorded. No source change is required based on current evidence.
+- The one-image Sign in guide remains separate from the homepage Product Tour. The separate Sign in navigation destination remains `/bomyra-site/auth/`.
+- The Product Tour uses the six original screenshot assets in the approved order: Floating controls → Quick actions → Export formats → Export selection and preview → Summary → Archive. `03-export-formats.png` is intentionally unblurred; the other five are the approved blurred copies.
+- The user uploaded all six named PNG files to `assets/images/tour/` on `feature/site-signin-visual-guide`.
+- A post-migration JavaScript guard still required six deleted `.bomyra-tour-scene` elements, preventing the event handlers from being registered. This was corrected by commit `5dbd4957f857af39a11f9b094283c8c4b22a4fcb` (`Fix product tour controls after screenshot migration`). The script now switches the screenshot source and no longer depends on the removed scene elements.
+- Cloudflare Pages deployment `486f5458-cd4a-44f8-87a6-5baebf49b41f` for that commit completed successfully; queued, initialize, clone_repo, build, and deploy all report success.
+- The user subsequently confirmed that the button works. Record the interactive behavior as **user-confirmed PASS**. Do not repeat the same button test absent a relevant change.
 - Keep the feature branch isolated; do not promote or merge it as part of this task.
 
 ## Priority 2 — start account pairing from the website
@@ -38,8 +40,8 @@ Purpose: current task order based on the latest available project checkpoint, QA
 
 **Status: BLOCKED — official store URL not supplied/confirmed**
 
-- Obtain and verify the official store listing URL.
-- Only then prepare a separately reviewed installation CTA.
+- Await the official Chrome Web Store listing URL from the user / store publication process.
+- Verify the listing before preparing a separately reviewed installation CTA.
 - Do not invent or use an unconfirmed store URL.
 
 ## Priority 4 — Cloudflare Billing QA release evidence
@@ -131,3 +133,24 @@ Resume the independent website task: inspect the homepage `Get Started` / `Sign 
 ### Superseded website-pairing instruction
 
 The earlier “Priority 2 — start account pairing from the website” and the older queue item describing a website-to-extension bridge are obsolete and must not be resumed. The user explicitly rejected website-side pairing. Do not implement or revive the orphaned `assets/js/bomyra-pairing.js` flow.
+
+
+## Current status update — Product Tour button fix and remaining work (2026-11-23, Africa/Algiers)
+
+### Completed and closed
+- Product Tour original screenshot integration and six-step order: PASS.
+- Product Tour Get Started/button interaction: user-confirmed PASS after commit `5dbd4957f857af39a11f9b094283c8c4b22a4fcb`; Cloudflare Pages deployment `486f5458-cd4a-44f8-87a6-5baebf49b41f` completed successfully.
+- The button defect was caused by a stale JavaScript guard that still required six removed mock scene elements. The guard and obsolete scene-render loop were removed; the screenshot-switching logic and Previous/Next handlers remain.
+- No further Product Tour code or test work is open. Preserve the user-confirmed result; do not retest without a relevant change.
+- Website account pairing remains explicitly rejected and closed as a work item. Do not implement it.
+
+### Ordered remaining work
+1. **Official Chrome Web Store listing** — waiting for the confirmed official listing URL / publication. Only after verification, prepare a separate installation CTA review. No guessed URL.
+2. **Natural subscription expiry observation** — on/after 2026-12-20, check whether the recorded canceled paid-through subscription naturally transitions to Free. This is an observation task, not a reason to rerun the accelerated QA transaction test or alter the unrelated active Sandbox subscription.
+3. **Duplicate Chrome installation cleanup** — deferred. The 1.5.139 QA candidate is enabled; an older duplicate installation was previously seen disabled with Errors. Identify it and confirm it is the obsolete copy before removing it; do not delete it by assumption.
+4. **Production release/cutover review** — blocked until all applicable release evidence is current and the user gives separate explicit approval. No merge to production, Paddle Live, production traffic, DNS, or service shutdown is authorized by this queue update.
+
+### Evidence and scope
+- Site source branch: `feature/site-signin-visual-guide`; latest relevant fix commit: `5dbd4957f857af39a11f9b094283c8c4b22a4fcb`.
+- Preview deployment: `https://486f5458.bomyra-site-preview.pages.dev/bomyra-site/` (deployment API reports all stages successful; user confirmed the button works).
+- This is a documentation/status update. No extension, Worker, backend, Supabase, Paddle, production, DNS, or Vercel changes were made.
