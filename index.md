@@ -116,8 +116,8 @@ permalink: /
     <section class="bomyra-install-card">
       <div class="bomyra-guide-heading">
         <span class="eyebrow">SIGN IN · VISUAL GUIDE</span>
-        <h2 id="bomyra-install-title">Connect your BOMYRA account</h2>
-        <p id="bomyra-install-description" class="bomyra-guide-intro">Open the BOMYRA panel in your AI chat, then connect or add the account you want to use.</p>
+        <h2 id="bomyra-install-title">Sign in to BOMYRA in the extension</h2>
+        <p id="bomyra-install-description" class="bomyra-guide-intro">This guide shows where to manage your BOMYRA account inside the browser extension. The website does not connect accounts.</p>
       </div>
       <div class="bomyra-guide-grid">
         <article class="bomyra-guide-step">
@@ -133,10 +133,9 @@ permalink: /
       </div>
       <p class="bomyra-guide-footnote">Each account keeps its own plan and quota. Switching accounts never transfers a subscription.</p>
       <div class="bomyra-install-actions">
-        <button class="bomyra-install-primary" id="bomyra-install-button" type="button" disabled>Install BOMYRA</button>
-        <button class="bomyra-install-secondary" id="bomyra-retry-button" type="button">I've installed it — Retry</button>
+        <button class="bomyra-install-secondary" id="bomyra-guide-close" type="button">Close guide</button>
       </div>
-      <small class="bomyra-install-note">The official Chrome Web Store link will be added when the store listing is available.</small>
+      <small class="bomyra-install-note">Account sign-in and switching happen only inside the BOMYRA extension.</small>
     </section>
   </div>
   <script src="/bomyra-site/assets/js/bomyra-onboarding.js" defer></script>

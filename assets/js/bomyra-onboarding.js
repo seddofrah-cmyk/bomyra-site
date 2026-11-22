@@ -2,8 +2,8 @@
   "use strict";
   const triggers = Array.from(document.querySelectorAll("[data-bomyra-onboarding]"));
   const dialog = document.getElementById("bomyra-install-dialog");
-  const retry = document.getElementById("bomyra-retry-button");
-  if (!triggers.length || !dialog || !retry) return;
+  const closeButton = document.getElementById("bomyra-guide-close");
+  if (!triggers.length || !dialog || !closeButton) return;
 
   let previousFocus = null;
 
@@ -11,7 +11,7 @@
     previousFocus = document.activeElement;
     dialog.hidden = false;
     document.body.classList.add("bomyra-dialog-open");
-    retry.focus();
+    closeButton.focus();
   }
 
   function closeDialog() {
@@ -49,7 +49,5 @@
     }
   });
 
-  retry.addEventListener("click", () => {
-    window.location.assign("/bomyra-site/extension/connect-qa/?flow=site-preview");
-  });
+  closeButton.addEventListener("click", closeDialog);
 })();
