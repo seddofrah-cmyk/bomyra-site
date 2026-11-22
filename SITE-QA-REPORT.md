@@ -77,3 +77,31 @@ Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
 - Static source inspection confirms exactly two `data-bomyra-tour` triggers, no remaining `data-bomyra-onboarding` triggers on the homepage, six tour step definitions, and no pairing/auth/Worker logic in the tour script.
 - **Acceptance boundary:** source edits are committed; no browser interaction test or Pages preview deployment result has yet been recorded. Verify all six steps, Next/Previous boundaries, Finish, Escape/backdrop close, mobile layout, and independent Sign in navigation in the preview before marking behavioral QA PASS.
 - No production merge or deployment was performed.
+
+
+## Final Product Tour acceptance update — 2026-11-23 (Africa/Algiers)
+
+### Original screenshot integration
+- The user uploaded the six approved PNG assets to `assets/images/tour/` on branch `feature/site-signin-visual-guide`:
+  1. `01-floating-controls.png` — Floating controls
+  2. `02-quick-actions.png` — Quick actions
+  3. `03-export-formats.png` — Export formats (intentionally unblurred at the user's request)
+  4. `04-export-selection-preview.png` — Export selection and preview
+  5. `05-summary.png` — Summary
+  6. `06-archive.png` — Archive
+- The Product Tour uses the original image files; the order above is the user's approved tour order, not the order of feature implementation.
+
+### Get Started button defect and resolution
+- After screenshot migration, `assets/js/bomyra-onboarding.js` still queried for six `.bomyra-tour-scene` nodes and returned early when they were absent. This prevented registration of the Get Started, Previous, Next, Finish, and close handlers.
+- Removed only the obsolete scene dependency and scene-render block. The existing screenshot-per-step mapping, copy, step order, button labels, close behavior, and focus behavior remain in place.
+- Fix commit: `5dbd4957f857af39a11f9b094283c8c4b22a4fcb` — `Fix product tour controls after screenshot migration`.
+- Cloudflare Pages preview deployment: `486f5458-cd4a-44f8-87a6-5baebf49b41f`, URL `https://486f5458.bomyra-site-preview.pages.dev`. Cloudflare API reports queued, initialize, clone_repo, build, and deploy all successful.
+- The user opened the preview and confirmed: **the button works**. Record Product Tour interaction as **PASS — user-confirmed browser acceptance**.
+
+### Acceptance boundary and release safety
+- The six-step Product Tour is accepted for this pass. Do not repeat the same button test unless a relevant code change occurs.
+- Website Get Started opens the visual tour only. Website pairing/account linking/account management remain explicitly out of scope; those functions stay inside the extension.
+- The separate Sign in navigation link remains independent and points to `/bomyra-site/auth/`.
+- Work remains on `feature/site-signin-visual-guide`. No merge to `main`, production deployment, extension change, Worker/backend/Supabase/Paddle change, DNS change, or Vercel change was made.
+
+**Current site QA result: PASS for the six-step Product Tour source, successful Cloudflare preview deployment, and user-confirmed button behavior.**
