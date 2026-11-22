@@ -40,6 +40,7 @@ permalink: /
   .bomyra-tour-shell{width:min(1120px,100%);max-height:calc(100vh - 48px);display:grid;grid-template-rows:minmax(0,1fr) auto;overflow:hidden;border:1px solid #285064;border-radius:22px;background:#071a28;box-shadow:0 30px 100px #000b}
   .bomyra-tour-stage{min-height:0;padding:clamp(16px,3vw,30px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(250px,.8fr);gap:22px;align-items:center}
   .bomyra-tour-demo{position:relative;min-height:410px;overflow:hidden;border:1px solid #315064;border-radius:16px;background:#101820;padding:20px;display:flex;align-items:center;justify-content:center}
+  .bomyra-tour-screenshot{display:block;width:100%;height:auto;max-height:min(68vh,760px);object-fit:contain;border-radius:10px}
   .bomyra-tour-browser{width:100%;max-width:650px;min-height:330px;border:1px solid #344b5b;border-radius:14px;background:#f7fafc;color:#1c2933;overflow:hidden;box-shadow:0 20px 50px #0006}
   .bomyra-tour-browserbar{height:25px;background:#dce5eb;border-bottom:1px solid #c7d4dd;display:flex;align-items:center;gap:5px;padding:0 10px}
   .bomyra-tour-browserbar i{width:6px;height:6px;border-radius:50%;background:#8fa3b1}
@@ -166,48 +167,8 @@ permalink: /
     <section class="bomyra-tour-shell">
       <button class="bomyra-tour-close" id="bomyra-tour-close" type="button" aria-label="Close tour">×</button>
       <div class="bomyra-tour-stage">
-        <div class="bomyra-tour-demo" id="bomyra-tour-demo" aria-label="Illustrated preview of the BOMYRA extension">
-          <div class="bomyra-tour-browser">
-            <div class="bomyra-tour-browserbar"><i></i><i></i><i></i></div>
-            <div class="bomyra-tour-chat">
-              <div class="bomyra-tour-message">Conversation Context Transfer<br>Platform: Google Gemini · Messages: 6<br>Topic: Casual Greeting</div>
-              <div class="bomyra-tour-answer">Your selected conversation is ready to organize and export.</div>
-            </div>
-          </div>
-          <aside class="bomyra-tour-extension">
-            <div class="bomyra-tour-brand"><img src="/bomyra-site/assets/images/bomyra-mark.svg" alt=""> BOMYRA</div>
-            <div class="bomyra-tour-tabs"><span class="active">Export</span><span>Summary</span><span>Archive</span></div>
-            <div class="bomyra-tour-notice">Security notice: keep API keys on a trusted device.</div>
-            <div class="bomyra-tour-scene" data-scene="0">
-              <div class="bomyra-tour-card">Selected messages <strong>8</strong></div>
-              <div class="bomyra-tour-float tour-focus"><span>▣</span><span>↓</span></div>
-            </div>
-            <div class="bomyra-tour-scene" data-scene="1" hidden>
-              <div class="bomyra-tour-card">Export actions</div>
-              <div class="bomyra-tour-menu tour-focus"><span>Export</span><span>Export Visible Images (ZIP)</span><span>Select Specific Conversation Images</span><span>Scan All Images</span><span>Copy Selected</span><span>Deselect messages</span></div>
-            </div>
-            <div class="bomyra-tour-scene" data-scene="2" hidden>
-              <div class="bomyra-tour-menu tour-focus"><span>Download JSON (.json)</span><span>Download CSV (.csv)</span><span>Download Markdown (.md)</span><span>Markdown + images &amp; files (ZIP)</span><span>Download Text (.txt)</span><span>Download formatted HTML</span><span>Quick PDF</span><span>Advanced PDF settings</span><span>Copy rich text for Word</span></div>
-            </div>
-            <div class="bomyra-tour-scene" data-scene="3" hidden>
-              <div class="bomyra-tour-card tour-focus">Export template <strong>›</strong></div>
-              <div class="bomyra-tour-metrics"><span>8<small>Selected</small></span><span>1158<small>Words</small></span><span>6 min<small>Reading time</small></span></div>
-              <div class="bomyra-tour-btn primary">Export selected (8)</div>
-            </div>
-            <div class="bomyra-tour-scene" data-scene="4" hidden>
-              <div class="bomyra-tour-card">Choose how to summarize the selected messages.</div>
-              <div class="bomyra-tour-card tour-focus">Cloud provider · Google Gemini</div>
-              <div class="bomyra-tour-btn primary">Summarize Selected</div>
-              <div class="bomyra-tour-btn">Summarize with Local Model</div>
-              <div class="bomyra-tour-btn">Create Context Transfer Summary</div>
-            </div>
-            <div class="bomyra-tour-scene" data-scene="5" hidden>
-              <div class="bomyra-tour-card">0 / 50 items</div>
-              <div class="bomyra-tour-tabs tour-focus"><span class="active">All</span><span>MD</span><span>HTML</span><span>PDF</span><span>AI</span></div>
-              <div class="bomyra-tour-card">⌕ Search archive…</div>
-              <div class="bomyra-tour-card" style="text-align:center;padding:32px 8px">No matching archives.</div>
-            </div>
-          </aside>
+        <div class="bomyra-tour-demo" id="bomyra-tour-demo" aria-label="Original BOMYRA extension screenshot">
+          <img class="bomyra-tour-screenshot" id="bomyra-tour-screenshot" src="/bomyra-site/assets/images/tour/01-floating-controls.png" alt="BOMYRA floating controls" />
         </div>
         <div class="bomyra-tour-copy">
           <span class="bomyra-tour-kicker" id="bomyra-tour-step">STEP 1 OF 6</span>
