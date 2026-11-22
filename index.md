@@ -123,12 +123,12 @@ permalink: /
         <article class="bomyra-guide-step">
           <h3><span class="bomyra-guide-number">1</span> Open the account control</h3>
           <p>At the bottom of the BOMYRA side panel, select <strong>Connect BOMYRA account</strong>.</p>
-          <div class="bomyra-guide-image step-one"><img src="/bomyra-site/assets/images/signin-connect-account.jpg" alt="BOMYRA panel showing the Connect BOMYRA account control at the bottom"></div>
+          <div class="bomyra-guide-image step-one"><img src="/bomyra-site/assets/images/signin-connect-account.webp" alt="BOMYRA panel showing the Connect BOMYRA account control at the bottom"></div>
         </article>
         <article class="bomyra-guide-step">
           <h3><span class="bomyra-guide-number">2</span> Choose or add an account</h3>
           <p>Use an existing BOMYRA account, or select <strong>Add account</strong> to sign in with another one.</p>
-          <div class="bomyra-guide-image step-two"><img src="/bomyra-site/assets/images/signin-add-account.jpg" alt="BOMYRA accounts menu with the Add account option"></div>
+          <div class="bomyra-guide-image step-two"><img src="/bomyra-site/assets/images/signin-add-account.webp" alt="BOMYRA accounts menu with the Add account option"></div>
         </article>
       </div>
       <p class="bomyra-guide-footnote">Each account keeps its own plan and quota. Switching accounts never transfers a subscription.</p>
