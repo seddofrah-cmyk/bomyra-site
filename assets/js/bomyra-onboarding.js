@@ -12,8 +12,7 @@
   const count = document.getElementById("bomyra-tour-count");
   const progress = document.getElementById("bomyra-tour-progress");
   const screenshot = document.getElementById("bomyra-tour-screenshot");
-  const scenes = Array.from(document.querySelectorAll(".bomyra-tour-scene"));
-  if (!triggers.length || !tour || !closeButton || !previousButton || !nextButton || !screenshot || scenes.length !== 6) return;
+  if (!triggers.length || !tour || !closeButton || !previousButton || !nextButton || !screenshot) return;
 
   const steps = [
     {
@@ -67,14 +66,6 @@
     const step = steps[currentStep];
     screenshot.src = step.image;
     screenshot.alt = step.imageAlt;
-    scenes.forEach((scene, index) => {
-      scene.hidden = index !== currentStep;
-      scene.querySelectorAll(".tour-focus").forEach(element => element.classList.remove("tour-focus"));
-    });
-    const activeScene = scenes[currentStep];
-    const target = activeScene.querySelector(step.focus);
-    if (target) target.classList.add("tour-focus");
-
     title.textContent = step.title;
     description.textContent = step.description;
     stepLabel.textContent = "STEP " + (currentStep + 1) + " OF " + steps.length;
