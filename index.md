@@ -40,7 +40,7 @@ permalink: /
     <nav aria-label="Main navigation">
       <a href="#features">Features</a><a href="#how">How it works</a><a href="/bomyra-site/pricing/">Pricing</a>
       
-      <a href="/bomyra-site/auth/" class="nav-login">Sign in</a><a href="/bomyra-site/auth/" class="nav-cta">Get Started</a>
+      <a href="/bomyra-site/auth/" class="nav-login" data-bomyra-onboarding>Sign in</a><a href="/bomyra-site/auth/" class="nav-cta" data-bomyra-onboarding>Get Started</a>
 
     </nav>
   </header>
@@ -51,7 +51,7 @@ permalink: /
         <span class="eyebrow"><i></i> AI CHAT SAVER &amp; EXPORTER</span>
         <h1>Keep your best AI conversations.<span> Make them useful again.</span></h1>
         <p>BOMYRA helps you select the messages that matter from ChatGPT, Claude and Google Gemini, then turn them into portable, organized archives.</p>
-        <div class="hero-actions"><a class="button-primary" href="/bomyra-site/auth/">Get Started <span>→</span></a><a class="button-quiet" href="/bomyra-site/pricing/">View Plans</a></div>
+        <div class="hero-actions"><a class="button-primary" href="/bomyra-site/auth/" data-bomyra-onboarding>Get Started <span>→</span></a><a class="button-quiet" href="/bomyra-site/pricing/">View Plans</a></div>
         <div class="platform-line">CHATGPT <b>·</b> CLAUDE <b>·</b> GOOGLE GEMINI</div>
       </div>
       
@@ -111,7 +111,7 @@ permalink: /
 
     <section class="final-cta"><div><span class="eyebrow">MAKE YOUR AI CHATS WORK FOR YOU</span><h2>Keep the ideas.<br><span>Take them anywhere.</span></h2><p>Explore BOMYRA plans and choose the workflow that fits you.</p><a class="button-primary" href="/bomyra-site/pricing/">Explore plans <span>→</span></a></div></section>
   </main>
-  <footer class="home-footer"><a class="home-brand" href="/bomyra-site/" aria-label="BOMYRA home"><img src="/bomyra-site/assets/images/bomyra-mark.svg" alt="" /><span class="home-brand-copy"><strong>BOMYRA</strong><small>AI CHAT SAVER &amp; EXPORTER</small></span></a><div class="footer-links"><a href="/bomyra-site/pricing/">Plans</a><a href="/bomyra-site/privacy.html">Privacy</a><a href="#" data-bomyra-onboarding>Account guide</a><a href="mailto:seddev213@gmail.com">Support</a></div><p>© 2026 BOMYRA · Independent product. Not affiliated with OpenAI, Anthropic or Google.</p></footer>
+  <footer class="home-footer"><a class="home-brand" href="/bomyra-site/" aria-label="BOMYRA home"><img src="/bomyra-site/assets/images/bomyra-mark.svg" alt="" /><span class="home-brand-copy"><strong>BOMYRA</strong><small>AI CHAT SAVER &amp; EXPORTER</small></span></a><div class="footer-links"><a href="/bomyra-site/pricing/">Plans</a><a href="/bomyra-site/privacy.html">Privacy</a><a href="mailto:seddev213@gmail.com">Support</a></div><p>© 2026 BOMYRA · Independent product. Not affiliated with OpenAI, Anthropic or Google.</p></footer>
   <div class="bomyra-install-dialog" id="bomyra-install-dialog" role="dialog" aria-modal="true" aria-labelledby="bomyra-install-title" aria-describedby="bomyra-install-description" hidden>
     <section class="bomyra-install-card">
       <div class="bomyra-guide-heading">
