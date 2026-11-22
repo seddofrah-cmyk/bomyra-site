@@ -63,3 +63,17 @@ Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
 - Consequently, the current website CTA → extension pairing path is not wired end-to-end. The correct implementation requires an explicit website/extension bridge and must preserve the existing in-extension Add account and multi-account storage behavior.
 - The CTA-only preview deployment `c56f2566-84bc-4641-ba55-b876446a304c` reflects the now-reverted commit and is not an accepted QA result. Browser behavior was never accepted.
 - No extension source, Worker, database, auth session, production environment, or Paddle configuration was changed during this diagnosis.
+
+
+## Addendum — six-step interactive product tour (2026-11-23, Africa/Algiers)
+
+- User-approved Get Started behavior: open a single interactive product-tour dialog with a persistent bottom navigation bar; each Next/Previous action changes the active step, explanatory copy, progress indicator, and focused UI preview.
+- Implemented on isolated branch `feature/site-signin-visual-guide` in homepage commit `6cfab24797225df9ff7c50ae008cfdad8794dfb2` and script commit `d33ec6f97bbaf536b889f9fa8546a14cc88c7849`.
+- The six stages follow the user's exact approved order: (1) Floating controls, (2) Quick actions, (3) Export formats, (4) Export selection and preview, (5) Summary, (6) Archive.
+- The current tour scenes are lightweight HTML/CSS interface illustrations derived from the supplied screenshots; the original screenshot files have not yet been added as website assets. This distinction must be preserved in QA and review.
+- Navigation includes Previous, Next, Finish on the last step, close button, backdrop click, Escape handling, focus restoration and keyboard focus containment. Progress reflects the current step.
+- Both homepage Get Started CTAs launch the tour. The Sign in navigation link now follows its existing `/bomyra-site/auth/` destination and no longer opens the tour.
+- No website account linking, extension pairing, account management, auth implementation, extension code, Worker, backend, Supabase, billing, or production configuration was changed.
+- Static source inspection confirms exactly two `data-bomyra-tour` triggers, no remaining `data-bomyra-onboarding` triggers on the homepage, six tour step definitions, and no pairing/auth/Worker logic in the tour script.
+- **Acceptance boundary:** source edits are committed; no browser interaction test or Pages preview deployment result has yet been recorded. Verify all six steps, Next/Previous boundaries, Finish, Escape/backdrop close, mobile layout, and independent Sign in navigation in the preview before marking behavioral QA PASS.
+- No production merge or deployment was performed.
