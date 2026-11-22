@@ -9,6 +9,22 @@ permalink: /
   .bomyra-install-dialog[hidden]{display:none}
   .bomyra-install-dialog{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:20px;background:#020b12d9;backdrop-filter:blur(8px)}
   .bomyra-install-card{width:min(480px,100%);padding:clamp(25px,5vw,36px);border:1px solid #285064;border-radius:22px;background:linear-gradient(150deg,#102b3d,#0a1d2b);color:#f3f8fa;text-align:center;box-shadow:0 26px 70px #0008}
+  .bomyra-install-card{width:min(820px,100%);text-align:left}
+  .bomyra-guide-heading{text-align:center}
+  .bomyra-guide-heading h2{margin-top:10px}
+  .bomyra-guide-intro{max-width:620px;text-align:center}
+  .bomyra-guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:25px}
+  .bomyra-guide-step{min-width:0;padding:16px;border:1px solid #28495a;border-radius:16px;background:#081b29}
+  .bomyra-guide-step h3{display:flex;align-items:center;gap:9px;margin:0 0 8px;color:#f3f8fa;font-size:16px}
+  .bomyra-guide-number{display:grid;place-items:center;flex:0 0 27px;width:27px;height:27px;border-radius:50%;background:#20d5d2;color:#06202a;font-size:12px;font-weight:900}
+  .bomyra-guide-step p{min-height:48px;margin:0 0 13px;color:#a8bdc8;font-size:13px;line-height:1.55}
+  .bomyra-guide-image{display:flex;align-items:center;justify-content:center;min-height:112px;overflow:hidden;border:1px solid #315064;border-radius:11px;background:#050d14}
+  .bomyra-guide-image img{display:block;max-width:100%;height:auto;object-fit:contain}
+  .bomyra-guide-image.step-one img{width:100%;max-height:110px}
+  .bomyra-guide-image.step-two img{width:100%;max-height:145px}
+  .bomyra-guide-footnote{margin:15px 0 0;color:#819aa7;font-size:12px;text-align:center}
+  @media(max-width:620px){.bomyra-guide-grid{grid-template-columns:1fr}.bomyra-guide-step p{min-height:0}.bomyra-install-card{max-height:calc(100vh - 28px);overflow:auto}}
+
   .bomyra-install-card h2{margin:12px 0;color:#f3f8fa;font-size:clamp(24px,5vw,30px);line-height:1.2}
   .bomyra-install-card p{margin:0 auto;color:#a8bdc8;line-height:1.65}
   .bomyra-install-actions{display:grid;gap:10px;margin-top:24px}
@@ -98,14 +114,29 @@ permalink: /
   <footer class="home-footer"><a class="home-brand" href="/bomyra-site/" aria-label="BOMYRA home"><img src="/bomyra-site/assets/images/bomyra-mark.svg" alt="" /><span class="home-brand-copy"><strong>BOMYRA</strong><small>AI CHAT SAVER &amp; EXPORTER</small></span></a><div class="footer-links"><a href="/bomyra-site/pricing/">Plans</a><a href="/bomyra-site/privacy.html">Privacy</a><a href="mailto:seddev213@gmail.com">Support</a></div><p>© 2026 BOMYRA · Independent product. Not affiliated with OpenAI, Anthropic or Google.</p></footer>
   <div class="bomyra-install-dialog" id="bomyra-install-dialog" role="dialog" aria-modal="true" aria-labelledby="bomyra-install-title" aria-describedby="bomyra-install-description" hidden>
     <section class="bomyra-install-card">
-      <span class="eyebrow">ONE MORE STEP</span>
-      <h2 id="bomyra-install-title">Connect your BOMYRA extension</h2>
-      <p id="bomyra-install-description">To continue, install and enable the BOMYRA browser extension.</p>
+      <div class="bomyra-guide-heading">
+        <span class="eyebrow">SIGN IN · VISUAL GUIDE</span>
+        <h2 id="bomyra-install-title">Connect your BOMYRA account</h2>
+        <p id="bomyra-install-description" class="bomyra-guide-intro">Open the BOMYRA panel in your AI chat, then connect or add the account you want to use.</p>
+      </div>
+      <div class="bomyra-guide-grid">
+        <article class="bomyra-guide-step">
+          <h3><span class="bomyra-guide-number">1</span> Open the account control</h3>
+          <p>At the bottom of the BOMYRA side panel, select <strong>Connect BOMYRA account</strong>.</p>
+          <div class="bomyra-guide-image step-one"><img src="/bomyra-site/assets/images/signin-connect-account.jpg" alt="BOMYRA panel showing the Connect BOMYRA account control at the bottom"></div>
+        </article>
+        <article class="bomyra-guide-step">
+          <h3><span class="bomyra-guide-number">2</span> Choose or add an account</h3>
+          <p>Use an existing BOMYRA account, or select <strong>Add account</strong> to sign in with another one.</p>
+          <div class="bomyra-guide-image step-two"><img src="/bomyra-site/assets/images/signin-add-account.jpg" alt="BOMYRA accounts menu with the Add account option"></div>
+        </article>
+      </div>
+      <p class="bomyra-guide-footnote">Each account keeps its own plan and quota. Switching accounts never transfers a subscription.</p>
       <div class="bomyra-install-actions">
         <button class="bomyra-install-primary" id="bomyra-install-button" type="button" disabled>Install BOMYRA</button>
         <button class="bomyra-install-secondary" id="bomyra-retry-button" type="button">I've installed it — Retry</button>
       </div>
-      <small class="bomyra-install-note">The official installation link will be added here soon.</small>
+      <small class="bomyra-install-note">The official Chrome Web Store link will be added when the store listing is available.</small>
     </section>
   </div>
   <script src="/bomyra-site/assets/js/bomyra-onboarding.js" defer></script>
