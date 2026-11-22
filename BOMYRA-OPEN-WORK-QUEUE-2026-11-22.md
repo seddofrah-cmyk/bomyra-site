@@ -112,3 +112,22 @@ Purpose: current task order based on the latest available project checkpoint, QA
 ## Next execution item after PR #6 closure
 
 Resume the independent website task: inspect the homepage `Get Started` / `Sign in` click handling and establish the intended authentication destination. Do not add website-side pairing, account linking, or account management; those remain extension-only. Do not invent an auth route or change the CTA until the actual supported destination is verified.
+
+
+## Website Get Started — replaced by the six-step product tour (2026-11-23)
+
+**Status: IMPLEMENTED IN SOURCE; preview/browser QA pending.**
+
+- The previous website-pairing task is explicitly superseded. The user confirmed that the website must not initiate extension pairing, account linking, or account management. Those functions remain exclusively inside the extension.
+- Get Started now opens the visual product tour; it does not navigate to auth or communicate with the extension.
+- The separate Sign in navigation link continues to point to the existing website auth route `/bomyra-site/auth/`.
+- The six approved tour steps are: Floating controls → Quick actions → Export formats → Export selection and preview → Summary → Archive.
+- The tour uses a changing bottom navigation bar with Previous / Next and Finish on the final step, plus a changing explanatory panel, progress, focused UI preview, Escape/backdrop close and focus restoration.
+- Current tour scenes are CSS/HTML illustrations based on the supplied screenshots; original screenshots have not yet been uploaded as site assets.
+- Commits: homepage `6cfab24797225df9ff7c50ae008cfdad8794dfb2`; tour controller `d33ec6f97bbaf536b889f9fa8546a14cc88c7849`.
+- No pairing bridge, extension code, authentication flow, Worker, backend, database, billing or production configuration was changed.
+- Next: wait for/check the branch preview deployment, then browser-test all six stages, navigation, close behavior, responsive layout and Sign in isolation. Do not mark PASS before browser evidence.
+
+### Superseded website-pairing instruction
+
+The earlier “Priority 2 — start account pairing from the website” and the older queue item describing a website-to-extension bridge are obsolete and must not be resumed. The user explicitly rejected website-side pairing. Do not implement or revive the orphaned `assets/js/bomyra-pairing.js` flow.
