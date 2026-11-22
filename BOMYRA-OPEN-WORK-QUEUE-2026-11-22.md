@@ -24,12 +24,12 @@ Purpose: current task order based on the latest available project checkpoint, QA
 
 ## Priority 2 — homepage Get Started / Sign in navigation
 
-**Status: IMPLEMENTED IN ISOLATED QA BRANCH; preview validation pending**
+**Status: IMPLEMENTED; Cloudflare Pages preview deployment PASS; browser interaction check pending**
 
 - Root cause confirmed: the three homepage Sign in/Get Started anchors already pointed to `/bomyra-site/auth/`, but `assets/js/bomyra-onboarding.js` intercepted clicks on elements carrying `data-bomyra-onboarding`, called `preventDefault()`, and opened the visual guide instead.
 - The authentication page exists at `auth/index.html` and provides Sign in / Create account tabs. Its existing logic preserves the extension pairing continuation path; that flow was not modified.
 - Commit `8bed0ba574b3e1345814dc307f49bcdd5a5f13cd` on `feature/site-signin-visual-guide` removes the interception attribute from the three primary CTAs and adds a separate footer **Account guide** link, retaining the visual guide as an independent informational action.
-- Next: wait for the Cloudflare Pages preview build for this exact commit to finish, then verify the homepage links navigate to `/bomyra-site/auth/` and that the separate Account guide still opens. No pairing or account linking is added to the main website.
+- Cloudflare Pages deployment `c56f2566-84bc-4641-ba55-b876446a304c` for this exact code commit completed successfully (all stages succeeded). The preview is `https://c56f2566.bomyra-site-preview.pages.dev/bomyra-site/`. Remaining acceptance: open it in a browser and confirm the homepage CTAs navigate to `/bomyra-site/auth/` and the separate Account guide still opens. The browser verification is not yet independently observed. No pairing or account linking is added to the main website.
 
 ## Priority 3 — official extension distribution destination
 
