@@ -86,12 +86,7 @@ Purpose: current task order based on the latest available project checkpoint, QA
 
 ## Next execution order
 
-1. The site visual guide is complete for this pass. Keep Get Started review separate; no further image-guide change is currently queued.
-2. Verify active Cloudflare Billing QA Worker provenance and perform one signed Sandbox event check on the active atomic-claim version.
-3. Keep the Get Started behavior review separate from the image-guide work; maintain the extension-only account flow.
-4. Wait for/verify the official store listing before any install CTA.
-5. On/after 2026-12-20, verify the natural paid-through expiry-to-Free transition.
-6. Only after QA gates are complete, prepare a separate production cutover review for explicit approval.
+The historical sequence above has been superseded by the **Current status update — Product Tour button fix and remaining work (2026-11-23)** at the end of this file. Use that section as the authoritative open-work order. The previously completed Worker provenance and signed Sandbox event checks are not open tasks; preserve their PASS evidence and do not repeat them without a relevant change.
 
 
 ## PR #6 disposition — superseded and closed (2026-11-22, Africa/Algiers)
