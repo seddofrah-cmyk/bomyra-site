@@ -88,3 +88,25 @@ Purpose: current task order based on the latest available project checkpoint, QA
 4. Wait for/verify the official store listing before any install CTA.
 5. On/after 2026-12-20, verify the natural paid-through expiry-to-Free transition.
 6. Only after QA gates are complete, prepare a separate production cutover review for explicit approval.
+
+
+## PR #6 disposition — superseded and closed (2026-11-22, Africa/Algiers)
+
+**Status: CLOSED — verified superseded; NOT MERGED.** This supersedes the earlier Priority 4 wording that PR #6 remained open/Draft and required review.
+
+- PR #6: https://github.com/seddofrah-cmyk/bomyra-backend/pull/6 — closed without merge. Head branch `fix/webhook-atomic-claim-qa` was retained; no branch deletion.
+- The branches diverged 9 commits each from their common merge base; this was investigated rather than assumed to mean missing work.
+- Exact comparison confirmed the Worker entrypoint is content-identical between target `migration/cloudflare-billing-qa` and PR head. Target has the required atomic claim and `subscription.past_due` handling.
+- Target contains the applied QA migration `20261121122153_atomic_paddle_webhook_claim.sql`. The PR-only migration is redundant and includes an unsafe broad CHECK-constraint drop loop; it was deliberately not transferred or applied.
+- Target tests already cover an event held by another lease and `subscription.past_due` lifecycle processing. The PR test file has textual/structural differences, but no unique essential behavior was identified as missing from target.
+- No source, migration, deployment, database, Paddle, production, DNS, or Vercel changes were made. No previously passed QA tests were repeated.
+
+### Updated Billing QA status
+
+- Active QA Worker provenance and signed Sandbox event evidence are verified and recorded; do not repeat those successful checks without a relevant code change.
+- PR #6 is no longer an open task. Keep the branch for traceability; do not merge or delete it.
+- Production cutover remains blocked and requires a separate explicit approval.
+
+## Next execution item after PR #6 closure
+
+Resume the independent website task: inspect the homepage `Get Started` / `Sign in` click handling and establish the intended authentication destination. Do not add website-side pairing, account linking, or account management; those remain extension-only. Do not invent an auth route or change the CTA until the actual supported destination is verified.
