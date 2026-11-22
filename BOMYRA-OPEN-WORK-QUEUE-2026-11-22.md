@@ -22,14 +22,17 @@ Purpose: current task order based on the latest available project checkpoint, QA
 - Independent binary/hash verification of the image is not recorded. No source change is required based on current evidence.
 - Keep the feature branch isolated; do not promote or merge it as part of this task.
 
-## Priority 2 — homepage Get Started / Sign in navigation
+## Priority 2 — start account pairing from the website
 
-**Status: IMPLEMENTED; Cloudflare Pages preview deployment PASS; browser interaction check pending**
+**Status: OPEN — blocked on website-to-extension bridge implementation**
 
-- Root cause confirmed: the three homepage Sign in/Get Started anchors already pointed to `/bomyra-site/auth/`, but `assets/js/bomyra-onboarding.js` intercepted clicks on elements carrying `data-bomyra-onboarding`, called `preventDefault()`, and opened the visual guide instead.
-- The authentication page exists at `auth/index.html` and provides Sign in / Create account tabs. Its existing logic preserves the extension pairing continuation path; that flow was not modified.
-- Commit `8bed0ba574b3e1345814dc307f49bcdd5a5f13cd` on `feature/site-signin-visual-guide` removes the interception attribute from the three primary CTAs and adds a separate footer **Account guide** link, retaining the visual guide as an independent informational action.
-- Cloudflare Pages deployment `c56f2566-84bc-4641-ba55-b876446a304c` for this exact code commit completed successfully (all stages succeeded). The preview is `https://c56f2566.bomyra-site-preview.pages.dev/bomyra-site/`. Remaining acceptance: open it in a browser and confirm the homepage CTAs navigate to `/bomyra-site/auth/` and the separate Account guide still opens. The browser verification is not yet independently observed. No pairing or account linking is added to the main website.
+- The homepage CTAs currently open the informational onboarding dialog because `assets/js/bomyra-onboarding.js` intercepts `data-bomyra-onboarding`. A previous CTA-only change was reverted; do not treat the auth page as a completed connection flow.
+- The account page `/auth/` only authenticates a Supabase web session. It does not create an extension session or store an extension token in the browser extension.
+- The site contains an unfinished/orphaned `assets/js/bomyra-pairing.js` bridge client. It expects a `data-bomyra-pair` trigger and a same-window bridge response, but the homepage does not load this script or provide those triggers.
+- The current extension manifest injects content scripts only on ChatGPT, Claude, and Gemini origins; it does not include the BOMYRA website origin or an `externally_connectable` bridge. The extension's existing `aixConnectBomyraAccount()` pairing is initiated inside the extension account menu and polls the QA Worker itself.
+- Therefore, website-initiated pairing cannot complete end-to-end in the current code. A valid implementation must connect website CTA → extension bridge → QA Worker `/pair/start` → site authentication/approval → extension `/pair/poll` → save/activate extension token and refresh account UI.
+- Preserve the existing in-extension Add account flow and multi-account isolation. Do not replace it with website-only Supabase sign-in. Do not touch production or Paddle Live.
+- The previous CTA-only code commit `8bed0ba574b3e1345814dc307f49bcdd5a5f13cd` was reverted in `b89f86c465b01cb81a43aead5c80c62bc1bea80e`; its preview deployment is not an accepted fix.
 
 ## Priority 3 — official extension distribution destination
 
