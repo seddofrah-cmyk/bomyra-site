@@ -41,23 +41,52 @@ const validConfig=createClient && url && !url.includes("YOUR_PROJECT_REF") && ke
 const supabaseClient=validConfig?createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}):null;
 const basePath="/bomyra-site/";
 const callbackUrl=location.origin+basePath+"auth/callback/";
+const pendingConnectKey="bomyra.extension.pendingConnectPath";
 function safeNextPath(value){
  if(!value)return "../";
  try{const target=new URL(value,location.origin);if(target.origin!==location.origin||!target.pathname.startsWith(basePath))return "../";return target.pathname+target.search+target.hash;}
  catch{return "../";}
 }
-const nextPath=safeNextPath(new URLSearchParams(location.search).get("next"));
-function rememberNextPath(){try{localStorage.setItem("bomyra.auth.next",nextPath);}catch{}}
+function safePendingConnectPath(value){
+ try{
+  const target=new URL(value,location.origin);
+  const code=target.searchParams.get("code")||"";
+  if(target.origin!==location.origin||target.pathname!==basePath+"extension/connect-qa/"||!/^[A-Za-z0-9_-]{40,100}$/.test(code))return null;
+  return target.pathname+target.search+target.hash;
+ }catch{return null;}
+}
+const requestedNextPath=safeNextPath(new URLSearchParams(location.search).get("next"));
+let pendingConnectPath=null;
+try{
+ const storedPending=localStorage.getItem(pendingConnectKey);
+ pendingConnectPath=safePendingConnectPath(storedPending);
+ if(storedPending&&!pendingConnectPath)localStorage.removeItem(pendingConnectKey);
+}catch{}
+const nextPath=requestedNextPath!=="../"?requestedNextPath:(pendingConnectPath||"../");
+function rememberNextPath(){
+ try{
+  localStorage.setItem("bomyra.auth.next",nextPath);
+  const pending=safePendingConnectPath(nextPath);
+  if(pending)localStorage.setItem(pendingConnectKey,pending);
+ }catch{}
+}
 let mode="signin";
 const $=id=>document.getElementById(id);
 $("year").textContent=new Date().getFullYear();
+// If this browser has a pending extension-pairing request, preserve that flow
+// when the user reaches Sign in/Get Started from another site page or tab.
+if(supabaseClient&&pendingConnectPath){
+ supabaseClient.auth.getSession().then(({data,error})=>{
+  if(!error&&data.session&&pendingConnectPath)location.replace(pendingConnectPath);
+ }).catch(()=>{});
+}
 function showStatus(message,type=""){const el=$("status");el.textContent=message;el.className="status "+type;el.style.display="block";}
 function setMode(next){
  mode=next;
  $("signinTab").classList.toggle("active",mode==="signin");
  $("signupTab").classList.toggle("active",mode==="signup");
  $("formTitle").textContent=mode==="signin"?"Sign in":"Create account";
- $("formHint").textContent=mode==="signin"?"Use your email and password to continue.":"Create your account. We'll email you a confirmation link.";
+ $("formHint").textContent=mode==="signin"?(pendingConnectPath?"Sign in to continue connecting your BOMYRA extension.":"Use your email and password to continue."):(pendingConnectPath?"Create your account to continue connecting your BOMYRA extension.":"Create your account. We'll email you a confirmation link.");
  $("submitBtn").textContent=mode==="signin"?"Sign in securely":"Create account";
  $("status").style.display="none";
 }
