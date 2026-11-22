@@ -13,17 +13,17 @@ permalink: /
   .bomyra-guide-heading{text-align:center}
   .bomyra-guide-heading h2{margin-top:10px}
   .bomyra-guide-intro{max-width:620px;text-align:center}
-  .bomyra-guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:25px}
+  .bomyra-guide-grid{display:block;max-width:680px;margin:25px auto 0}
+  .bomyra-guide-step{padding:16px;border:1px solid #28495a;border-radius:16px;background:#081b29}
+  .bomyra-guide-step h3{display:flex;align-items:center;gap:9px;margin:0 0 12px;color:#f3f8fa;font-size:16px}
+  .bomyra-guide-image{display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid #315064;border-radius:11px;background:#050d14}
+  .bomyra-guide-image img{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;pointer-events:none;user-select:none}
   .bomyra-guide-step{min-width:0;padding:16px;border:1px solid #28495a;border-radius:16px;background:#081b29}
   .bomyra-guide-step h3{display:flex;align-items:center;gap:9px;margin:0 0 8px;color:#f3f8fa;font-size:16px}
   .bomyra-guide-number{display:grid;place-items:center;flex:0 0 27px;width:27px;height:27px;border-radius:50%;background:#20d5d2;color:#06202a;font-size:12px;font-weight:900}
   .bomyra-guide-step p{min-height:48px;margin:0 0 13px;color:#a8bdc8;font-size:13px;line-height:1.55}
-  .bomyra-guide-image{display:flex;align-items:center;justify-content:center;min-height:112px;overflow:hidden;border:1px solid #315064;border-radius:11px;background:#050d14}
-  .bomyra-guide-image img{display:block;max-width:100%;height:auto;object-fit:contain;pointer-events:none;user-select:none}
-  .bomyra-guide-image.step-one img{width:100%;max-height:110px}
-  .bomyra-guide-image.step-two img{width:100%;max-height:145px}
   .bomyra-guide-footnote{margin:15px 0 0;color:#819aa7;font-size:12px;text-align:center}
-  @media(max-width:620px){.bomyra-guide-grid{grid-template-columns:1fr}.bomyra-guide-step p{min-height:0}.bomyra-install-card{max-height:calc(100vh - 28px);overflow:auto}}
+  @media(max-width:620px){.bomyra-install-card{max-height:calc(100vh - 28px);overflow:auto}}
 
   .bomyra-install-card h2{margin:12px 0;color:#f3f8fa;font-size:clamp(24px,5vw,30px);line-height:1.2}
   .bomyra-install-card p{margin:0 auto;color:#a8bdc8;line-height:1.65}
@@ -121,14 +121,9 @@ permalink: /
       </div>
       <div class="bomyra-guide-grid">
         <article class="bomyra-guide-step">
-          <h3><span class="bomyra-guide-number">1</span> Open the account control</h3>
-          <p>In the extension panel, use <strong>Connect BOMYRA account</strong> to open the account options. This picture is guidance only; it does not connect an account.</p>
-          <div class="bomyra-guide-image step-one"><img src="/bomyra-site/assets/images/signin-connect-account.jpg" alt="Visual reference: Connect BOMYRA account control in the extension panel" draggable="false"></div>
-        </article>
-        <article class="bomyra-guide-step">
-          <h3><span class="bomyra-guide-number">2</span> Choose or add an account</h3>
-          <p>Use an existing BOMYRA account, or select <strong>Add account</strong> to sign in with another one.</p>
-          <div class="bomyra-guide-image step-two"><img src="/bomyra-site/assets/images/signin-add-account.jpg" alt="Visual reference: BOMYRA accounts menu with the Add account option" draggable="false"></div>
+          <h3><span class="bomyra-guide-number">1</span> Manage your BOMYRA accounts</h3>
+          <p>Open the account control in the extension to view your accounts or add another account. This picture is a visual reference only; account sign-in and switching happen inside the extension.</p>
+          <div class="bomyra-guide-image"><img src="/bomyra-site/assets/images/signin-guide.png" alt="BOMYRA accounts menu and Connect BOMYRA account control in the browser extension" draggable="false"></div>
         </article>
       </div>
       <p class="bomyra-guide-footnote">Each account keeps its own plan and quota. Switching accounts never transfers a subscription.</p>
