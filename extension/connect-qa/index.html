@@ -74,6 +74,16 @@ h1{margin:12px 0;color:#f3f8fa;font-size:clamp(25px,5vw,32px);font-weight:850;le
   fail("This QA connection link is invalid or expired. Return to the extension and start again.");
   return;
  }
+ const pendingConnectKey="bomyra.extension.pendingConnectPath";
+ function clearPendingConnectPath(){
+  try{
+   const stored=localStorage.getItem(pendingConnectKey);
+   if(stored===returnPath)localStorage.removeItem(pendingConnectKey);
+  }catch(_){}
+ }
+ // Keep the pairing destination available if the user opens the site's
+ // general Sign in/Get Started route before completing this authorization.
+ try{localStorage.setItem(pendingConnectKey,returnPath);}catch(_){}
  if(!window.supabase||!window.BOMYRA_SUPABASE_URL||!window.BOMYRA_SUPABASE_ANON_KEY){
   fail("Account connection is temporarily unavailable.");
   return;
@@ -134,6 +144,7 @@ h1{margin:12px 0;color:#f3f8fa;font-size:clamp(25px,5vw,32px);font-weight:850;le
    }
    status.className="status success";
    status.textContent="The extension is now authorized for "+email+". Return to the extension to finish setup.";
+   clearPendingConnectPath();
    accountActions.hidden=true;
    returnLink.hidden=false;
   }catch(error){
