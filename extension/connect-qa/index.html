@@ -64,6 +64,7 @@ h1{margin:12px 0;color:#f3f8fa;font-size:clamp(25px,5vw,32px);font-weight:850;le
  const code=params.get("code")||"";
  const returnPath=location.pathname+location.search;
  const siteStartedFlow=params.get("flow")==="site";
+ const sitePreviewFlow=params.get("flow")==="site-preview";
  // Keep the one-time pairing code in memory only, not in browser history.
  try{history.replaceState(null,"",location.pathname);}catch(_){}
  const fail=message=>{status.className="status error";status.textContent=message;};
@@ -90,7 +91,7 @@ h1{margin:12px 0;color:#f3f8fa;font-size:clamp(25px,5vw,32px);font-weight:850;le
   const parts=String(value||"B").split("@")[0].split(/[._ -]+/).filter(Boolean);
   return ((parts[0]||"B")[0]+(parts[1]||"")[0]).toUpperCase();
  };
- if(!/^[A-Za-z0-9_-]{40,100}$/.test(code)){
+ if(!sitePreviewFlow&&!/^[A-Za-z0-9_-]{40,100}$/.test(code)){
   fail("This QA connection link is invalid or expired. Return to the extension and start again.");
   return;
  }
@@ -103,7 +104,7 @@ h1{margin:12px 0;color:#f3f8fa;font-size:clamp(25px,5vw,32px);font-weight:850;le
  }
  // Keep the pairing destination available if the user opens the site's
  // general Sign in/Get Started route before completing this authorization.
- try{localStorage.setItem(pendingConnectKey,returnPath);}catch(_){}
+ if(!sitePreviewFlow){try{localStorage.setItem(pendingConnectKey,returnPath);}catch(_){}}
  if(!window.supabase||!window.BOMYRA_SUPABASE_URL||!window.BOMYRA_SUPABASE_ANON_KEY){
   fail("Account connection is temporarily unavailable.");
   return;
