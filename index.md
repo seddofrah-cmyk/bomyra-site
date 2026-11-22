@@ -46,6 +46,7 @@ permalink: /
   .bomyra-tour-chat{padding:20px 24px 24px;background:#101010;color:#eee;min-height:300px;position:relative}
   .bomyra-tour-message{max-width:75%;margin:12px 0 12px auto;padding:15px 18px;border-radius:20px;background:#202020;font-size:12px;line-height:1.6}
   .bomyra-tour-answer{max-width:80%;margin:18px auto 0 0;font-size:13px;line-height:1.6;color:#ddd}
+  .bomyra-tour-message,.bomyra-tour-answer{filter:blur(4px)}
   .bomyra-tour-extension{position:absolute;right:0;top:0;bottom:0;width:34%;min-width:185px;background:#f8fafc;color:#26333c;padding:12px;border-left:1px solid #dce5eb;font-size:11px}
   .bomyra-tour-brand{display:flex;align-items:center;gap:7px;font-weight:900;font-size:13px;margin-bottom:14px}
   .bomyra-tour-brand img{width:27px;height:27px}
