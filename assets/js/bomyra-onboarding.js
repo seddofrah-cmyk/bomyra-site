@@ -38,7 +38,7 @@
     {
       title: "Summary",
       description: "Choose an enabled cloud provider, use a configured local model, or create a context-transfer summary. These are separate workflows.",
-      focus: ".bomyra-tour-card"
+      focus: ".bomyra-tour-card:nth-of-type(2)"
     },
     {
       title: "Archive",
