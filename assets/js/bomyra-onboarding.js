@@ -1,6 +1,61 @@
 (() => {
   "use strict";
 
+  // The Sign in Guide is informational only. It never starts account pairing or website authentication.
+  const guideTriggers = Array.from(document.querySelectorAll("[data-bomyra-signin-guide]"));
+  const guideDialog = document.getElementById("bomyra-install-dialog");
+  const guideCloseButton = document.getElementById("bomyra-guide-close");
+
+  if (guideTriggers.length && guideDialog && guideCloseButton) {
+    let guidePreviousFocus = null;
+
+    function openGuide() {
+      guidePreviousFocus = document.activeElement;
+      guideDialog.hidden = false;
+      document.body.classList.add("bomyra-dialog-open");
+      guideCloseButton.focus();
+    }
+
+    function closeGuide() {
+      guideDialog.hidden = true;
+      document.body.classList.remove("bomyra-dialog-open");
+      if (guidePreviousFocus && typeof guidePreviousFocus.focus === "function") guidePreviousFocus.focus();
+    }
+
+    guideTriggers.forEach(trigger => {
+      trigger.addEventListener("click", event => {
+        event.preventDefault();
+        openGuide();
+      });
+    });
+
+    guideCloseButton.addEventListener("click", closeGuide);
+    guideDialog.addEventListener("click", event => {
+      if (event.target === guideDialog) closeGuide();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (guideDialog.hidden) return;
+      if (event.key === "Escape") {
+        closeGuide();
+        return;
+      }
+      if (event.key === "Tab") {
+        const focusable = Array.from(guideDialog.querySelectorAll("button:not(:disabled)"));
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
+  }
+
   const triggers = Array.from(document.querySelectorAll("[data-bomyra-tour]"));
   const tour = document.getElementById("bomyra-product-tour");
   const closeButton = document.getElementById("bomyra-tour-close");
