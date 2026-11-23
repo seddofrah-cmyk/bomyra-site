@@ -181,3 +181,39 @@ The earlier “Priority 2 — start account pairing from the website” and the 
 - Reconciled the duplicate-installation status as closed based on the user-confirmed QA report.
 - Updated the ordered work queue to distinguish QA package PASS from production-release blockers.
 - No code, Worker deployment, Supabase row, Paddle configuration, DNS record, production route, PR merge/closure, Chrome Web Store listing, or production traffic was changed.
+
+
+## Authoritative update — store-readiness work completed 2026-11-23
+
+This section supersedes earlier statements above where they describe candidate Workers, QA migrations, and production source readiness. It does not authorize production publication.
+
+### Verified QA and candidate evidence
+- Extension QA package build after source hardening: GitHub Actions run `45097459350`, artifact ID `14783478894`; its source build contains the account disconnect warning, transient pairing retry, bounded export finalization retry, and CSS sanitizer hardening. Browser regression for these new branches remains outstanding.
+- Separate production-endpoint extension candidate: [run #45100265507](https://github.com/seddofrah-cmyk/bomyra-extension/actions/runs/45100265507), artifact ID `14785585190`, commit `93e8bd510e45d0590e4e77f0812012133d3b9a7d`. The artifact was downloaded and inspected: 1.5.139, Manifest v3, 24 JavaScript files pass syntax checks, no QA Worker or QA pairing URL in runtime source. It is explicitly marked `PRODUCTION_CANDIDATE_NOT_STORE_APPROVED`; the target Worker is not deployed.
+- Backend CI [run #45099567497](https://github.com/seddofrah-cmyk/bomyra-backend/actions/runs/45099567497) passed: 27 backend tests, 19 Extension API Worker tests, 38 Billing QA Worker tests, 21 Production Extension Worker candidate tests, and 39 Production Billing Worker candidate tests. TypeScript and Worker JavaScript checks passed.
+- Supabase migration-chain validation [run #45099567546](https://github.com/seddofrah-cmyk/bomyra-backend/actions/runs/45099567546) passed on clean PostgreSQL 17 databases for QA and the isolated Production migration chain.
+- QA Supabase project `xbtcmfstzpculiqckvnc` now records migration versions `20261123021647` and `20261123021700`. A rollback-only integration transaction passed: older Paddle events were rejected as stale, newer lifecycle events applied, export finalization was idempotent, and a completed reservation could not be reversed. After rollback, no test subscription/reservation remained.
+- QA Worker `bomyra-entitlements-qa` updated to version `1f41b929-0c7d-4b80-88d7-799597ab6007`, deployment `d7be9ea1-89d5-4156-b811-00fa1e22bed0`, 100% QA traffic. It now includes account/revoke routes and encrypted transient pairing tokens.
+- QA Billing Worker `bomyra-billing-qa-v2` updated to version `0395f4e7-f955-427a-b842-7cebd62ea7fb`, deployment `a6c1240d-b9fd-43eb-8f3f-c7ca577f0a4d`, 100% QA traffic. It includes monotonic event application and retryable webhook failure responses.
+- Production Worker source candidates now exist in backend branch `store-readiness/cloudflare-qa`: `cloudflare-extension-production/` and `cloudflare-billing-production/`. They are not deployed; no production Worker is currently listed in the Cloudflare account.
+- The production Supabase project `vagxeweqihibhcqnsnbe` is active and contains the bootstrap plus the first eight QA-aligned migrations; the two latest hardening migrations remain pending there. No production rows were inserted or changed.
+- Site branch `store-readiness/site` now uses the production Supabase publishable key for browser Auth, excludes internal/QA documentation and QA routes from Jekyll output, removes the hard-coded Sandbox Paddle checkout, and keeps checkout and extension approval fail-closed because production Worker endpoints are not deployed.
+
+### Remaining release gates — in this order
+1. **Deploy and verify Production Entitlements Worker** with the exact HTTPS production connect URL, exact origin allowlist, production Supabase secret, and observability settings. Do not route extension users to it until the dedicated QA-to-production acceptance is complete.
+2. **Apply Production Supabase migrations** `20261123021647` and `20261123021700` only after the production dry-run is confirmed against project ref `vagxeweqihibhcqnsnbe` and the user separately approves the database change.
+3. **Provision Paddle Live**: verify the monthly/yearly Live catalog IDs, Live API key, notification destination, signing secret, and webhook URL. Do not reuse Sandbox values.
+4. **Deploy and verify Production Billing Worker** with Live-only guard, production Supabase binding, exact site origin, Live price IDs, and secrets. Exercise duplicate checkout protection, failed/replayed webhook handling, event ordering, and subscription lifecycle with controlled acceptance accounts.
+5. **Verify Production Supabase Auth settings**: allowed site/callback URLs, email confirmation, recovery flow, and production email delivery. The production project settings were not changed or verified in this work.
+6. **Targeted end-to-end browser acceptance**: extension pairing, account identity/switch/disconnect, quota, all exports, payment, webhook activation, cancellation/paid-period access, and sign-in/recovery. No production endpoints are currently enabled in the site.
+7. **Promote the approved site branch** with the Product Tour and separate Sign in behavior. Keep website-initiated account pairing/account management out of scope.
+8. **Chrome Web Store submission — LAST**. Change the Manifest version to the approved next release only after all prior gates, create the final store package, complete permission disclosures, obtain the official listing URL, and then add the installation CTA.
+
+### Important test limitation
+- An external HTTP smoke test from the connected tools was blocked before reaching either QA Worker (tool-origin 403 / URL inaccessible). This is not evidence of a Worker response. The new code and settings were verified through Cloudflare metadata and CI; browser/runtime acceptance of the new pairing encryption and webhook retries remains to be performed from an allowed browser/client.
+- The production-endpoint extension archive is a candidate only. Never submit it while `bomyra-entitlements-prod` is not deployed.
+- The 2026-12-20 natural subscription-expiry observation remains a post-release follow-up, not a launch blocker.
+- Duplicate Chrome installation cleanup remains CLOSED based on the user-confirmed QA report.
+
+### Scope of completed actions
+QA-only Worker deployments and QA Supabase migrations were changed. No production Worker, production Supabase migration, Paddle Live key/catalog/notification, site publication, DNS, main-branch merge, Chrome Web Store listing, or production traffic was changed.

@@ -115,3 +115,13 @@ Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
 - The legacy checkout-success URL no longer claims checkout completed or grants Pro; it states that the route is not proof of payment.
 - Jekyll excludes internal integration reports, QA-only checkout and connection pages, repository READMEs, and the unselected duplicate privacy file from the published site output.
 - No Cloudflare Worker, Supabase production setting, Paddle account, DNS, or published site was changed. The production Supabase Auth redirect allowlist and SMTP/email confirmation behavior still require separate verification.
+
+
+## Store-readiness update — 2026-11-23
+
+- Production-candidate site source is intentionally fail-closed: browser Auth points to the separate production Supabase project using its public publishable key; checkout and extension approval API URLs remain blank until the production Workers exist.
+- `/pay/` contains no Paddle.js, Sandbox token, checkout request, or transaction creation. `/pay/success/` does not imply payment or Pro activation.
+- Jekyll excludes integration documents, internal QA notes, and QA-only checkout/connection paths.
+- The production extension connection page requires an HTTPS `BOMYRA_EXTENSION_PAIR_APPROVE_API_URL` configuration and sends no credentials or redirects.
+- Production Worker candidates are source-only and CI-tested. No production Worker is deployed; no production Supabase Auth redirect/email settings have been verified.
+- Site preview/publication is not approved by this report. Production sign-in, connection, checkout, and subscription flows require a full acceptance pass before publication.
