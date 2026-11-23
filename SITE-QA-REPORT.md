@@ -116,3 +116,15 @@ Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
 - Kept the Product Tour on the separate `data-bomyra-tour` trigger. The **Get Started** labels, six tour steps, images, and navigation logic were not changed.
 - No extension, Worker, backend, Supabase, billing, production branch, or production deployment was changed.
 - Verification status at commit time: source-level checks pending; Cloudflare preview and browser behavior must be verified before marking this change accepted.
+
+
+## Standing approval rule — homepage primary buttons (2026-11-23)
+
+- **SIGN IN GUIDE** and **Get Started** are protected controls.
+- Do not change either button's label, destination, trigger, visual presentation, guide/tour content, navigation, or behavior unless the user personally requests the change or gives explicit prior approval for that specific change.
+- Do not treat general project approval, approval for another task, or a previous change as permission to modify either button.
+- Preserve the currently user-confirmed behavior exactly:
+  - **SIGN IN GUIDE** opens the informational visual guide only; it does not sign in, authenticate, connect, or pair an account.
+  - **Get Started** opens the separate six-step Product Tour.
+- Any proposed change to either control must be raised with the user first and left untouched until their explicit approval is received.
+- This rule applies to all future work on the BOMYRA website and its preview/production branches.
