@@ -105,3 +105,13 @@ Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
 - Work remains on `feature/site-signin-visual-guide`. No merge to `main`, production deployment, extension change, Worker/backend/Supabase/Paddle change, DNS change, or Vercel change was made.
 
 **Current site QA result: PASS for the six-step Product Tour source, successful Cloudflare preview deployment, and user-confirmed button behavior.**
+
+
+## Production-candidate safety review — 2026-11-23
+
+- The candidate site now targets the separate production Supabase project with its public `sb_publishable_` browser key; no service-role, Paddle API, or webhook secret is included.
+- Production Cloudflare billing and extension approval endpoint variables remain empty by design because no production Worker is currently deployed. The sign-in/approval UI fails closed if the production pairing endpoint is missing.
+- The checkout page contains no Paddle.js Sandbox setup, no `test_...` client token, no checkout API request, and no transaction creation path. Pricing links lead to a clear unavailable state until production billing is provisioned.
+- The legacy checkout-success URL no longer claims checkout completed or grants Pro; it states that the route is not proof of payment.
+- Jekyll excludes internal integration reports, QA-only checkout and connection pages, repository READMEs, and the unselected duplicate privacy file from the published site output.
+- No Cloudflare Worker, Supabase production setting, Paddle account, DNS, or published site was changed. The production Supabase Auth redirect allowlist and SMTP/email confirmation behavior still require separate verification.

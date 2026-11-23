@@ -6,3 +6,15 @@ markdown: kramdown
 header_pages:
   - privacy.md
 show_excerpts: false
+exclude:
+  - AUTH-INTEGRATION.md
+  - README-INTEGRATION.md
+  - SITE-QA-REPORT.md
+  - BOMYRA-OPEN-WORK-QUEUE-2026-11-22.md
+  - README.md
+  - README_AR.md
+  - PRIVACY.md
+  - pay-qa/
+  - extension/connect-qa/
+  - node_modules/
+  - vendor/

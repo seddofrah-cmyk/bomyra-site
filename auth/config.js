@@ -1,9 +1,13 @@
 /*
- * BOMYRA Supabase browser configuration.
- * Safe for the browser ONLY with the Supabase publishable/anon key.
- * Never place the service_role key or any server secret in this file.
+ * BOMYRA production-candidate browser configuration.
+ * The Supabase publishable key is intended for public browser use.
+ * Never place service_role, Supabase secret, Paddle API, or webhook keys here.
  */
-window.BOMYRA_SUPABASE_URL = "https://xbtcmfstzpculiqckvnc.supabase.co";
-window.BOMYRA_SUPABASE_ANON_KEY = "sb_publishable_6e1xeqY5XUSn2ZTG-3aIKw_a4CdKdoP";
-// QA checkout runs through the isolated Cloudflare Billing Worker.
-window.BOMYRA_CHECKOUT_API_URL = "https://bomyra-billing-qa-v2.seddofrah.workers.dev/api/paddle/checkout";
+window.BOMYRA_SITE_ENVIRONMENT = "production-candidate";
+window.BOMYRA_SUPABASE_URL = "https://vagxeweqihibhcqnsnbe.supabase.co";
+window.BOMYRA_SUPABASE_ANON_KEY = "sb_publishable_m3rsQdRt1pFFuSzYiKagiw_kGbeYw56";
+
+// Production Cloudflare services are intentionally unset until deployed and verified.
+// Checkout and extension approval must stay unavailable rather than fall back to QA/Vercel.
+window.BOMYRA_CHECKOUT_API_URL = "";
+window.BOMYRA_EXTENSION_PAIR_APPROVE_API_URL = "";

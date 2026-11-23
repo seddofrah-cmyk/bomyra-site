@@ -49,6 +49,15 @@ h1{margin:12px 0;color:#f3f8fa;font-size:clamp(25px,5vw,32px);font-weight:850;le
   fail("Account connection is temporarily unavailable.");
   return;
  }
+ let pairingApproveUrl="";
+ try{
+  const target=new URL(String(window.BOMYRA_EXTENSION_PAIR_APPROVE_API_URL||""));
+  if(target.protocol!=="https:"||target.username||target.password||target.hash||target.search)throw new Error("invalid");
+  pairingApproveUrl=target.href;
+ }catch(_){
+  fail("Secure extension connection is not enabled in this environment. Start again after the production service is available.");
+  return;
+ }
  const client=window.supabase.createClient(
   window.BOMYRA_SUPABASE_URL,
   window.BOMYRA_SUPABASE_ANON_KEY,
@@ -62,14 +71,16 @@ h1{margin:12px 0;color:#f3f8fa;font-size:clamp(25px,5vw,32px);font-weight:850;le
    return;
   }
   status.textContent="Authorizing this extension…";
-  const response=await fetch("https://bomyra-entitlements-qa.seddofrah.workers.dev/api/extension/pair/approve",{
+  const response=await fetch(pairingApproveUrl,{
    method:"POST",
    headers:{
     "Authorization":"Bearer "+data.session.access_token,
     "Content-Type":"application/json"
    },
    body:JSON.stringify({code}),
-   cache:"no-store"
+   cache:"no-store",
+   credentials:"omit",
+   redirect:"error"
   });
   const result=await response.json().catch(()=>({}));
   if(!response.ok)throw new Error(result.error||"Could not connect the extension.");
