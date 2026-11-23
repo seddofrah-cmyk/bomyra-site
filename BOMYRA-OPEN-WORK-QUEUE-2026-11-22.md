@@ -258,3 +258,27 @@ The earlier “Priority 2 — start account pairing from the website” and the 
 1. Turn the existing 1.5.139 extension On (only if it is still Off), then start Add account inside that extension to generate a fresh one-time code.
 2. Confirm the opened page is on the historical GitHub Pages host, approve the intended account, and verify the extension displays the saved account and plan.
 3. If it still fails, preserve the exact error and inspect only that failing request. Do not rerun prior successful quota, export, multi-account, or billing QA.
+
+
+## Final integration status — correct 1.5.139 extension + official site (2026-11-23, Africa/Algiers)
+
+### Completed
+1. Verified the user-uploaded `bomyra-extension-rebuild-cloudflare-v1.5.139 (1)(2).zip`: manifest version 1.5.139; exact `manifest.json` and `src/quota.js` Git blob hashes match the 1.5.139 reference source. Archive SHA-256: `0511a040466be4cb3bbeea583fcb582545d998750180a4ef49248252c337bbe9`.
+2. On the approved site branch `feature/site-signin-visual-guide`, corrected only the nav and hero `Get Started` href fallback targets to the existing Product Tour dialog `#bomyra-product-tour`. This removes the former auth-route fallback and the nonexistent anchor fallback.
+3. Kept `SIGN IN GUIDE` targeting `#bomyra-install-dialog`, with its one-image guide; six-step Product Tour remains in place.
+4. Deployed the corrected site to the official `bomyra-site` Pages project: deployment `63694ad9-09c8-4dfb-b436-85aa861878eb`, all stages success, branch `feature/site-signin-visual-guide`. Official URL: `https://bomyra-site.pages.dev/bomyra-site/`.
+5. Connected the extension's existing `Add account` flow to the official site's `/bomyra-site/extension/connect-qa/` route by updating the QA Worker `connectUrl` and adding `https://bomyra-site.pages.dev` to CORS allow-origin logic. Active Worker deployment `b2e8c73b-435e-43b9-a0a4-fa9fa85e95ef`, version `ceb1985f-1787-489b-9752-e098d5ad435a`, 100% traffic.
+6. Verified current Worker source still includes AES-GCM token encryption/decryption and all existing bindings/secrets remain present.
+
+### Architecture boundary
+- `Get Started` opens the six-step Product Tour.
+- `SIGN IN GUIDE` opens the single-image informational guide only.
+- No homepage or public-site account pairing was added. Only the existing `Add account` action inside the extension starts pairing.
+- No extension source/package replacement, Supabase row/schema change, account-data change, billing change, production Worker, DNS, or production traffic change was made.
+
+### One remaining live acceptance
+1. Ensure the installed BOMYRA 1.5.139 extension is On.
+2. Start a new `Add account` attempt inside the extension. Do not reuse any old one-time code shown in prior screenshots.
+3. Confirm the opened page is `bomyra-site.pages.dev/bomyra-site/extension/connect-qa/`, approve the intended account, and verify the saved account and plan appear in the extension.
+4. Mark PASS only after the extension UI shows the account and plan. Do not repeat previously accepted quota/export/multi-account tests.
+
