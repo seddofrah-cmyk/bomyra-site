@@ -140,10 +140,10 @@ The earlier “Priority 2 — start account pairing from the website” and the 
 - Website account pairing remains explicitly rejected and closed as a work item. Do not implement it.
 
 ### Ordered remaining work
-1. **Official Chrome Web Store listing** — waiting for the confirmed official listing URL / publication. Only after verification, prepare a separate installation CTA review. No guessed URL.
-2. **Natural subscription expiry observation** — on/after 2026-12-20, check whether the recorded canceled paid-through subscription naturally transitions to Free. This is an observation task, not a reason to rerun the accelerated QA transaction test or alter the unrelated active Sandbox subscription.
-3. **Duplicate Chrome installation cleanup** — deferred. The 1.5.139 QA candidate is enabled; an older duplicate installation was previously seen disabled with Errors. Identify it and confirm it is the obsolete copy before removing it; do not delete it by assumption.
-4. **Production release/cutover review** — blocked until all applicable release evidence is current and the user gives separate explicit approval. No merge to production, Paddle Live, production traffic, DNS, or service shutdown is authorized by this queue update.
+1. **Natural subscription expiry observation** — on/after 2026-12-20, check whether the recorded canceled paid-through subscription naturally transitions to Free. This is a future observation, not a reason to rerun the accelerated QA transaction test or alter the unrelated active Sandbox subscription.
+2. **Duplicate Chrome installation identification and cleanup** — deferred. The 1.5.139 QA candidate is enabled; an older duplicate installation was previously seen disabled with Errors. Identify it and confirm it is the obsolete copy before removing it; do not delete it by assumption.
+3. **Production release/cutover review** — remains blocked until all applicable evidence is current and the user separately approves the cutover. No merge to production, Paddle Live, production traffic, DNS, or service shutdown is authorized by this queue update.
+4. **Official Chrome Web Store listing and installation CTA — LAST** — wait for the official listing URL and verify it. Only then prepare the installation CTA for separate review. Never guess the URL.
 
 ### Evidence and scope
 - Site source branch: `feature/site-signin-visual-guide`; latest relevant fix commit: `5dbd4957f857af39a11f9b094283c8c4b22a4fcb`.
