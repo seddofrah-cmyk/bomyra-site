@@ -181,3 +181,36 @@ The earlier “Priority 2 — start account pairing from the website” and the 
 - Reconciled the duplicate-installation status as closed based on the user-confirmed QA report.
 - Updated the ordered work queue to distinguish QA package PASS from production-release blockers.
 - No code, Worker deployment, Supabase row, Paddle configuration, DNS record, production route, PR merge/closure, Chrome Web Store listing, or production traffic was changed.
+
+
+## Current status update — extension-initiated Add account route restored (2026-11-23, Africa/Algiers)
+
+### Decision boundary
+- **The public website must not initiate account connection, sign-in, pairing, or account management.** The earlier historical website-pairing Priority 2 remains superseded/rejected. Do not revive the orphaned website bridge or change Get Started / SIGN IN GUIDE.
+- Account addition remains initiated only by **Add account inside the BOMYRA extension**.
+- The complete extension-initiated path is present: extension Add account → QA Worker `/pair/start` → Cloudflare Pages `/bomyra-site/extension/connect-qa/` sign-in/approval → QA Worker `/pair/approve` → extension `/pair/poll` → `/account` verification → save/activate account in extension.
+
+### Completed restoration — QA only
+- Extension `main` is manifest `1.5.139`; `aixConnectBomyraAccount()` already implements the in-extension start/open/poll/save sequence. No extension code change was necessary.
+- The live `bomyra-site-preview.pages.dev/bomyra-site/extension/connect-qa/` endpoint was fetched successfully. The deployed page source uses the normal extension authorization path when no site-preview flow flag is supplied.
+- Corrected the deployed QA Worker `bomyra-entitlements-qa` so `/pair/start` returns the existing Cloudflare Pages URL rather than GitHub Pages.
+- Active Worker deployment: `1d7a1012-86a2-4c46-9f20-bf4d83e75431`; version `88c466b3-9de1-42ed-afb9-9ea14fa5c20a`; 100% traffic; created `2026-11-23T20:35:01.185531Z`.
+- Preserved AES-GCM token encryption/decryption and all current Worker bindings, including the existing Cloudflare Pages CORS origin and secret binding.
+- No Supabase rows, account data, schema, extension package, website source, homepage behavior, billing, production services, or production traffic were modified.
+
+### Acceptance status
+- **PASS:** Worker endpoint destination is corrected and active; Cloudflare Pages connection page responds; static source confirms the extension-initiated approval/poll/save path is wired; security and binding preservation were checked after deployment.
+- **PENDING — one authenticated live test:** the user must complete Add account in the installed QA extension with a signed-in BOMYRA account. Do not mark full end-to-end acceptance PASS until the extension shows the verified account and plan after approval.
+- No synthetic `/pair/start` call was made because it writes a pairing row. No database mutation was performed for this verification.
+
+### Next execution order
+1. **Complete one live QA Add account acceptance test** from inside the extension. Verify that the opened tab uses the Cloudflare Pages connection URL, approve the intended BOMYRA account, and confirm the extension shows the saved account/plan. If an error occurs, capture its exact message/status and inspect only that failing segment; do not repeat unrelated successful quota/account-switcher tests.
+2. **Production extension/Worker cutover review — BLOCKED / not approved.** QA endpoints must not be shipped publicly. Prepare a separate production Worker, production Supabase bindings, production extension endpoints, and release evidence; obtain explicit approval before any production change.
+3. **Official Chrome Web Store listing / installation CTA — LAST.** Use only a verified official listing URL after the production package and release are approved.
+4. **Post-release subscription-expiry observation — 2026-12-20 or later.** Keep this as a scheduled follow-up, not a current release blocker.
+
+### Evidence and release safety
+- The older queue entries about website-initiated pairing are historical only; the authoritative decision remains extension-only account management.
+- The Product Tour and one-image SIGN IN GUIDE remain accepted and untouched.
+- Preserve the existing successful quota, multi-account isolation, checkout, webhook, and export QA evidence. Do not rerun those tests without a relevant change.
+- Full authenticated Add account acceptance remains pending the single user/browser test above. Production remains NOT APPROVED.
