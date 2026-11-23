@@ -214,3 +214,13 @@ The earlier “Priority 2 — start account pairing from the website” and the 
 - The Product Tour and one-image SIGN IN GUIDE remain accepted and untouched.
 - Preserve the existing successful quota, multi-account isolation, checkout, webhook, and export QA evidence. Do not rerun those tests without a relevant change.
 - Full authenticated Add account acceptance remains pending the single user/browser test above. Production remains NOT APPROVED.
+
+
+## Diagnostic update — Add account approval blocked before Worker invocation (2026-11-23, Africa/Algiers)
+
+- User browser evidence: the old Cloudflare Pages connection page renders and identifies the signed-in account; pressing **Continue with this account** enters the authorizing state and then shows **Failed to fetch**.
+- Read-only Worker telemetry for `2026-11-23T20:35:00Z`–`20:45:00Z`: extension `/pair/poll` calls and OPTIONS preflights arrive from `https://chatgpt.com` with HTTP 200 / 204. No events were observed from Origin `https://bomyra-site-preview.pages.dev`; no `/pair/approve` request reached the Worker.
+- The active Worker binding already allows the old Cloudflare Pages origin, and source includes the OPTIONS handler and `POST /api/extension/pair/approve` route. Do not modify CORS or the approval handler without further evidence.
+- Root cause is not yet proven; failure occurs before the Worker records the approval request. The next required evidence is the exact browser DevTools Console error from the connection tab (without secrets or request payloads).
+- **Status:** technical route restored, but authenticated Add account acceptance remains **BLOCKED / PENDING browser-side request diagnosis**. Do not claim full end-to-end PASS.
+- No source, Worker settings, database rows, account sessions, extension package, or website controls changed during this diagnostic.
