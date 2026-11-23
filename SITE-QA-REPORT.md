@@ -128,3 +128,17 @@ Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
   - **Get Started** opens the separate six-step Product Tour.
 - Any proposed change to either control must be raised with the user first and left untouched until their explicit approval is received.
 - This rule applies to all future work on the BOMYRA website and its preview/production branches.
+
+
+
+## Addendum — move official hosting to Cloudflare Pages (2026-11-23, Africa/Algiers)
+
+- The repository's default-branch homepage still contains the earlier Sign in / Get Started links to `/auth/`; it does not contain the approved six-step Product Tour or the separate one-image **SIGN IN GUIDE**.
+- The approved website experience remains on `feature/site-signin-visual-guide`: the six-step Product Tour opens from **Get Started**, and **SIGN IN GUIDE** opens its separate informational guide. Account linking, sign-in and account management remain extension-only.
+- Created a new Cloudflare Pages project `bomyra-site` (project ID `d6330fbb-3497-473b-807f-f8b533a227cd`) with production branch `feature/site-signin-visual-guide`.
+- Cloudflare Pages is the intended hosting platform. The GitHub repository remains the source/version-control repository; it is not the public website host. Preview deployments are enabled for other branches in Cloudflare Pages.
+- Official Pages hostname: `https://bomyra-site.pages.dev`. The build uses the same Jekyll command and output layout as the previously verified Pages preview project.
+- The existing `bomyra-site-preview` project and its deployments are retained as rollback/fallback evidence.
+- **Status at this addendum:** project creation and source configuration are confirmed; the first production deployment has not yet been observed. Do not disable GitHub Pages or call the migration complete until Cloudflare reports a successful production deployment and the user verifies the restored guide and tour on the new URL.
+- No DNS, custom domain, extension, Worker, backend, Supabase, billing, or Vercel settings were changed. GitHub Pages has not yet been disabled.
+
