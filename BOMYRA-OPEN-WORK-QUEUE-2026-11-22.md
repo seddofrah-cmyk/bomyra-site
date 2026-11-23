@@ -140,14 +140,44 @@ The earlier “Priority 2 — start account pairing from the website” and the 
 - Website account pairing remains explicitly rejected and closed as a work item. Do not implement it.
 
 ### Ordered remaining work
-1. **Release candidate/package verification** — verify that the final 1.5.139 package was built from the approved candidate after the icon update; the previously inspected artifact predates that icon change, and no later package build is evidenced yet.
-2. **Duplicate Chrome installation identification and cleanup** — resolve the conflicting records before any cleanup. The extension QA report records user confirmation that the older duplicate was removed, while this queue previously described it as deferred. Verify current Chrome state/evidence; do not delete anything by assumption.
-3. **Production release/cutover review** — remains a separate decision. Review current evidence and obtain explicit user approval before any merge to production, Paddle Live, production traffic, DNS, or service shutdown.
-4. **Official Chrome Web Store listing and installation CTA — LAST** — wait for the official listing URL and verify it. Only then prepare the installation CTA for separate review. Never guess the URL.
 
-**Post-release follow-up (not a release gate):** On/after 2026-12-20, observe whether the recorded canceled paid-through subscription naturally transitions to Free. This future calendar-time observation does not block publication, does not justify rerunning the accelerated QA transaction test, and must not alter the unrelated active Sandbox subscription.
+1. **Production extension configuration and Cloudflare cutover review — BLOCKER.** The current GitHub default-branch extension source is version 1.5.139 but points to `bomyra-entitlements-qa.seddofrah.workers.dev` and the `/extension/connect-qa/` page. The backend default-branch README still documents Vercel Functions and Paddle Sandbox; Cloudflare billing is only evidenced on the QA migration branch / draft PR #5. Do not publish the QA package or build the public extension from the current default-branch QA configuration. A production-specific Cloudflare Worker, production Supabase bindings, approved billing environment, extension production endpoints, and end-to-end production release review must be established before public distribution. Do not switch Paddle Live or production traffic without separate explicit approval.
+2. **Promote the approved site experience — separate website release gate.** The inspected site default-branch homepage still links Get Started to `/auth/`. The approved six-step Product Tour with separate Sign in behavior exists on `feature/site-signin-visual-guide` and its Cloudflare preview, with the button already user-confirmed PASS. Review and promote that site branch only as a separately approved website change; do not add website-initiated account pairing or account management.
+3. **Official Chrome Web Store listing and installation CTA — LAST.** No official listing URL has been supplied or verified in the current release evidence. Publish only a production-configured and approved extension package, obtain the official listing URL, verify it, and only then prepare the website installation CTA for separate review. Never guess the URL.
+
+**Closed items (do not reopen without new evidence):**
+- **1.5.139 QA package build and icon verification — PASS.** GitHub Actions run #22 / `45077825899` built from `7266dd61fbdf4e429422bf35bded869620f8597e`; artifact ID `14775798045`. Independent inspection verified embedded build metadata, 29/29 packaged payload files byte-for-byte against the supplied candidate archive, 27/27 manifest resources, 24/24 JavaScript syntax checks, ZIP integrity, and exact source matches for all three icons. This closes only the QA package verification gate, not production release.
+- **Duplicate Chrome installation — CLOSED (user-confirmed in the extension QA report).** Do not remove anything else or reopen absent new evidence.
+- **Functional QA groups** for quota, account switching/pairing, export/PDF and Escape behavior remain closed. Do not repeat successful tests just to refresh the checklist.
+
+**Post-release follow-up (not a release gate):** On/after 2026-12-20, observe whether the recorded canceled paid-through subscription naturally transitions to Free. This does not block publication, does not justify rerunning the accelerated QA transaction test, and must not alter the unrelated active Sandbox subscription.
 
 ### Evidence and scope
 - Site source branch: `feature/site-signin-visual-guide`; latest relevant fix commit: `5dbd4957f857af39a11f9b094283c8c4b22a4fcb`.
 - Preview deployment: `https://486f5458.bomyra-site-preview.pages.dev/bomyra-site/` (deployment API reports all stages successful; user confirmed the button works).
 - This is a documentation/status update. No extension, Worker, backend, Supabase, Paddle, production, DNS, or Vercel changes were made.
+
+
+## Final release-readiness review — 2026-11-23 (Africa/Algiers)
+
+### Decision
+**The 1.5.139 QA package is verified, but BOMYRA is not ready for public production publication.** This is a source/configuration decision, not a failure of the package build. No production changes were made.
+
+### Source evidence inspected
+- Extension default branch `main` resolves to commit `a39377370c26393b2acefe8f29d1b384372c92ce`. Its `manifest.json` is version `1.5.139`, and its manifest host permission plus `src/quota.js` target the QA extension Worker and QA connect page. The extension README heading still identifies `v1.5.137`; this inconsistency must be reconciled before any release build.
+- Extension PR #3 remains Draft/open, with head `rebuild/cloudflare-v1.5.139` and base `feature/free-export-quota`; it is not an approval to publish. Older extension PR #2 is also Draft/open and targets a separate older QA branch. Do not merge either blindly.
+- Backend default-branch README still describes a private Vercel Functions backend and Paddle Sandbox. Backend PR #5 (`migration/cloudflare-billing-qa` → `feature/cloudflare-extension-api-qa`) is Draft/open and documents QA migration work, not production cutover. Older backend PRs #3 and #4 are also Draft/open. PR #6 remains closed without merge as previously recorded.
+- Site default-branch `index.md` still routes both Sign in and Get Started to `/auth/`. The approved Product Tour behavior is present on `feature/site-signin-visual-guide` and its preview, not the inspected default-branch homepage. The site PR #3 proposes website-driven extension pairing, which the user rejected; do not merge or revive that behavior.
+- The extension QA candidate's pairing starts inside the extension and opens the QA consent page. Keep that extension-initiated flow distinct from the rejected website-initiated pairing/account-management design.
+
+### Release constraints
+- QA Worker and QA connect endpoints must never be shipped as public production endpoints.
+- Backend production routing, production Supabase, Cloudflare production bindings, Paddle Live, site publication, and Chrome Web Store submission each need their own verified release plan and explicit approval.
+- Version 1.5.139 remains the current QA candidate. The user-approved 1.6.0 is only the next version-number decision; it does not authorize changing the manifest or publishing.
+- The 2026-12-20 natural subscription-expiry observation is post-release follow-up, not a release blocker.
+
+### Actions taken in this review
+- Verified and closed the QA package/icon inclusion task.
+- Reconciled the duplicate-installation status as closed based on the user-confirmed QA report.
+- Updated the ordered work queue to distinguish QA package PASS from production-release blockers.
+- No code, Worker deployment, Supabase row, Paddle configuration, DNS record, production route, PR merge/closure, Chrome Web Store listing, or production traffic was changed.
