@@ -54,9 +54,9 @@ Purpose: current task order based on the latest available project checkpoint, QA
 - Active Worker provenance, signed Sandbox `subscription.past_due`, duplicate replay protection, and unauthenticated checkout rejection are already verified. Do not repeat these successful checks absent a relevant code change.
 - Production cutover remains blocked and requires a separate explicit approval.
 
-## Priority 5 — subscription expiry lifecycle follow-through
+## Post-release follow-up — subscription expiry lifecycle observation
 
-**Status: LOGIC PASS / real-time expiry observation pending**
+**Status: NOT A RELEASE BLOCKER — scheduled observation on/after 2026-12-20**
 
 - QA transaction test simulated the canceled subscription's paid-through date as expired; entitlement logic returned Free and allowed a new checkout. Transaction rollback restored the original canceled state and no reservation remained.
 - Extension UI showed Free for the canceled/no-period account and Pro for the paid-through account.
@@ -140,10 +140,12 @@ The earlier “Priority 2 — start account pairing from the website” and the 
 - Website account pairing remains explicitly rejected and closed as a work item. Do not implement it.
 
 ### Ordered remaining work
-1. **Natural subscription expiry observation** — on/after 2026-12-20, check whether the recorded canceled paid-through subscription naturally transitions to Free. This is a future observation, not a reason to rerun the accelerated QA transaction test or alter the unrelated active Sandbox subscription.
-2. **Duplicate Chrome installation identification and cleanup** — deferred. The 1.5.139 QA candidate is enabled; an older duplicate installation was previously seen disabled with Errors. Identify it and confirm it is the obsolete copy before removing it; do not delete it by assumption.
-3. **Production release/cutover review** — remains blocked until all applicable evidence is current and the user separately approves the cutover. No merge to production, Paddle Live, production traffic, DNS, or service shutdown is authorized by this queue update.
+1. **Release candidate/package verification** — verify that the final 1.5.139 package was built from the approved candidate after the icon update; the previously inspected artifact predates that icon change, and no later package build is evidenced yet.
+2. **Duplicate Chrome installation identification and cleanup** — resolve the conflicting records before any cleanup. The extension QA report records user confirmation that the older duplicate was removed, while this queue previously described it as deferred. Verify current Chrome state/evidence; do not delete anything by assumption.
+3. **Production release/cutover review** — remains a separate decision. Review current evidence and obtain explicit user approval before any merge to production, Paddle Live, production traffic, DNS, or service shutdown.
 4. **Official Chrome Web Store listing and installation CTA — LAST** — wait for the official listing URL and verify it. Only then prepare the installation CTA for separate review. Never guess the URL.
+
+**Post-release follow-up (not a release gate):** On/after 2026-12-20, observe whether the recorded canceled paid-through subscription naturally transitions to Free. This future calendar-time observation does not block publication, does not justify rerunning the accelerated QA transaction test, and must not alter the unrelated active Sandbox subscription.
 
 ### Evidence and scope
 - Site source branch: `feature/site-signin-visual-guide`; latest relevant fix commit: `5dbd4957f857af39a11f9b094283c8c4b22a4fcb`.
