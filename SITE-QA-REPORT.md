@@ -142,3 +142,17 @@ Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
 - **Status at this addendum:** project creation and source configuration are confirmed; the first production deployment has not yet been observed. Do not disable GitHub Pages or call the migration complete until Cloudflare reports a successful production deployment and the user verifies the restored guide and tour on the new URL.
 - No DNS, custom domain, extension, Worker, backend, Supabase, billing, or Vercel settings were changed. GitHub Pages has not yet been disabled.
 
+
+
+## Integration closeout — approved site experience paired with extension 1.5.139 (2026-11-23, Africa/Algiers)
+
+- User-supplied extension archive `bomyra-extension-rebuild-cloudflare-v1.5.139 (1)(2).zip` was inspected: manifest version is 1.5.139 and its manifest/quota source Git blob hashes match the reference 1.5.139 source files.
+- Corrected only the two `Get Started` href fallbacks in `index.md` so both the nav and hero target the existing dialog id `#bomyra-product-tour`. The previous nav fallback pointed at `/auth/`; the hero fallback referenced a missing `#product-tour` target. Both controls already carry the `data-bomyra-tour` handler.
+- `SIGN IN GUIDE` remains connected to `#bomyra-install-dialog`; its approved single-image visual guide, close control, and the six-step product tour content remain unchanged.
+- Site commit: `eb23681bc2a9918e26e1393065bfdab85de0c65c`.
+- Official Cloudflare Pages production deployment: `63694ad9-09c8-4dfb-b436-85aa861878eb`; immutable URL `https://63694ad9.bomyra-site.pages.dev`; all build/deploy stages succeeded. The stable site path is `https://bomyra-site.pages.dev/bomyra-site/`.
+- Live read-only fetch confirms the published nav/hero link targets, six-step Product Tour dialog, single-image SIGN IN GUIDE dialog, and the official Pages route `/bomyra-site/extension/connect-qa/`.
+- The QA Worker now returns that official site connection route for extension-initiated `Add account`; Worker CORS code explicitly allows `https://bomyra-site.pages.dev`. Worker deployment is `b2e8c73b-435e-43b9-a0a4-fa9fa85e95ef` (version `ceb1985f-1787-489b-9752-e098d5ad435a`, 100%).
+- No website-initiated account linking was introduced. No production traffic, database, account rows, DNS, or billing config changed.
+- Remaining live acceptance: one fresh Add account attempt from inside the enabled 1.5.139 extension, approval on the official Cloudflare connection page, then confirm account/plan in the extension.
+
