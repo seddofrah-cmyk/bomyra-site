@@ -91,7 +91,7 @@ permalink: /
     <nav aria-label="Main navigation">
       <a href="#features">Features</a><a href="#how">How it works</a><a href="/bomyra-site/pricing/">Pricing</a>
       
-      <a href="#bomyra-install-dialog" class="nav-login" data-bomyra-signin-guide>SIGN IN GUIDE</a><a href="/bomyra-site/auth/" class="nav-cta" data-bomyra-tour>Get Started</a>
+      <a href="#bomyra-install-dialog" class="nav-login" data-bomyra-signin-guide>SIGN IN GUIDE</a><a href="#bomyra-product-tour" class="nav-cta" data-bomyra-tour>Get Started</a>
 
     </nav>
   </header>
@@ -102,7 +102,7 @@ permalink: /
         <span class="eyebrow"><i></i> AI CHAT SAVER &amp; EXPORTER</span>
         <h1>Keep your best AI conversations.<span> Make them useful again.</span></h1>
         <p>BOMYRA helps you select the messages that matter from ChatGPT, Claude and Google Gemini, then turn them into portable, organized archives.</p>
-        <div class="hero-actions"><a class="button-primary" href="#product-tour" data-bomyra-tour>Get Started <span>→</span></a><a class="button-quiet" href="/bomyra-site/pricing/">View Plans</a></div>
+        <div class="hero-actions"><a class="button-primary" href="#bomyra-product-tour" data-bomyra-tour>Get Started <span>→</span></a><a class="button-quiet" href="/bomyra-site/pricing/">View Plans</a></div>
         <div class="platform-line">CHATGPT <b>·</b> CLAUDE <b>·</b> GOOGLE GEMINI</div>
       </div>
       
