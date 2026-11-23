@@ -91,7 +91,7 @@ permalink: /
     <nav aria-label="Main navigation">
       <a href="#features">Features</a><a href="#how">How it works</a><a href="/bomyra-site/pricing/">Pricing</a>
       
-      <a href="/bomyra-site/auth/" class="nav-login">Sign in</a><a href="/bomyra-site/auth/" class="nav-cta" data-bomyra-tour>Get Started</a>
+      <a href="#bomyra-install-dialog" class="nav-login" data-bomyra-signin-guide>SIGN IN GUIDE</a><a href="/bomyra-site/auth/" class="nav-cta" data-bomyra-tour>Get Started</a>
 
     </nav>
   </header>
@@ -163,6 +163,27 @@ permalink: /
     <section class="final-cta"><div><span class="eyebrow">MAKE YOUR AI CHATS WORK FOR YOU</span><h2>Keep the ideas.<br><span>Take them anywhere.</span></h2><p>Explore BOMYRA plans and choose the workflow that fits you.</p><a class="button-primary" href="/bomyra-site/pricing/">Explore plans <span>→</span></a></div></section>
   </main>
   <footer class="home-footer"><a class="home-brand" href="/bomyra-site/" aria-label="BOMYRA home"><img src="/bomyra-site/assets/images/bomyra-mark.svg" alt="" /><span class="home-brand-copy"><strong>BOMYRA</strong><small>AI CHAT SAVER &amp; EXPORTER</small></span></a><div class="footer-links"><a href="/bomyra-site/pricing/">Plans</a><a href="/bomyra-site/privacy.html">Privacy</a><a href="mailto:seddev213@gmail.com">Support</a></div><p>© 2026 BOMYRA · Independent product. Not affiliated with OpenAI, Anthropic or Google.</p></footer>
+  <div class="bomyra-install-dialog" id="bomyra-install-dialog" role="dialog" aria-modal="true" aria-labelledby="bomyra-install-title" aria-describedby="bomyra-install-description" hidden>
+    <section class="bomyra-install-card">
+      <div class="bomyra-guide-heading">
+        <span class="eyebrow">SIGN IN · VISUAL GUIDE</span>
+        <h2 id="bomyra-install-title">Sign in to BOMYRA in the extension</h2>
+        <p id="bomyra-install-description" class="bomyra-guide-intro">This guide shows where to manage your BOMYRA account inside the browser extension. The website does not connect accounts.</p>
+      </div>
+      <div class="bomyra-guide-grid">
+        <article class="bomyra-guide-step">
+          <h3><span class="bomyra-guide-number">1</span> Manage your BOMYRA accounts</h3>
+          <p>Open the account control in the extension to view your accounts or add another account. This picture is a visual reference only; account sign-in and switching happen inside the extension.</p>
+          <div class="bomyra-guide-image"><img src="/bomyra-site/assets/images/signin-guide.png" alt="BOMYRA accounts menu and Connect BOMYRA account control in the browser extension" draggable="false"></div>
+        </article>
+      </div>
+      <p class="bomyra-guide-footnote">Each account keeps its own plan and quota. Switching accounts never transfers a subscription.</p>
+      <div class="bomyra-install-actions">
+        <button class="bomyra-install-secondary" id="bomyra-guide-close" type="button">Close guide</button>
+      </div>
+      <small class="bomyra-install-note">Account sign-in and switching happen only inside the BOMYRA extension.</small>
+    </section>
+  </div>
   <div class="bomyra-tour" id="bomyra-product-tour" role="dialog" aria-modal="true" aria-labelledby="bomyra-tour-title" aria-describedby="bomyra-tour-description" hidden>
     <section class="bomyra-tour-shell">
       <button class="bomyra-tour-close" id="bomyra-tour-close" type="button" aria-label="Close tour">×</button>
