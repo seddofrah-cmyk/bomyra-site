@@ -239,3 +239,22 @@ The earlier “Priority 2 — start account pairing from the website” and the 
 1. On the already-open connection page, open DevTools (F12) → Network, enable Preserve log, then click **Continue with this account** once.
 2. Inspect the `OPTIONS` or `POST` request to `bomyra-entitlements-qa.seddofrah.workers.dev/api/extension/pair/approve`. Share a screenshot of its General section/status or the exact Console error only. Never expose Authorization or Cookie values.
 3. Resume the narrow fix based on that evidence; preserve the active Worker version and all passing extension tests.
+
+
+## Corrective restoration — preserve the historically successful Add account route (2026-11-23, Africa/Algiers)
+
+- User-provided Chrome screenshots identify the normally working installed unpacked extension as **1.5.139**, loaded from `F:\bomyra-extension-rebuild-cloudflare-v1.5.139`; its QA Worker host permission is present. No extension package or permission change was made.
+- The previous Worker-only switch to the Cloudflare Pages connection host was rolled back. The active QA Worker `startPairing()` now returns the historical GitHub Pages connect URL:
+  `https://seddofrah-cmyk.github.io/bomyra-site/extension/connect-qa/`.
+- Corrective Worker deployment: `ae75a673-42b2-4a58-a5d6-d858d3314ce7`; version `83f6e0d5-2ebf-4645-a4c1-93751da367ab`; 100% traffic; created `2026-11-23T20:54:47.598659Z`.
+- The restored GitHub Pages connection endpoint was fetched successfully and returns the expected BOMYRA QA connection page.
+- Historical Worker telemetry records successful GitHub Pages-origin `OPTIONS 204` and `POST 200` for `/api/extension/pair/approve`. Those successful earlier events are the evidence used to select this restored route. The newer Cloudflare Pages attempt timed out in the user's browser.
+- AES-GCM token encryption/decryption remains intact. No extension, site source, CORS binding, Worker secrets, Supabase rows, account data, or database schema were changed during restoration.
+- The latest Chrome screenshot visibly shows the extension's global enable switch as **Off**. Before the next Add account test, ensure it is On. Do not change site permissions, reinstall or reload an alternate package.
+- The one-time code exposed in the user's screenshot must not be reused. Start a fresh Add account attempt once the extension is enabled.
+- **Status:** restored historical route / previous successful evidence available; one fresh end-to-end Add account confirmation remains pending. Do not mark PASS until the extension shows the account and plan.
+
+### Next action
+1. Turn the existing 1.5.139 extension On (only if it is still Off), then start Add account inside that extension to generate a fresh one-time code.
+2. Confirm the opened page is on the historical GitHub Pages host, approve the intended account, and verify the extension displays the saved account and plan.
+3. If it still fails, preserve the exact error and inspect only that failing request. Do not rerun prior successful quota, export, multi-account, or billing QA.
