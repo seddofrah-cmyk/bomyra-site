@@ -105,3 +105,14 @@ Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
 - Work remains on `feature/site-signin-visual-guide`. No merge to `main`, production deployment, extension change, Worker/backend/Supabase/Paddle change, DNS change, or Vercel change was made.
 
 **Current site QA result: PASS for the six-step Product Tour source, successful Cloudflare preview deployment, and user-confirmed button behavior.**
+
+
+## Addendum — Rename and restore the homepage Sign in Guide (2026-11-23)
+
+- Renamed the homepage navigation control from **Sign in** to **SIGN IN GUIDE** so it cannot be confused with website authentication.
+- Restored the previously user-approved visual guide and its single source image: `assets/images/signin-guide.png`.
+- The renamed control opens the visual guide only. It has no authentication destination and does not initiate account connection or pairing.
+- The guide remains informational: its only action is **Close guide**. Account sign-in, adding accounts, and switching accounts remain inside the BOMYRA extension.
+- Kept the Product Tour on the separate `data-bomyra-tour` trigger. The **Get Started** labels, six tour steps, images, and navigation logic were not changed.
+- No extension, Worker, backend, Supabase, billing, production branch, or production deployment was changed.
+- Verification status at commit time: source-level checks pending; Cloudflare preview and browser behavior must be verified before marking this change accepted.
