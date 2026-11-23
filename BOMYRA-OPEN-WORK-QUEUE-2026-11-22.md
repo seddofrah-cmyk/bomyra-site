@@ -224,3 +224,18 @@ The earlier “Priority 2 — start account pairing from the website” and the 
 - Root cause is not yet proven; failure occurs before the Worker records the approval request. The next required evidence is the exact browser DevTools Console error from the connection tab (without secrets or request payloads).
 - **Status:** technical route restored, but authenticated Add account acceptance remains **BLOCKED / PENDING browser-side request diagnosis**. Do not claim full end-to-end PASS.
 - No source, Worker settings, database rows, account sessions, extension package, or website controls changed during this diagnostic.
+
+
+## Diagnostic update — extension Add account approval fails in the browser (2026-11-23, Africa/Algiers)
+
+- User-provided screenshots confirm the restored Cloudflare Pages page loads and displays the signed-in BOMYRA account. Clicking **Continue with this account** changes the page to **Authorizing … with the Cloudflare QA Worker…**, then the browser reports **Failed to fetch**.
+- Read-only telemetry shows extension-originated requests to `/api/extension/pair/poll` reached Worker and returned 200, with their OPTIONS preflights returning 204.
+- Earlier `/api/extension/pair/approve` OPTIONS 204 and POST 200 events exist from the former GitHub Pages origin; they are historical, not evidence that the screenshot attempt succeeded.
+- For the screenshot time window, no `OPTIONS` or `POST` for `/api/extension/pair/approve` from `https://bomyra-site-preview.pages.dev` appears in Worker telemetry. The active Worker CORS allowlist does include this exact Pages origin, and its handler allows POST/OPTIONS plus Authorization/Content-Type. No cause is yet proven for why the browser request does not reach Worker.
+- **Do not change CORS or deploy another Worker version speculatively.** The next required evidence is the failed browser request in Chrome DevTools Network, or the exact Console error. Capture only the error/status and request URL. Do not share HAR, Authorization headers, access tokens, pairing codes, cookies, or credentials.
+- No source, deployment, CORS binding, Supabase record, or account data was changed during this diagnostic. Keep full authenticated Add account acceptance **BLOCKED / PENDING** until the real browser approval and extension account save are confirmed.
+
+### Immediate next action
+1. On the already-open connection page, open DevTools (F12) → Network, enable Preserve log, then click **Continue with this account** once.
+2. Inspect the `OPTIONS` or `POST` request to `bomyra-entitlements-qa.seddofrah.workers.dev/api/extension/pair/approve`. Share a screenshot of its General section/status or the exact Console error only. Never expose Authorization or Cookie values.
+3. Resume the narrow fix based on that evidence; preserve the active Worker version and all passing extension tests.
