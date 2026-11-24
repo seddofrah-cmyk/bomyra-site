@@ -313,3 +313,34 @@ This update is authoritative over earlier Add account pending/diagnostic entries
 - Extension source commit: `f40aa3454bc9044d1bccd6d2745567237f8b77dc`.
 - `src/quota.js` SHA: `d3eada7dbd5d45890a0a296c289afe71f8a8e458`.
 - No source beyond the documented constant update, Worker, site deployment, database, billing, DNS, production configuration, or release state was changed by this status update.
+
+
+## Authoritative status update — Add account verification closed (2026-11-24, Africa/Algiers)
+
+This entry supersedes the 2026-11-24 status entry above wherever it says the user is still completing browser verification or instructs continuing that verification.
+
+### Priority 1 — Add account browser acceptance
+
+**Status: PASS — CLOSED by explicit user confirmation (2026-11-24).**
+
+- The user confirmed that verification of the Add account operation, the domains, and the related buttons is complete and the result is good.
+- Pairing behavior had already been confirmed by the user as **100/100**.
+- The established in-extension flow order remains accepted and closed: Add account → temporary `about:blank` → `POST /pair/start` → navigate to returned `start.connectUrl` → connect page checks its Supabase session → user approval → extension polls `/pair/poll` → account verification/save.
+- Do not reopen the flow order, repeat the completed browser acceptance, or treat the transient no-session observation as a project defect. It later worked without a project change; its root cause was not established.
+- No code, Worker, site, Supabase, billing, DNS, production, or release change was made to close this item.
+
+### Updated remaining work — authoritative execution order
+
+1. **Production extension / Cloudflare cutover review — BLOCKED; separate approval required.** Review the production-specific Worker, production Supabase bindings, approved billing environment, production extension endpoints, and end-to-end release evidence. QA endpoints must not be shipped publicly. Do not change production traffic, Paddle Live, DNS, or production services without explicit approval.
+2. **Approved site-experience promotion review — separate release gate.** Review the approved `feature/site-signin-visual-guide` experience and its production-promotion implications. Keep the Product Tour and one-image SIGN IN GUIDE behavior intact. Do not add website-initiated pairing, sign-in, account linking, or account management.
+3. **Official Chrome Web Store distribution and installation CTA — last.** Requires an approved production-configured extension package and a verified official listing URL. Do not invent the URL or publish before the production gates are approved.
+4. **Post-release subscription-expiry observation — on/after 2026-12-20.** Follow-up only; not a current release blocker.
+
+### No-regression / no-reopen rules
+- Add account acceptance is closed. Reopen only if new, reproducible evidence shows a regression.
+- Preserve all successful QA evidence; do not rerun unrelated quota, export, account-switching, checkout, webhook, or pairing tests without a relevant change.
+- Keep production services, production Supabase, Paddle Live, DNS, and public extension publication untouched absent separate explicit approval.
+- The public website remains informational/onboarding only; account pairing and account management remain inside the extension.
+
+### Documentation scope
+- This is a status/report update only. It does not change application source, deployment, Worker configuration, database state, billing, DNS, production traffic, or publication status.
