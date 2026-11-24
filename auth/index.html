@@ -102,7 +102,7 @@ $("authForm").addEventListener("submit",async e=>{
    rememberNextPath();
    const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:callbackUrl}});
    if(error)throw error;
-   showStatus(data.session?"Your account has been created.":"We sent a confirmation link to your email. Open it to verify your account.","success");
+   showStatus(data.session?"Your account has been created.":"If this email can be registered, follow the confirmation link sent to its inbox. If you already have a BOMYRA account, switch to Sign in.","success");
   }else{
    const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
    if(error)throw error;
