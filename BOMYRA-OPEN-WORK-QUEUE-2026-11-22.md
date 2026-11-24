@@ -282,3 +282,34 @@ The earlier “Priority 2 — start account pairing from the website” and the 
 3. Confirm the opened page is `bomyra-site.pages.dev/bomyra-site/extension/connect-qa/`, approve the intended account, and verify the saved account and plan appear in the extension.
 4. Mark PASS only after the extension UI shows the account and plan. Do not repeat previously accepted quota/export/multi-account tests.
 
+
+
+## Current status update — Add account flow verified; resume planned work (2026-11-24, Africa/Algiers)
+
+This update is authoritative over earlier Add account pending/diagnostic entries above where they conflict.
+
+### Add account — current disposition
+- The active extension QA candidate is **1.5.139**, branch `feature/account-switcher-1.5.139-qa`; latest documented source commit: `f40aa3454bc9044d1bccd6d2745567237f8b77dc`.
+- The user confirmed that Add account pairing succeeded and that the behavior was **100/100** in the completed check.
+- The flow order is settled and must not be changed: Add account → temporary `about:blank` → `POST /pair/start` → navigate to returned `start.connectUrl` → connect page checks its Supabase session → user approval → extension polls `/pair/poll` → account verification/save.
+- The connect page URL constant in `src/quota.js` was updated to `https://bomyra-site.pages.dev/bomyra-site/extension/connect-qa/` in commit `f40aa3454bc9044d1bccd6d2745567237f8b77dc`. This source commit was not deployed as part of this work.
+- QA Worker `bomyra-entitlements-qa` remains Version 18 (version ID `9feee266-8a3a-4a25-b252-8555feb55d23`; deployment `7c5cb5fb-2be0-4052-8c0d-a6b213928b47`; 100% traffic). No Worker deployment or configuration change occurred.
+- The no-session/auth path briefly appeared unavailable and then worked again without any project change. The user suspects a local network issue. This is not established as a project defect, is not an open queue item, and must not be logged as a BOMYRA incident.
+- The user is still completing broader checks of the operation, domains, and buttons. Do not mark the entire browser acceptance stage finally closed until the user confirms completion.
+
+### Work-order correction
+1. Continue only the user's remaining browser verification of the current Add account operation, actual domains, and buttons. Do not alter the settled flow order or repeat unrelated successful QA.
+2. After the user confirms this verification is complete, resume the previously ordered roadmap: production extension/Worker cutover review (blocked; separate approval required), then the separate site-experience promotion review, then official Chrome Web Store listing/installation CTA last.
+3. Preserve the approved Product Tour and one-image SIGN IN GUIDE. The public website must not initiate pairing, sign-in, account linking, or account management.
+4. Keep all production services, production Supabase, Paddle Live, DNS, and public extension publication untouched unless the user gives separate explicit approval.
+
+### No-regression / no-reopen rules
+- Do not return to the previously encountered project regression path or reintroduce changes that reduce paid-plan behavior or weaken security.
+- Do not reopen the settled Add account ordering.
+- Do not repeat successful quota, export, account-switching, checkout, webhook, or pairing checks without a relevant code change.
+- The transient no-session observation is deliberately excluded from the defect list; no project change was made in response to it.
+
+### Evidence and scope
+- Extension source commit: `f40aa3454bc9044d1bccd6d2745567237f8b77dc`.
+- `src/quota.js` SHA: `d3eada7dbd5d45890a0a296c289afe71f8a8e458`.
+- No source beyond the documented constant update, Worker, site deployment, database, billing, DNS, production configuration, or release state was changed by this status update.
