@@ -1,14 +1,14 @@
-# BOMYRA Supabase Auth + Cloudflare QA integration
+# BOMYRA Production Auth + Cloudflare Extension integration
 
-The account UI is a static GitHub Pages addition and uses Supabase Auth from the browser. The subscription and extension APIs are hosted on isolated Cloudflare QA Workers.
+The account UI is a static GitHub Pages addition and uses the Production Supabase project from the browser. Extension account, pairing, entitlement, and export requests use the Cloudflare Production Entitlements Worker. Billing remains disconnected until the final Paddle Production cutover.
 
 ## Routes
 
 - `/auth/` — sign in and create account
 - `/auth/callback/` — email confirmation return page
 - `/extension/connect/` — extension account approval fallback page
-- `/extension/connect-qa/` — account-confirmation page returned by the Cloudflare QA pairing endpoint
-- `/pay/` — Paddle Sandbox checkout page
+- `/extension/connect/` — Production account-confirmation page opened only by extension-initiated pairing
+- `/pay/` — checkout page currently unavailable pending Paddle Production cutover
 
 ## Browser configuration
 
@@ -19,11 +19,10 @@ The account UI is a static GitHub Pages addition and uses Supabase Auth from the
 
 Never place the Supabase `service_role` key, Paddle API key, Paddle webhook secret, or other server secrets in browser code or Git.
 
-The checkout endpoint is:
-`https://bomyra-billing-qa-v2.seddofrah.workers.dev/api/paddle/checkout`
+The checkout endpoint is intentionally unset until the final Paddle Production cutover.
 
 The extension pairing and entitlement endpoint is:
-`https://bomyra-entitlements-qa.seddofrah.workers.dev`
+`https://bomyra-entitlements-prod.seddofrah.workers.dev`
 
 ## Supabase dashboard
 
@@ -35,8 +34,8 @@ Keep email confirmation enabled. The account page requests that confirmation lin
 
 ## Extension account pairing
 
-1. The extension requests a short-lived pairing code from `POST /api/extension/pair/start` on the Cloudflare Entitlements QA Worker.
-2. The Worker stores only the SHA-256 hash of that code and returns the approval URL at `/extension/connect-qa/?code=…`.
+1. The extension requests a short-lived pairing code from `POST /api/extension/pair/start` on the Cloudflare Entitlements Production Worker.
+2. The Worker stores only the SHA-256 hash of that code and returns the approval URL at `/extension/connect/?code=…`.
 3. The approval page checks the existing Supabase browser session. If the user is signed out, it sends them through `/auth/` and returns to the approval page afterward.
 4. The page sends only the one-time pairing code and the signed-in user's Supabase access token to `POST /api/extension/pair/approve`.
 5. The extension polls `POST /api/extension/pair/poll` and receives an opaque 30-day extension session token once. The Worker stores only the token's SHA-256 hash.
@@ -47,7 +46,7 @@ The Worker also exposes account inspection/revocation, entitlement lookup, and e
 
 ## Paddle Sandbox checkout
 
-The checkout page requires a Supabase session and calls the Cloudflare Billing QA Worker. It sends the current Supabase access token and the selected plan key (`monthly` or `yearly`). The Worker validates the token, resolves the user UUID from Supabase Auth, chooses the server-side price ID, and creates a Paddle Sandbox transaction with `custom_data.user_id`.
+The checkout page is intentionally disconnected during this stage. Do not send Production Supabase access tokens to the QA Billing Worker. Production checkout will be configured only in the final Paddle step.
 
 The browser never sends a trusted user UUID or Paddle price ID. Paddle.js opens only the server-created transaction.
 
@@ -68,4 +67,4 @@ Only the signed Paddle webhook can activate or change Pro access. A browser succ
 
 ## Vercel isolation
 
-The published checkout and extension connection pages use Cloudflare QA Worker URLs. The former Vercel backend is not a dependency of these browser flows. Keep the Vercel project disabled after the Cloudflare webhook destination has been verified; do not restore its secrets or route browser requests back to it.
+The published extension approval page uses the Cloudflare Production Entitlements Worker. Checkout remains disabled until the final Paddle Production cutover. The former Vercel backend is not a dependency of these browser flows. Keep the Vercel project disabled after the Cloudflare webhook destination has been verified; do not restore its secrets or route browser requests back to it.
