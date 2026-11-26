@@ -384,3 +384,16 @@ No other queue item is changed by this correction. Preserve the existing order, 
 ### Safety boundary
 - No Cloudflare Worker deployment, Supabase change, Paddle change, DNS change, secret change, or production traffic change was part of PR #10 or this report update.
 - Do not create or deploy `bomyra-billing-prod`, enable Paddle Live, or alter production CORS as part of this closeout.
+
+
+## Active checkpoint — missing Terms of Service and Refund Policy (2026-11-26, Africa/Algiers)
+
+**Status: CONFIRMED GAP — implementation not started; user approval required.**
+
+- Inspected `seddofrah-cmyk/bomyra-site` default branch `feature/site-signin-visual-guide` at `c50f6ec433e599fbf92d24fb801042227e44400c`.
+- `privacy.md` exists. No Terms of Service or Refund Policy file/page exists in the complete tracked tree; exact-term repository searches returned no matches.
+- `_layouts/default.html` footer links only Plans, Privacy, and Support. The homepage footer also has no Terms or Refund link.
+- **Next action:** after the user approves, establish the factual subscription/legal terms, draft Terms of Service and Refund Policy, then add both pages and their footer links. Preserve existing design, Product Tour, SIGN IN GUIDE, and protected CTA behavior. Do not invent business identity, legal address, jurisdiction, or refund/cancellation terms.
+- **Stop point:** do not draft or modify site source until the user approves the policy drafting/update scope and supplies any missing factual terms.
+- Paddle Live account-side review remains partially unverified because no Paddle connector/account access was available. Do not claim Paddle readiness. No Paddle or production settings were changed.
+- No application code, Worker, Supabase, billing, DNS, deployment, or production traffic was changed by this inspection.
