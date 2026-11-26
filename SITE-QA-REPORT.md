@@ -187,3 +187,24 @@ This is a documentation-only status correction. It does not authorize or record 
 - The user deleted the merged working branch `chore/final-vercel-isolation-20261126` in GitHub. A subsequent GitHub branch search returned **zero matches** for that exact branch name. Protected backup `backup/pre-vercel-isolation-20261126` remains retained; do not modify or delete it.
 - **External integration boundary:** a `vercel[bot]` comment was observed on the PR after opening it, referencing the former Vercel project/deployment. This proves a GitHub-side Vercel integration still emitted a comment at that time; removal of the external GitHub App/installation or repository webhook has **not** been verified. Do not claim complete external integration removal.
 - This is a documentation-only closeout. No new deployment, service configuration, database, billing, DNS, or production change was performed.
+
+
+## Checkpoint — legal pages gap identified for Paddle readiness (2026-11-26, Africa/Algiers)
+
+### Confirmed repository state
+- Repository: `seddofrah-cmyk/bomyra-site`; reviewed default/production-source branch `feature/site-signin-visual-guide` at commit `c50f6ec433e599fbf92d24fb801042227e44400c`.
+- The tracked site contains the Privacy Policy (`privacy.md`, published through the existing privacy route).
+- No Terms of Service page/file and no Refund Policy page/file were found in the complete repository tree at the reviewed commit. A repository search for the exact terms also returned no matches.
+- The shared content layout footer (`_layouts/default.html`) links to Plans, Privacy, and Support; it has no Terms or Refund links. The homepage footer likewise exposes Privacy but no Terms or Refund link.
+- Therefore, **Terms of Service and Refund Policy are missing from the current site source**. This is a source-tree finding; it does not by itself establish the current Paddle account's review outcome or whether Paddle has separately approved the domain.
+
+### Checkpoint / stop point
+- **Current stop point:** repository inspection is complete. Do not begin writing policy language, changing navigation/footer markup, creating files, or deploying until the user approves the policy content and the narrowly scoped site update.
+- Next proposed task: prepare accurate BOMYRA Terms of Service and Refund Policy based on the actual subscription, cancellation, renewal, refund, support, and seller details; then add the two pages and footer links while preserving the approved site design and all protected homepage controls.
+- Do not invent a legal entity, registered address, jurisdictional representation, refund promise, or subscription/cancellation behavior. Confirm any missing factual business terms with the user before drafting final policy language.
+- This finding does not reopen the already-closed Add account, extension ZIP 1.5.140, or Supabase Auth URL tasks.
+
+### Paddle / release boundary
+- The prior Paddle Live review remains **partially unverified**: source code and public Paddle documentation were reviewed, but the actual Paddle vendor account/catalog/notification settings were not accessible through a connected Paddle integration. No Paddle products, prices, notification destinations, API keys, or Live settings were created or changed.
+- No application code, Worker, Supabase, billing configuration, DNS, deployment, production traffic, or publication state was changed during this repository inspection.
+- No policy content has yet been drafted or approved; no site pages or footer links have been added.
