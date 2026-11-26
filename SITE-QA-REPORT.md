@@ -167,3 +167,13 @@ This addendum is authoritative and supersedes all earlier status statements in t
 3. **Supabase Auth Site URL and Redirect URL update — COMPLETED / CLOSED.** The user explicitly confirmed closure. Do not request another save confirmation or repeat this configuration task.
 
 This is a documentation-only status correction. It does not authorize or record any new code, service configuration, database, billing, DNS, deployment, or production change.
+
+
+## Documentation closeout transaction — 2026-11-26 (Africa/Algiers)
+
+- Before merging the documentation-only PR #14, a protected GitHub backup branch was created from the then-current default-branch commit `ecb7628a91980c74cfdb89f4a09207a61b18b059`: `backup/pre-docs-closeout-20261126`.
+- GitHub branch search subsequently confirmed that backup branch exists. It is retained and must not be modified or deleted without explicit user instruction.
+- PR #14, `docs: close confirmed BOMYRA QA items`, was merged into `feature/site-signin-visual-guide` on 2026-11-26. Merge commit: `93167517b8bfe8ea9ce58cd0fabcf8894b11b40e`.
+- Post-merge verification confirmed PR #14 is closed and merged, and both this report and `BOMYRA-OPEN-WORK-QUEUE-2026-11-22.md` contain their authoritative closeout addenda.
+- After the merge, the user deleted the merged working branch `docs/closeout-status-2026-11-26`; a subsequent GitHub branch search confirmed it is absent. The backup branch above remains present.
+- This entry records the Git/documentation lifecycle only. No application code, tests, Workers, Supabase, billing, DNS, deployment, or production configuration was changed.
