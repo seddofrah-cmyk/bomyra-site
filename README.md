@@ -3,8 +3,8 @@
 
 Official bilingual public website for **BOMYRA — AI Chat Saver & Exporter**.
 
-* **Live website:** https://seddofrah-cmyk.github.io/bomyra-site/
-* **Privacy & Data Notice:** https://seddofrah-cmyk.github.io/bomyra-site/privacy.html
+* **Live website:** https://bomyra-site.pages.dev/bomyra-site/
+* **Privacy & Data Notice:** https://bomyra-site.pages.dev/bomyra-site/privacy.html
 * **Source repository:** https://github.com/seddofrah-cmyk/bomyra-site
 
 This repository contains the public-facing website only. It does **not** contain the BOMYRA Chrome extension source code, installation package, API keys, credentials, or private project records.
