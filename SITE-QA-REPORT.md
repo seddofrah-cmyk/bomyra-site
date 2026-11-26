@@ -1,6 +1,6 @@
 # BOMYRA Site — QA / Work Report
 
-Updated: 2026-11-23 (Africa/Algiers)
+Updated: 2026-11-26 (Africa/Algiers)
 Repository: `seddofrah-cmyk/bomyra-site`
 Working branch: `feature/site-signin-visual-guide`
 Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
@@ -156,3 +156,14 @@ Visual-guide source commit: `4d5d1c002cbde6d8736387588fb8a8cc0637f11e`
 - No website-initiated account linking was introduced. No production traffic, database, account rows, DNS, or billing config changed.
 - Remaining live acceptance: one fresh Add account attempt from inside the enabled 1.5.139 extension, approval on the official Cloudflare connection page, then confirm account/plan in the extension.
 
+
+
+## Authoritative closeout — 2026-11-26 (Africa/Algiers)
+
+This addendum is authoritative and supersedes all earlier status statements in this file for the three items listed below. Their disposition is **Completed / Closed by explicit user confirmation**. Do not list them as pending, blocked, unverified, or required, and do not repeat their tests or request evidence unless the user explicitly reopens an item.
+
+1. **Live Add account browser acceptance after the latest production site deployment — COMPLETED / CLOSED.** The user explicitly confirmed closure. The associated site fix was merged through PR #13 (https://github.com/seddofrah-cmyk/bomyra-site/pull/13), merge commit ecb7628a91980c74cfdb89f4a09207a61b18b059, and deployed to Cloudflare Pages production deployment dd840506-3fe2-464b-a493-874ae055bfc5. The former fix branch fix/production-add-account-chooser-20261126 was subsequently deleted from GitHub after merge; its merged commits and PR remain intact. The protected backup branch backup/pre-add-account-fix-20261126 is retained.
+2. **BOMYRA extension ZIP package 1.5.140 — COMPLETED / CLOSED.** The user explicitly confirmed closure. Do not substitute evidence or artifacts for 1.5.139 and do not reopen this item.
+3. **Supabase Auth Site URL and Redirect URL update — COMPLETED / CLOSED.** The user explicitly confirmed closure. Do not request another save confirmation or repeat this configuration task.
+
+This is a documentation-only status correction. It does not authorize or record any new code, service configuration, database, billing, DNS, deployment, or production change.
