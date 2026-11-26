@@ -26,8 +26,8 @@ The extension pairing and entitlement endpoint is:
 ## Supabase dashboard
 
 In Authentication → URL Configuration:
-- Site URL: `https://seddofrah-cmyk.github.io/bomyra-site/`
-- Add this exact Redirect URL: `https://seddofrah-cmyk.github.io/bomyra-site/auth/callback/`
+- Site URL: `https://bomyra-site.pages.dev/bomyra-site/`
+- Add this exact Redirect URL: `https://bomyra-site.pages.dev/bomyra-site/auth/callback/`
 
 Keep email confirmation enabled. The account page requests that confirmation links return to the callback route.
 
