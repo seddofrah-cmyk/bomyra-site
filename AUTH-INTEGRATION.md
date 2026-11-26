@@ -1,6 +1,6 @@
 # BOMYRA Production Auth + Cloudflare Extension integration
 
-The account UI is a static GitHub Pages addition and uses the Production Supabase project from the browser. Extension account, pairing, entitlement, and export requests use the Cloudflare Production Entitlements Worker. Billing remains disconnected until the final Paddle Production cutover.
+The account UI is a static Cloudflare Pages site and uses the Production Supabase project from the browser. Extension account, pairing, entitlement, and export requests use the Cloudflare Production Entitlements Worker. Billing remains disconnected until the final Paddle Production cutover.
 
 ## Routes
 
