@@ -1,6 +1,6 @@
 # BOMYRA — Ordered Open Work Queue
 
-Updated: 2026-11-23 (Africa/Algiers)
+Updated: 2026-11-26 (Africa/Algiers)
 Purpose: current task order based on the latest available project checkpoint, QA reports, repository evidence, and the user's browser confirmation of the site guide.
 
 ## Operating rules
@@ -344,3 +344,14 @@ This entry supersedes the 2026-11-24 status entry above wherever it says the use
 
 ### Documentation scope
 - This is a status/report update only. It does not change application source, deployment, Worker configuration, database state, billing, DNS, production traffic, or publication status.
+
+
+## Authoritative queue correction — 2026-11-26 (Africa/Algiers)
+
+The following items are **COMPLETED / CLOSED by explicit user confirmation**. This entry supersedes every earlier queue instruction or status in this file that describes these same items as pending, blocked, unverified, or required. Remove them from active work; do not repeat tests or request evidence unless the user explicitly reopens an item.
+
+- **Live Add account browser acceptance after the latest production site deployment — CLOSED.** The site fix was merged through PR #13 (merge commit ecb7628a91980c74cfdb89f4a09207a61b18b059) and deployed as Cloudflare Pages production deployment dd840506-3fe2-464b-a493-874ae055bfc5. The user explicitly closed the live acceptance item. The merged fix branch fix/production-add-account-chooser-20261126 has been deleted from GitHub; the merged commits and PR remain intact. Protected backup backup/pre-add-account-fix-20261126 remains retained.
+- **Extension ZIP package 1.5.140 — CLOSED** by explicit user confirmation.
+- **Supabase Auth Site URL and Redirect URL update — CLOSED** by explicit user confirmation.
+
+No other queue item is changed by this correction. Preserve the existing order, status, and scope of all remaining work. This update is documentation-only and does not authorize code, service, database, billing, DNS, deployment, or production changes.
