@@ -51,7 +51,7 @@ function safePendingConnectPath(value){
  try{
   const target=new URL(value,location.origin);
   const code=target.searchParams.get("code")||"";
-  if(target.origin!==location.origin||target.pathname!==basePath+"extension/connect-qa/"||!/^[A-Za-z0-9_-]{40,100}$/.test(code))return null;
+  if(target.origin!==location.origin||target.pathname!==basePath+"extension/connect/"||!/^[A-Za-z0-9_-]{40,100}$/.test(code))return null;
   return target.pathname+target.search+target.hash;
  }catch{return null;}
 }
@@ -73,7 +73,7 @@ function rememberNextPath(){
 let mode="signin";
 const $=id=>document.getElementById(id);
 $("year").textContent=new Date().getFullYear();
-// If this browser has a pending extension-pairing request, preserve that flow
+// If this browser has a pending extension-pairing request, preserve the Production approval flow
 // when the user reaches Sign in/Get Started from another site page or tab.
 if(supabaseClient&&pendingConnectPath){
  supabaseClient.auth.getSession().then(({data,error})=>{
