@@ -6,7 +6,6 @@ The account UI is a static GitHub Pages addition and uses the Production Supabas
 
 - `/auth/` — sign in and create account
 - `/auth/callback/` — email confirmation return page
-- `/extension/connect/` — extension account approval fallback page
 - `/extension/connect/` — Production account-confirmation page opened only by extension-initiated pairing
 - `/pay/` — checkout page currently unavailable pending Paddle Production cutover
 
@@ -44,26 +43,13 @@ The pairing code expires after 10 minutes. The page removes it from the address 
 
 The Worker also exposes account inspection/revocation, entitlement lookup, and export reservation/completion/release endpoints.
 
-## Paddle Sandbox checkout
+## Production billing (pending final cutover)
 
-The checkout page is intentionally disconnected during this stage. Do not send Production Supabase access tokens to the QA Billing Worker. Production checkout will be configured only in the final Paddle step.
+The public checkout route is intentionally unavailable during the Production account and extension cutover. The browser checkout endpoint remains unset. Do not send Production Supabase access tokens to either QA Billing Worker.
 
-The browser never sends a trusted user UUID or Paddle price ID. Paddle.js opens only the server-created transaction.
+Paddle Production will be configured only in the final billing step, after the Production Billing Worker, Live API key, Live webhook secret, monthly/yearly price IDs, and notification destination have been confirmed. No Live billing credentials or identifiers are stored in browser code or Git.
 
-The Cloudflare Billing QA Worker uses server-side bindings:
-- `PADDLE_ENVIRONMENT=sandbox`
-- `PADDLE_API_KEY`
-- `PADDLE_WEBHOOK_SECRET`
-- `PADDLE_MONTHLY_PRICE_ID`
-- `PADDLE_YEARLY_PRICE_ID`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `SUPABASE_URL`
-- `CHECKOUT_ALLOWED_ORIGINS`
-
-The Paddle Sandbox notification destination must target:
-`https://bomyra-billing-qa-v2.seddofrah.workers.dev/api/paddle/webhook`
-
-Only the signed Paddle webhook can activate or change Pro access. A browser success page or Paddle.js event is not proof of an active subscription. Keep Paddle in Sandbox; do not use Live credentials or Live notification destinations for this QA flow.
+When enabled, the browser must send only the signed-in Supabase access token and selected plan key to the Production Billing Worker. The Worker must resolve the user identity and price server-side and create the Paddle transaction. Only the signed Paddle webhook may activate or change Pro access; a browser success page or Paddle.js event is not proof of an active subscription.
 
 ## Vercel isolation
 
