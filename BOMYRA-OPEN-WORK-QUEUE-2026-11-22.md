@@ -365,3 +365,22 @@ No other queue item is changed by this correction. Preserve the existing order, 
 - **Merged working branch deleted:** `docs/closeout-status-2026-11-26`. The user confirmed deletion; GitHub branch search verified it is absent.
 - The protected backup `backup/pre-docs-closeout-20261126` remains present. The earlier `backup/pre-add-account-fix-20261126` also remains a separately protected backup.
 - Documentation/Git lifecycle only. No code, tests, services, database, billing, DNS, deployment, or production changes.
+
+
+## Backend Vercel isolation — Git closeout and remaining external integration check (2026-11-26, Africa/Algiers)
+
+### Completed
+- Backend PR #10 was merged with explicit user approval into `store-readiness/cloudflare-qa`; merge commit: `aeb4fccb5ae6ea30ad35a49b6b1fe9e210af0ce3`.
+- Vercel runtime/configuration and legacy Vercel backend handlers/dependencies were removed from the Backend repository. CI now checks/tests the Production Cloudflare Workers only.
+- Post-merge Production Worker CI passed: [run 45877923334](https://github.com/seddofrah-cmyk/bomyra-backend/actions/runs/45877923334).
+- The user deleted `chore/final-vercel-isolation-20261126`. GitHub branch search subsequently returned zero matches for that exact name.
+- Protected Backend backup `backup/pre-vercel-isolation-20261126` remains retained and must not be changed or deleted.
+
+### Remaining — external GitHub/Vercel integration
+- A `vercel[bot]` comment was observed on PR #10 after it was opened, referencing the former Vercel project/deployment.
+- This is evidence of an external GitHub-side Vercel integration still emitting a comment at that time. Whether the GitHub App installation, repository webhook, or organization-level integration has since been removed is **not verified**.
+- Keep this item open as **external integration removal/verification pending**. Inspect the repository/organization GitHub App installations and webhooks, identify the exact Vercel integration associated with this repository, and only then remove it with explicit user authorization. Do not remove unrelated integrations.
+
+### Safety boundary
+- No Cloudflare Worker deployment, Supabase change, Paddle change, DNS change, secret change, or production traffic change was part of PR #10 or this report update.
+- Do not create or deploy `bomyra-billing-prod`, enable Paddle Live, or alter production CORS as part of this closeout.

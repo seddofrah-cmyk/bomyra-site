@@ -177,3 +177,13 @@ This is a documentation-only status correction. It does not authorize or record 
 - Post-merge verification confirmed PR #14 is closed and merged, and both this report and `BOMYRA-OPEN-WORK-QUEUE-2026-11-22.md` contain their authoritative closeout addenda.
 - After the merge, the user deleted the merged working branch `docs/closeout-status-2026-11-26`; a subsequent GitHub branch search confirmed it is absent. The backup branch above remains present.
 - This entry records the Git/documentation lifecycle only. No application code, tests, Workers, Supabase, billing, DNS, deployment, or production configuration was changed.
+
+
+## Backend Vercel isolation closeout — 2026-11-26 (Africa/Algiers)
+
+- Backend repository: `seddofrah-cmyk/bomyra-backend`; PR #10, **Complete Vercel isolation — Cloudflare Production Workers only**, was merged into `store-readiness/cloudflare-qa` with merge commit `aeb4fccb5ae6ea30ad35a49b6b1fe9e210af0ce3` after the user's explicit approval.
+- The isolation removes the Vercel runtime/configuration and legacy Vercel API handlers/dependencies from the Backend repository, and updates CI to check/test the Production Cloudflare Workers only. It does not deploy or alter any Worker, Supabase project, Paddle environment, DNS, secrets, or production traffic.
+- Post-merge Production Worker CI succeeded: run [45877923334](https://github.com/seddofrah-cmyk/bomyra-backend/actions/runs/45877923334), including both Production Extension Worker and Production Billing Worker checks/tests.
+- The user deleted the merged working branch `chore/final-vercel-isolation-20261126` in GitHub. A subsequent GitHub branch search returned **zero matches** for that exact branch name. Protected backup `backup/pre-vercel-isolation-20261126` remains retained; do not modify or delete it.
+- **External integration boundary:** a `vercel[bot]` comment was observed on the PR after opening it, referencing the former Vercel project/deployment. This proves a GitHub-side Vercel integration still emitted a comment at that time; removal of the external GitHub App/installation or repository webhook has **not** been verified. Do not claim complete external integration removal.
+- This is a documentation-only closeout. No new deployment, service configuration, database, billing, DNS, or production change was performed.
