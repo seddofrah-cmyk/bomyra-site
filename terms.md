@@ -6,7 +6,7 @@ permalink: /terms.html
 
 # BOMYRA — Terms of Service
 
-**Last updated:** [To be completed before publication]
+**Last updated:** November 27, 2026
 
 ## 1. Acceptance of These Terms
 
