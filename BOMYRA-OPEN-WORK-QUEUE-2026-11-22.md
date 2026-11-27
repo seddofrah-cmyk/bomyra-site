@@ -434,3 +434,16 @@ Use this section as the current source of truth wherever older entries in this q
 ### Documentation transaction
 - Backup branch: `backup/pre-bomyra-status-refresh-20261127`, verified against the original report blob SHAs before editing.
 - Single documentation work branch: `docs/refresh-bomyra-status-20261127`, based on the default branch. This update is pending review and has not been merged.
+
+
+## Authoritative site deployment and visual acceptance — 2026-11-28 (Africa/Algiers)
+
+This entry supersedes earlier statements that post-PR-21 deployment or browser verification was not recorded. The deployment and visual acceptance item is now **COMPLETED / CLOSED**.
+
+- **Source change:** PR #21 removed the shared-header Sign in link; merge commit `37ffdfd31f3ff4c599268e522cd4f821d14226a3`.
+- **Production deployment:** Cloudflare Pages project `bomyra-site`; deployment `79f51280-fa90-473d-a11c-6593e4bce384`; immutable deployment URL `https://79f51280.bomyra-site.pages.dev`; stable site URL `https://bomyra-site.pages.dev/bomyra-site/`.
+- **Deployment provenance:** Cloudflare reports Production environment, production branch `feature/site-signin-visual-guide`, source commit `75f6ec3f53bd9fc663d567e874e9538f7ee4782b`. That commit follows PR #21's merge and contains documentation-only changes; no intervening site-source change was identified.
+- **Build/deploy evidence:** queued, initialize, clone_repo, build, and deploy stages all report success. The deploy stage completed successfully on 2026-11-27 at 11:15:59 UTC.
+- **Visual acceptance:** on 2026-11-28, the user personally confirmed that they visually inspected the published website and that it is سليـم (visually sound). Record this as **PASS — user-confirmed visual inspection of the published site**. This is separate from the Cloudflare deployment-stage evidence.
+- **Final disposition:** post-PR-21 production deployment verification and visual acceptance are **CLOSED**. Do not repeat the visual inspection or deployment check absent a relevant site change.
+- No site source, application behavior, Worker, backend, Supabase, billing, DNS, or production configuration was changed during this verification/documentation update.
