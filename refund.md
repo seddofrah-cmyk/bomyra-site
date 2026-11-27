@@ -6,7 +6,7 @@ permalink: /refund.html
 
 # BOMYRA — Refund Policy
 
-**Last updated:** [To be completed before publication]
+**Last updated:** November 27, 2026
 
 ## 1. General Policy
 
