@@ -208,3 +208,39 @@ This is a documentation-only status correction. It does not authorize or record 
 - The prior Paddle Live review remains **partially unverified**: source code and public Paddle documentation were reviewed, but the actual Paddle vendor account/catalog/notification settings were not accessible through a connected Paddle integration. No Paddle products, prices, notification destinations, API keys, or Live settings were created or changed.
 - No application code, Worker, Supabase, billing configuration, DNS, deployment, production traffic, or publication state was changed during this repository inspection.
 - No policy content has yet been drafted or approved; no site pages or footer links have been added.
+
+
+## Authoritative status refresh — 2026-11-27 (Africa/Algiers)
+
+This entry supersedes earlier status statements in this report wherever they conflict with the completed items below. It is a documentation-only checkpoint; no application behavior, service configuration, deployment, database, billing, DNS, or production traffic is changed by this entry.
+
+### Website legal pages and navigation — COMPLETED
+- **Terms of Service and Refund Policy:** added from the user's reviewed/provided content and merged in PR #18; merge commit `eff08d8d531a0230108e5793d4e52b1d78f87682`. The Terms page contains the user's exact 21-section text; Refund Policy was verified as an exact content match.
+- **Last-updated date:** both pages were updated to November 27, 2026 in PR #19; merge commit `0b55e99b8a50ac9d4089cffd14e67ffd802c4969`.
+- **Page spacing/layout:** both pages use the existing `page` layout and the same legal wrappers/styles as Privacy, merged in PR #20; merge commit `56fe3265c3cfb70a21d66e20b2681715817ada71`. Legal text and global CSS were not changed by this spacing fix.
+- **Shared Sign in navigation:** removed from the shared `_layouts/default.html` header in PR #21; merge commit `37ffdfd31f3ff4c599268e522cd4f821d14226a3`. The change removes one navigation line only. The `/auth/` page and checkout authentication flow remain intact; the homepage `SIGN IN GUIDE` remains a separate informational guide. The user confirmed the Sign in removal task is complete.
+- Do not recreate the legal pages, re-edit their content/date/layout, or repeat the Sign in removal. Do not change the protected `Get Started` or `SIGN IN GUIDE` controls without the user's specific approval.
+
+### Current site-source and release boundary
+- Repository default branch: `feature/site-signin-visual-guide` (verified from GitHub repository metadata).
+- Latest site merge recorded in this refresh: PR #21, merge commit `37ffdfd31f3ff4c599268e522cd4f821d14226a3`.
+- Source-level completion is confirmed by merged PRs and the user's confirmation. A separate post-PR-21 Cloudflare Pages deployment/browser verification is not recorded in this checkpoint; do not claim that the latest navigation change has been independently re-verified in a live browser.
+- Website remains informational/onboarding only. Account pairing and account management remain inside the extension.
+
+### Production billing / Paddle checkpoint — 2026-11-27
+- Cloudflare Worker `bomyra-billing-prod` exists; current version at the latest check: version 5, ID `175d2e9a-6146-4319-b594-297a7e946b17`, 100% traffic. Its production configuration includes `PADDLE_ENVIRONMENT=live`, the verified monthly/yearly price IDs, and the Production Supabase URL. The monthly/yearly IDs are present as ordinary variables; `PADDLE_API_KEY` and `SUPABASE_SERVICE_ROLE_KEY` are stored as encrypted secrets.
+- `PADDLE_WEBHOOK_SECRET` has **not** been added. No Live Notification Destination has yet been created. The next Paddle integration step, after the legal pages were completed, is to create the Live Notification Destination for `POST /api/paddle/webhook`, obtain its signing secret, and add that value as the Worker secret. Do not expose secrets in Git or chat.
+- Paddle Live catalog evidence: BOMYRA Pro is active; monthly price USD 5.99 and yearly price USD 39.99 are active. Payout settings were saved on 2026-11-27 (Algeria, Individual/Sole Proprietorship, wire transfer, EUR settlement, minimum USD 100). A Live API key exists; do not create another key.
+- The website domain review remains In review (may take up to seven days). The Paddle account's Product website field still points to the previous GitHub Pages URL; user deferred changing it until after approval. Do not alter it prematurely.
+- Do not deploy another Worker version, enable public workers.dev access, change routes, or modify Production services without a specific reason and explicit approval. The Cloudflare dashboard's Wrangler sync notice was assessed as informational, not a configuration failure.
+
+### Remaining work — ordered and not to be repeated
+1. **Paddle Live Notification Destination / webhook secret:** create the Live destination for `POST /api/paddle/webhook`, obtain the Paddle signing secret, then add `PADDLE_WEBHOOK_SECRET` to `bomyra-billing-prod` as an encrypted secret. Verify presence without displaying the value. This remains unstarted.
+2. **Domain approval and account website URL:** wait for the pending domain review; only after approval revisit the Product website field, as the user requested.
+3. **External Vercel integration removal/verification:** the backend PR #10 removed Vercel runtime/configuration from the repository, but a `vercel[bot]` PR comment showed an external GitHub-side integration still existed at that time. Whether its GitHub App/webhook has since been removed remains unverified. Identify the exact integration before any removal; do not remove unrelated integrations.
+4. **Production release gates:** public extension distribution and any production cutover remain separate approval-gated work. Do not publish a QA-configured package or change production traffic without explicit approval.
+5. **Subscription expiry observation:** on/after 2026-12-20, observe the recorded canceled subscription's natural paid-through expiry transition. This is follow-up only, not a current release blocker; do not alter the unrelated active Sandbox subscription or repeat the accelerated QA test.
+
+### Documentation transaction
+- Pre-update protected backup: `backup/pre-bomyra-status-refresh-20261127`, created from the default branch at `37ffdfd31f3ff4c599268e522cd4f821d14226a3`; both original report blobs were fetched from the backup and matched the pre-update blob SHAs.
+- Documentation work branch: `docs/refresh-bomyra-status-20261127`, created from the default branch. This report update is isolated there pending review; it has not been merged.
