@@ -397,3 +397,40 @@ No other queue item is changed by this correction. Preserve the existing order, 
 - **Stop point:** do not draft or modify site source until the user approves the policy drafting/update scope and supplies any missing factual terms.
 - Paddle Live account-side review remains partially unverified because no Paddle connector/account access was available. Do not claim Paddle readiness. No Paddle or production settings were changed.
 - No application code, Worker, Supabase, billing, DNS, deployment, or production traffic was changed by this inspection.
+
+
+## Authoritative status refresh — 2026-11-27 (Africa/Algiers)
+
+Use this section as the current source of truth wherever older entries in this queue conflict. Older entries are retained for audit history, not as instructions to repeat completed work.
+
+### Completed website work — CLOSED / DO NOT REPEAT
+- Terms of Service and Refund Policy were added from the user's reviewed/provided text and merged in PR #18 (merge commit `eff08d8d531a0230108e5793d4e52b1d78f87682`). Terms contains the exact user-provided 21 sections; Refund Policy was checked as an exact content match.
+- Both legal pages' last-updated date was set to November 27, 2026 in PR #19 (merge commit `0b55e99b8a50ac9d4089cffd14e67ffd802c4969`).
+- Their spacing was corrected by applying the existing `page` layout/legal wrappers in PR #20 (merge commit `56fe3265c3cfb70a21d66e20b2681715817ada71`). No legal wording or global CSS changed in that fix.
+- The shared header Sign in link was removed in PR #21 (merge commit `37ffdfd31f3ff4c599268e522cd4f821d14226a3`). The user confirmed this work is complete. The `/auth/` page and checkout authentication flow remain; homepage `SIGN IN GUIDE` remains informational and distinct.
+- These PRs target the repository's verified default branch `feature/site-signin-visual-guide`. Do not recreate pages, redo the date/layout work, or repeat the Sign in removal. Do not change protected `Get Started` or `SIGN IN GUIDE` behavior without specific approval.
+- The latest source merge is confirmed. A separate post-PR-21 Cloudflare Pages deployment/browser verification is not recorded here; do not claim it has been re-verified live.
+
+### Current Paddle / Cloudflare Production state — 2026-11-27
+- Billing Worker: `bomyra-billing-prod`, current observed version 5 (`175d2e9a-6146-4319-b594-297a7e946b17`), 100% traffic. Live mode and monthly/yearly price variables are configured; Production Supabase URL is set. `PADDLE_API_KEY` and `SUPABASE_SERVICE_ROLE_KEY` exist as encrypted secrets.
+- Paddle Live catalog: BOMYRA Pro active; monthly USD 5.99 and yearly USD 39.99 active. Payout settings saved 2026-11-27; Live API key already exists.
+- **Not yet configured:** Live Notification Destination and `PADDLE_WEBHOOK_SECRET`. Webhook route in source is `POST /api/paddle/webhook`.
+- Domain approval remains In review. Product website field still points to the previous GitHub Pages URL; user deferred changing it until approval.
+- Do not deploy/publish another Worker version, enable workers.dev, change routes, or alter production services without a specific reason and explicit approval. Never expose secret values.
+
+### Active work — next execution order
+1. **Configure Paddle Live webhook:** create the Live Notification Destination for `POST /api/paddle/webhook`; obtain the Paddle signing secret; add it as encrypted `PADDLE_WEBHOOK_SECRET` to `bomyra-billing-prod`; verify only that the secret exists, without revealing it. Do not repeat completed catalog, payout, API-key, or Worker-variable setup.
+2. **Wait for domain approval:** after Paddle approves the domain, revisit the Product website field as previously deferred by the user.
+3. **Verify/remove the external Vercel integration:** repository runtime/configuration was removed in backend PR #10, but an observed `vercel[bot]` comment means external GitHub integration removal is not yet verified. Identify the exact GitHub App/webhook first; do not remove unrelated integrations.
+4. **Production release/public distribution:** remains a separate approval gate. Do not publish QA-configured artifacts or change production traffic without explicit approval.
+5. **2026-12-20 subscription expiry observation:** follow-up only, not a current release blocker. Observe natural expiry; do not modify the unrelated active Sandbox subscription or repeat accelerated QA.
+
+### Protected project constraints
+- Preserve all successful QA evidence; do not rerun quota, export, account-switching, checkout, webhook, or pairing checks without a relevant code change.
+- Do not reintroduce website-initiated pairing/account linking/account management. Those remain inside the extension.
+- Do not use Vercel for new BOMYRA runtime work. Distinguish repository Vercel isolation (completed) from external GitHub integration verification (still open).
+- No Production deploy, release, traffic change, DNS change, Paddle Live mutation, or service removal without the user's explicit approval.
+
+### Documentation transaction
+- Backup branch: `backup/pre-bomyra-status-refresh-20261127`, verified against the original report blob SHAs before editing.
+- Single documentation work branch: `docs/refresh-bomyra-status-20261127`, based on the default branch. This update is pending review and has not been merged.
