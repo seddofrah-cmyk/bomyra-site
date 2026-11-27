@@ -244,3 +244,16 @@ This entry supersedes earlier status statements in this report wherever they con
 ### Documentation transaction
 - Pre-update protected backup: `backup/pre-bomyra-status-refresh-20261127`, created from the default branch at `37ffdfd31f3ff4c599268e522cd4f821d14226a3`; both original report blobs were fetched from the backup and matched the pre-update blob SHAs.
 - Documentation work branch: `docs/refresh-bomyra-status-20261127`, created from the default branch. This report update is isolated there pending review; it has not been merged.
+
+
+## Production deployment and user visual acceptance — 2026-11-28 (Africa/Algiers)
+
+**Result: PASS — Cloudflare Production deployment confirmed; published site visually accepted by the user.**
+
+- PR #21 removed the shared-header Sign in link and was merged as `37ffdfd31f3ff4c599268e522cd4f821d14226a3`.
+- Cloudflare Pages project: `bomyra-site` (Production branch: `feature/site-signin-visual-guide`).
+- Successful production deployment: `79f51280-fa90-473d-a11c-6593e4bce384`, immutable URL `https://79f51280.bomyra-site.pages.dev`; stable URL `https://bomyra-site.pages.dev/bomyra-site/`.
+- Deployment source commit: `75f6ec3f53bd9fc663d567e874e9538f7ee4782b`, a documentation-only commit after PR #21. Cloudflare reports successful queued, initialize, clone_repo, build, and deploy stages; deploy completed 2026-11-27 11:15:59 UTC.
+- On 2026-11-28, the user confirmed completing a visual inspection of the published website and reported that it is visually sound. Evidence classification: **user-confirmed visual acceptance** (not an independently captured screenshot by the assistant).
+- The post-PR-21 deployment and visual acceptance gate is **CLOSED**. Do not repeat without a relevant site change.
+- No application source, Worker, backend, Supabase, billing, DNS, or production configuration was changed by this verification or report update.
