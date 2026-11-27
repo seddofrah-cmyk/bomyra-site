@@ -5,4 +5,6 @@ theme: minima
 markdown: kramdown
 header_pages:
   - privacy.md
+  - terms.md
+  - refund.md
 show_excerpts: false
