@@ -480,3 +480,15 @@ No Worker deployment, production secret mutation, Paddle event, checkout, subscr
 - Close the secret-correspondence verification item. This confirmation is user-reported; the secret values were not read, copied, or exposed in this documentation update.
 - The Paddle destination remains shown Active and its Notification log was empty in the supplied screenshot. Therefore successful signed Live delivery, Worker receipt, and Supabase event processing remain **NOT VERIFIED**. Do not send a simulation, replay, synthetic event, test checkout, or lifecycle event to Production.
 - No Worker, secret, Paddle, database, traffic, DNS, or production setting was changed. Documentation only; updated directly on the existing authoritative branch without creating a new branch or PR.
+
+
+## Paddle Live default payment link — implementation prepared, activation blocked on approved domain and Live token (2026-11-28, Africa/Algiers)
+
+- Paddle's official requirement was checked: every account needs a default payment link before transaction creation; the page must include Paddle.js, and Paddle appends `?_ptxn=<transaction_id>`. Live requires the exact domain to be approved; Sandbox and Live links are separate.
+- Existing `/pay/` was inspected and deliberately left unchanged: it is a customer-facing plan checkout page that still initializes Paddle Sandbox with a `test_` token and is intentionally disconnected from the Production Billing API. It must not be entered as the Live default payment link.
+- A separate isolated page was added at `payment-link/index.html`. It validates the `_ptxn` transaction reference, initializes Paddle.js with a Live client-side token, does not set Sandbox mode, and relies on Paddle.js to open the transaction from `_ptxn`. It does not create transactions, call the Billing Worker, or alter account pairing.
+- Its public config file `payment-link/config.js` intentionally has an empty `BOMYRA_PADDLE_LIVE_CLIENT_TOKEN`. No token was invented or copied from Sandbox. A Live client-side token must be created/copied from Paddle and placed there before this page can initialize Paddle.js.
+- **Current disposition: IMPLEMENTED IN ISOLATED WORK BRANCH; NOT DEPLOYED; NOT ACTIVE AS DEFAULT LINK.** The domain is still recorded as In review. Do not configure the Live default URL or deploy this page to Production until the domain is approved and the Live client-side token is supplied/configured.
+- No Paddle account settings, Live API calls, Worker, Supabase, production traffic, DNS, or existing checkout page were changed. No Live transaction or test event was sent.
+- Work branch: `fix/paddle-live-default-payment-link-20261128`; protected backup: `backup/pre-paddle-live-payment-link-20261128`; both originate from site production-source commit `bd99311011e6863ae6d101cce32987794eff6e8f`.
+- Official references: Paddle [Default payment link](https://developer.paddle.com/build/transactions/default-payment-link/), [Paddle.Environment.set](https://developer.paddle.com/paddle-js/methods/paddle-environment-set/), and [client-side tokens](https://developer.paddle.com/paddle-js/about/client-side-tokens/).
