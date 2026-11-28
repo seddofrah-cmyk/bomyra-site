@@ -447,3 +447,28 @@ This entry supersedes earlier statements that post-PR-21 deployment or browser v
 - **Visual acceptance:** on 2026-11-28, the user personally confirmed that they visually inspected the published website and that it is سليـم (visually sound). Record this as **PASS — user-confirmed visual inspection of the published site**. This is separate from the Cloudflare deployment-stage evidence.
 - **Final disposition:** post-PR-21 production deployment verification and visual acceptance are **CLOSED**. Do not repeat the visual inspection or deployment check absent a relevant site change.
 - No site source, application behavior, Worker, backend, Supabase, billing, DNS, or production configuration was changed during this verification/documentation update.
+
+
+## Authoritative status correction — Paddle Live webhook setup and Vercel integration closeout (2026-11-28, Africa/Algiers)
+
+This entry supersedes the conflicting 2026-11-27 active-work statements below. Historical entries are retained for audit history only.
+
+### Paddle Live webhook setup — configuration present; delivery not verified
+- The user supplied a Paddle Live Notification log screenshot showing an **Active** Webhook destination targeting `https://bomyra-billing-prod.seddofrah.workers.dev/api/paddle/webhook`.
+- The screenshot shows 7 selected events and no notifications yet.
+- The user then supplied a Cloudflare `bomyra-billing-prod` Production settings screenshot showing `PADDLE_ENVIRONMENT=live`, and `PADDLE_WEBHOOK_SECRET` present as an encrypted secret. The same view showed the existing Live API key, monthly/yearly price IDs, Production Supabase URL, and service-role secret.
+- **Configuration status: CLOSED / present by user-supplied visual evidence.** Do not keep “create Live destination” or “add PADDLE_WEBHOOK_SECRET” as open tasks, and do not repeat those setup steps.
+- **Not verified:** the screenshots do not establish that the Paddle signing secret value exactly matches the encrypted Cloudflare secret. The Notification log is empty, so no successful signed Live delivery or end-to-end Production processing is evidenced. Do not send a Live simulation, replay, synthetic event, or test checkout to prove this.
+
+### External Vercel integration — CLOSED by user confirmation (2026-11-28)
+- The user explicitly confirmed that the remaining external GitHub/Vercel integration removal/verification work is complete.
+- Close the external-integration item. Do not ask the user to repeat it, do not inspect/remove other GitHub Apps or webhooks, and do not change unrelated integrations.
+- Backend repository Vercel runtime/configuration isolation remains separately completed through PR #10 as documented in the historical section below.
+
+### Corrected remaining work
+1. **Paddle Live secret correspondence / first real delivery:** not proven by the supplied screenshots. Keep this as an evidence limitation, not a request to send a test event to Production. Revisit only through a safe, non-mutating verification path or naturally occurring legitimate delivery with appropriate approval.
+2. **Domain approval:** remains In review per the latest recorded Paddle status. After approval, revisit the Product website field as previously deferred by the user.
+3. **Production release/public distribution:** separate approval gate; no QA artifact publication or production traffic change without explicit approval.
+4. **2026-12-20 subscription expiry observation:** follow-up only, not a release blocker.
+
+No Worker deployment, production secret mutation, Paddle event, checkout, subscription, DNS, traffic, or service change was performed for this documentation correction. No new branch was created; this status correction is written directly to the existing authoritative branch.
