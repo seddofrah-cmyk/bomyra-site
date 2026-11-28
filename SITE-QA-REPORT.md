@@ -257,3 +257,13 @@ This entry supersedes earlier status statements in this report wherever they con
 - On 2026-11-28, the user confirmed completing a visual inspection of the published website and reported that it is visually sound. Evidence classification: **user-confirmed visual acceptance** (not an independently captured screenshot by the assistant).
 - The post-PR-21 deployment and visual acceptance gate is **CLOSED**. Do not repeat without a relevant site change.
 - No application source, Worker, backend, Supabase, billing, DNS, or production configuration was changed by this verification or report update.
+
+
+## Paddle Live default payment-link page — source implementation (2026-11-28, Africa/Algiers)
+
+- Added a separate `payment-link/index.html` intended only for Paddle's Live default payment link. It accepts Paddle's `_ptxn` query parameter and initializes Paddle.js with a Live client-side token; it intentionally omits `Paddle.Environment.set("sandbox")` because Paddle.js defaults to Production when no Sandbox override is present.
+- Added `payment-link/config.js` with an empty public `BOMYRA_PADDLE_LIVE_CLIENT_TOKEN` placeholder. The Live token has not yet been supplied/configured. Client-side tokens are designed for frontend use; Paddle API keys and webhook secrets must never be placed here.
+- The existing `pay/index.html` remains unchanged. It is still Sandbox-configured and not suitable as the Live default payment-link page.
+- **Verification status:** source files were read back from the isolated Git branch and their contents verified. This is source inspection only; no browser/Chrome run, Paddle Live initialization, Live transaction, domain approval, deployment, or default-link setting has been verified/performed.
+- **Release gate:** Paddle's official docs require the Live default payment-link domain to be approved. The latest project checkpoint still records domain approval as In review. Therefore the new page is not deployed or activated, and the Live default URL must not be set yet.
+- No Worker, Supabase, Paddle account setting, DNS, production deployment, or existing checkout behavior was changed.
