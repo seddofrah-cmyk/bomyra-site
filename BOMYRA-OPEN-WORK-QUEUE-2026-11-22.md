@@ -472,3 +472,11 @@ This entry supersedes the conflicting 2026-11-27 active-work statements below. H
 4. **2026-12-20 subscription expiry observation:** follow-up only, not a release blocker.
 
 No Worker deployment, production secret mutation, Paddle event, checkout, subscription, DNS, traffic, or service change was performed for this documentation correction. No new branch was created; this status correction is written directly to the existing authoritative branch.
+
+
+## Authoritative evidence update — Paddle Live signing secret correspondence confirmed (2026-11-28, Africa/Algiers)
+
+- **User-confirmed:** the Paddle Live Notification Destination signing secret and the encrypted `PADDLE_WEBHOOK_SECRET` configured on Cloudflare Worker `bomyra-billing-prod` are an exact match.
+- Close the secret-correspondence verification item. This confirmation is user-reported; the secret values were not read, copied, or exposed in this documentation update.
+- The Paddle destination remains shown Active and its Notification log was empty in the supplied screenshot. Therefore successful signed Live delivery, Worker receipt, and Supabase event processing remain **NOT VERIFIED**. Do not send a simulation, replay, synthetic event, test checkout, or lifecycle event to Production.
+- No Worker, secret, Paddle, database, traffic, DNS, or production setting was changed. Documentation only; updated directly on the existing authoritative branch without creating a new branch or PR.
